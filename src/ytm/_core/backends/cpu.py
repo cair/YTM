@@ -155,6 +155,14 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
         self.lib.vote_sum(clause_outputs.ctypes.data_as(int8_p), self.p_clause_weights, c_int(bs), class_sums.ctypes.data_as(float_p))
         return class_sums
 
+    def _bit_pack_X(self, p_Xb, bs: int) -> np.ndarray | None:
+        cfg = self.config
+        if not cfg._all_binary_feats:
+            return None
+        x_bits = np.empty((bs, cfg._n_patches, cfg._n_feat_chunks), dtype=np.uint64)
+        self.lib.bit_pack_X(p_Xb, c_int(bs), x_bits.ctypes.data_as(uint64_p))
+        return x_bits
+
     def _clause_outputs(self, Xb: np.ndarray, bs: int) -> np.ndarray:
         pc = self.packed_clauses
         cfg = self.config
@@ -162,10 +170,7 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
         p_Xb = Xb.ctypes.data_as(POINTER(np.ctypeslib.as_ctypes_type(cfg._fbound_dtype)))
         clause_outputs = np.empty((bs, cfg._total_clauses), dtype=np.int8)
 
-        x_bits = None
-        if cfg._all_binary_feats:
-            x_bits = np.empty((bs, cfg._n_patches, cfg._n_feat_chunks), dtype=np.uint64)
-            self.lib.bit_pack_X(p_Xb, c_int(bs), x_bits.ctypes.data_as(uint64_p))
+        x_bits = self._bit_pack_X(p_Xb, bs)
 
         self.lib.eval_infer(
             p_Xb,
@@ -186,14 +191,21 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
     def _patch_outputs(self, Xb: np.ndarray, bs: int) -> np.ndarray:
         pc = self.packed_clauses
         cfg = self.config
+        Xb = np.asarray(Xb, dtype=cfg._fbound_dtype, order="C")
+        p_Xb = Xb.ctypes.data_as(POINTER(np.ctypeslib.as_ctypes_type(cfg._fbound_dtype)))
         patch_output = np.empty((bs, cfg._total_clauses, cfg._n_patches), dtype=np.int8)
+        x_bits = self._bit_pack_X(p_Xb, bs)
+
         self.lib.eval_patchwise(
-            Xb.ctypes.data_as(POINTER(np.ctypeslib.as_ctypes_type(cfg._fbound_dtype))),
+            p_Xb,
+            None if x_bits is None else x_bits.ctypes.data_as(uint64_p),
             c_int(bs),
             pc.p_clause_position_bounds,
             pc.p_clause_feat_bounds,
             pc.p_clause_feat_ids,
             pc.p_clause_n_feats,
+            pc.p_clause_pos_bits,
+            pc.p_clause_neg_bits,
             pc.p_has_contra,
             pc.p_clause_len,
             patch_output.ctypes.data_as(int8_p),
@@ -217,6 +229,8 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
             pc.p_clause_feat_bounds,
             pc.p_clause_feat_ids,
             pc.p_clause_n_feats,
+            pc.p_clause_pos_bits,
+            pc.p_clause_neg_bits,
             pc.p_clause_position_bounds,
             pc.p_has_contra,
             pw_norm.ctypes.data_as(float_p),
@@ -244,6 +258,8 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
                 pc.p_clause_feat_bounds,
                 pc.p_clause_feat_ids,
                 pc.p_clause_n_feats,
+                pc.p_clause_pos_bits,
+                pc.p_clause_neg_bits,
                 pc.p_has_contra,
                 self.p_therm_bits,
                 p_out_b,

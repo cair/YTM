@@ -53,19 +53,23 @@ static inline bool match_window(const FBOUND_T* restrict Xe, const uint64_t* res
  *
  * Arguments:
  *   X                       features of the batch
+ *   x_bits                  (N, N_PATCHES, N_FEAT_CHUNKS) bit packed X, all binary features only
  *   N                       number of samples in the batch
  *   clause_position_bounds  per clause [y_lo, y_hi, x_lo, x_hi] of allowed patches
  *   clause_feat_bounds      per clause [lo, hi] of each bounded feature
  *   clause_feat_ids         per clause ids of its bounded features
  *   clause_n_feats          number of bounded features per clause
+ *   clause_pos_bits         per clause included feature bits, all binary features only
+ *   clause_neg_bits         per clause included negated feature bits, all binary features only
  *   has_contra              1 for clauses with a contradiction
  *   clause_len              number of included literals per clause
  *   patch_output            output, (N, TOTAL_CLAUSES, N_PATCHES) clause outputs per patch
  */
-void eval_patchwise(const FBOUND_T* restrict X, const int N, const PBOUND_T* restrict clause_position_bounds,
-                    const FBOUND_T* restrict clause_feat_bounds, const NFEAT_T* restrict clause_feat_ids,
-                    const NFEAT_T* restrict clause_n_feats, const int8_t* restrict has_contra,
-                    const NLITS_T* restrict clause_len, int8_t* restrict patch_output) {
+void eval_patchwise(const FBOUND_T* restrict X, const uint64_t* restrict x_bits, const int N,
+                    const PBOUND_T* restrict clause_position_bounds, const FBOUND_T* restrict clause_feat_bounds,
+                    const NFEAT_T* restrict clause_feat_ids, const NFEAT_T* restrict clause_n_feats,
+                    const uint64_t* restrict clause_pos_bits, const uint64_t* restrict clause_neg_bits,
+                    const int8_t* restrict has_contra, const NLITS_T* restrict clause_len, int8_t* restrict patch_output) {
 #pragma omp parallel for schedule(static) num_threads(ytm_n_threads)
     for (ull idx = 0; idx < (ull)N * TOTAL_CLAUSES; idx++) {
         ull e = idx / (ull)TOTAL_CLAUSES;
@@ -85,6 +89,9 @@ void eval_patchwise(const FBOUND_T* restrict X, const int N, const PBOUND_T* res
         const FBOUND_T* cfb = &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
         const NFEAT_T* bounded_fids = &clause_feat_ids[feat_ids_offset(clause, 0)];
         int n_bounded_fids = (int)clause_n_feats[clause];
+        const uint64_t* xe_bits = ALL_BINARY_FEATS ? &x_bits[e * N_PATCHES * N_FEAT_CHUNKS] : NULL;
+        const uint64_t* pos_bits = ALL_BINARY_FEATS ? &clause_pos_bits[clause * N_FEAT_CHUNKS] : NULL;
+        const uint64_t* neg_bits = ALL_BINARY_FEATS ? &clause_neg_bits[clause * N_FEAT_CHUNKS] : NULL;
 
         for (int patch = 0; patch < N_PATCHES; patch++) {
             int py = patch / N_PATCHES_X;
@@ -97,7 +104,8 @@ void eval_patchwise(const FBOUND_T* restrict X, const int N, const PBOUND_T* res
             }
 
             // match a patch
-            output[patch] = match_patch(Xe, py, px, bounded_fids, cfb, n_bounded_fids, NULL, NULL);
+            output[patch] =
+                match_clause_patch(Xe, xe_bits, py, px, cfb, bounded_fids, n_bounded_fids, pos_bits, neg_bits, NULL, NULL, NULL);
         }
     }
 }

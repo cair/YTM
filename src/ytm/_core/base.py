@@ -267,11 +267,17 @@ class BaseTM(abc.ABC):
         feature_bounds[:, :, 0] = 0  # Set default
         feature_bounds[:, :, 1] = cfg._therm_bits  # Set default
 
-        fids = packed.clause_feat_ids.reshape(cfg._total_clauses, n_feat)  # feature ids.
-        compact = packed.clause_feat_bounds.reshape(cfg._total_clauses, n_feat, 2)  # feature bounds for the fids.
-        used = np.arange(n_feat)[None, :] < packed.clause_n_feats[:, None]  # mask to select packed.clause_n_feats entries
-        ci, si = np.nonzero(used)
-        feature_bounds[ci, fids[ci, si]] = compact[ci, si]
+        if packed.clause_pos_bits.ndim == 2:
+            pos = np.unpackbits(packed.clause_pos_bits.view(np.uint8), axis=1, bitorder="little")[:, :n_feat]
+            neg = np.unpackbits(packed.clause_neg_bits.view(np.uint8), axis=1, bitorder="little")[:, :n_feat]
+            feature_bounds[:, :, 0] = pos
+            feature_bounds[:, :, 1] = 1 - neg
+        else:
+            fids = packed.clause_feat_ids.reshape(cfg._total_clauses, n_feat)  # feature ids.
+            compact = packed.clause_feat_bounds.reshape(cfg._total_clauses, n_feat, 2)  # feature bounds for the fids.
+            used = np.arange(n_feat)[None, :] < packed.clause_n_feats[:, None]  # mask to select packed.clause_n_feats entries
+            ci, si = np.nonzero(used)
+            feature_bounds[ci, fids[ci, si]] = compact[ci, si]
 
         # Shift back the feature bounds back, since the model is trained on shifted X.
         feature_bounds = feature_bounds.reshape(*shape, n_feat, 2) + cfg._feat_mins.reshape(-1, 1)

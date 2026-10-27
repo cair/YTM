@@ -4,8 +4,28 @@
 
 #include <math.h>
 
+static inline void add_clause_feats(float* restrict out, int py, int px, float wm, const FBOUND_T* restrict cfb,
+                                    const NFEAT_T* restrict cfids, int n_feats, const uint64_t* restrict pos_bits,
+                                    const uint64_t* restrict neg_bits, const FBOUND_T* restrict therm_bits) {
+    if (ALL_BINARY_FEATS) {
+        for (int k = 0; k < N_FEAT_CHUNKS; k++) {
+            for (uint64_t w = pos_bits[k]; w; w &= w - 1)
+                out[feature_offset(k * FEAT_CHUNK_SIZE + __builtin_ctzll(w), py, px)] += wm;
+            for (uint64_t w = neg_bits[k]; w; w &= w - 1)
+                out[feature_offset(k * FEAT_CHUNK_SIZE + __builtin_ctzll(w), py, px)] -= wm;
+        }
+        return;
+    }
+    for (int i = 0; i < n_feats; i++) {
+        int k = (int)cfids[i];
+        float cp = (float)((int)cfb[i * 2] + (int)cfb[i * 2 + 1] - (int)therm_bits[k]);
+        out[feature_offset(k, py, px)] += cp * wm;
+    }
+}
+
 void wic(int class_id, int polarity, const float* restrict clause_weights, const FBOUND_T* restrict clause_feat_bounds,
          const NFEAT_T* restrict clause_feat_ids, const NFEAT_T* restrict clause_n_feats,
+         const uint64_t* restrict clause_pos_bits, const uint64_t* restrict clause_neg_bits,
          const PBOUND_T* restrict clause_position_bounds, const int8_t* restrict has_contra, const float* restrict patch_weights_norm,
          const FBOUND_T* restrict therm_bits, float pw_th, float* restrict output) {
 #pragma omp parallel for schedule(static) reduction(+ : output[ : HEIGHT * WIDTH * DEPTH]) num_threads(ytm_n_threads)
@@ -22,14 +42,12 @@ void wic(int class_id, int polarity, const float* restrict clause_weights, const
         const FBOUND_T* cfb = &clause_feat_bounds[feat_bounds_offset(clause_id, 0, 0)];
         const NFEAT_T* cfids = &clause_feat_ids[feat_ids_offset(clause_id, 0)];
         const int n_feats = (int)clause_n_feats[clause_id];
+        const uint64_t* pos_bits = ALL_BINARY_FEATS ? &clause_pos_bits[clause_id * N_FEAT_CHUNKS] : NULL;
+        const uint64_t* neg_bits = ALL_BINARY_FEATS ? &clause_neg_bits[clause_id * N_FEAT_CHUNKS] : NULL;
 
         if (N_PATCHES == 1) {
             float wm = fabsf(w);
-            for (int i = 0; i < n_feats; i++) {
-                int k = (int)cfids[i];
-                float cp = (float)((int)cfb[i * 2] + (int)cfb[i * 2 + 1] - (int)therm_bits[k]);
-                output[feature_offset(k, 0, 0)] += cp * wm;
-            }
+            add_clause_feats(output, 0, 0, wm, cfb, cfids, n_feats, pos_bits, neg_bits, therm_bits);
             continue;
         }
 
@@ -43,11 +61,7 @@ void wic(int class_id, int polarity, const float* restrict clause_weights, const
 
                 float wm = fabsf(w) * pwv;
 
-                for (int i = 0; i < n_feats; i++) {
-                    int k = (int)cfids[i];
-                    float cp = (float)((int)cfb[i * 2] + (int)cfb[i * 2 + 1] - (int)therm_bits[k]);
-                    output[feature_offset(k, py, px)] += cp * wm;
-                }
+                add_clause_feats(output, py, px, wm, cfb, cfids, n_feats, pos_bits, neg_bits, therm_bits);
             }
         }
     }
@@ -55,7 +69,7 @@ void wic(int class_id, int polarity, const float* restrict clause_weights, const
 
 void wac_sample(int class_id, int polarity, const int8_t* restrict patch_output, const int e, const float* restrict clause_weights,
                 const FBOUND_T* restrict clause_feat_bounds, const NFEAT_T* restrict clause_feat_ids, const NFEAT_T* restrict clause_n_feats,
-                const int8_t* restrict has_contra, const FBOUND_T* restrict therm_bits,
+                const uint64_t* restrict clause_pos_bits, const uint64_t* restrict clause_neg_bits, const int8_t* restrict has_contra, const FBOUND_T* restrict therm_bits,
                 float* restrict output) {
     const int8_t* patch_e = &patch_output[patch_output_offset(e, 0, 0)];
     float* out_e = &output[sample_offset(e)];
@@ -75,6 +89,8 @@ void wac_sample(int class_id, int polarity, const int8_t* restrict patch_output,
         const FBOUND_T* cfb = &clause_feat_bounds[feat_bounds_offset(clause_id, 0, 0)];
         const NFEAT_T* cfids = &clause_feat_ids[feat_ids_offset(clause_id, 0)];
         const int n_feats = (int)clause_n_feats[clause_id];
+        const uint64_t* pos_bits = ALL_BINARY_FEATS ? &clause_pos_bits[clause_id * N_FEAT_CHUNKS] : NULL;
+        const uint64_t* neg_bits = ALL_BINARY_FEATS ? &clause_neg_bits[clause_id * N_FEAT_CHUNKS] : NULL;
         float wm = fabsf(w);
 
         for (int p = 0; p < N_PATCHES; p++) {
@@ -83,11 +99,7 @@ void wac_sample(int class_id, int polarity, const int8_t* restrict patch_output,
 
             int py = p / N_PATCHES_X, px = p % N_PATCHES_X;
 
-            for (int i = 0; i < n_feats; i++) {
-                int k = (int)cfids[i];
-                float cp = (float)((int)cfb[i * 2] + (int)cfb[i * 2 + 1] - (int)therm_bits[k]);
-                out_e[feature_offset(k, py, px)] += cp * wm;
-            }
+            add_clause_feats(out_e, py, px, wm, cfb, cfids, n_feats, pos_bits, neg_bits, therm_bits);
         }
     }
 }
