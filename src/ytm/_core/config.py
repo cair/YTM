@@ -198,6 +198,7 @@ class BaseTMConfig:
         self._n_patches_x = ((self._dim[1] - self._patch_dim[1]) // self._stride[1]) + 1
         self._n_patches = self._n_patches_y * self._n_patches_x
         self._n_raw_patch_feats = self._patch_dim[0] * self._patch_dim[1] * self._dim[2]
+        self._n_feat_chunks = (self._n_raw_patch_feats + 63) // 64
 
     def _resolve_states(self):
         # TA states, need at least an include and an exclude state

@@ -58,10 +58,43 @@ static inline FeatureResult scan_feature_literals(const TA_STATE_T* restrict ta_
     return (FeatureResult){write_offset, n_includes, all_valid};
 }
 
+static inline FeatureResult scan_feature_bits(const TA_STATE_T* restrict ta_state, uint64_t* restrict pos_bits,
+                                              uint64_t* restrict neg_bits, int dont_skip) {
+    uint n_includes = 0;
+    int n_bounded = 0;
+    bool all_valid = true;
+
+    for (int k = 0; k < N_FEAT_CHUNKS; k++) {
+        const int base = k * FEAT_CHUNK_SIZE;
+        const int n = N_RAW_PATCH_FEATS - base < FEAT_CHUNK_SIZE ? N_RAW_PATCH_FEATS - base : FEAT_CHUNK_SIZE;
+        uint64_t pos = 0, neg = 0;
+
+        for (int b = 0; b < n; b++) {
+            pos |= (uint64_t)is_included(ta_state[N_POSITION_FEATS + base + b]) << b;
+            if (NEGATED_LITERALS)
+                neg |= (uint64_t)is_included(ta_state[N_POSITION_FEATS + N_LITERALS / 2 + base + b]) << b;
+        }
+
+        pos_bits[k] = pos;
+        neg_bits[k] = neg;
+        n_includes += (uint)(__builtin_popcountll(pos) + __builtin_popcountll(neg));
+        n_bounded += __builtin_popcountll(pos | neg);
+
+        if (pos & neg) {
+            all_valid = false;
+            if (!dont_skip)
+                break;
+        }
+    }
+
+    return (FeatureResult){n_bounded, n_includes, all_valid};
+}
+
 void pack_clauses(const TA_STATE_T* restrict global_ta_states, const FBOUND_T* restrict therm_bits,
                   const NLITS_T* restrict literal_offsets, PBOUND_T* restrict clause_position_bounds,
                   FBOUND_T* restrict clause_feat_bounds, NFEAT_T* restrict clause_feat_ids, NFEAT_T* restrict clause_n_feats,
-                  int8_t* restrict has_contra, NLITS_T* restrict clause_len, int8_t* restrict is_clause_synced, int dont_skip) {
+                  int8_t* restrict has_contra, NLITS_T* restrict clause_len, uint64_t* restrict clause_pos_bits,
+                  uint64_t* restrict clause_neg_bits, int8_t* restrict is_clause_synced, int dont_skip) {
 #pragma omp parallel for schedule(dynamic) num_threads(ytm_n_threads)
     for (ull clause = 0; clause < (ull)TOTAL_CLAUSES; clause++) {
         if (is_clause_synced[clause])
@@ -92,6 +125,9 @@ void pack_clauses(const TA_STATE_T* restrict global_ta_states, const FBOUND_T* r
         FBOUND_T* cfb = &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
 
         FeatureResult fr = scan_feature_literals(ta_state, therm_bits, literal_offsets, cfids, cfb, dont_skip);
+        if (ALL_BINARY_FEATS)
+            scan_feature_bits(ta_state, &clause_pos_bits[clause * N_FEAT_CHUNKS], &clause_neg_bits[clause * N_FEAT_CHUNKS],
+                              dont_skip);
 
         clause_n_feats[clause] = (NFEAT_T)fr.n_bounded_feats;
         has_contra[clause] = !(pr.valid && fr.all_valid);

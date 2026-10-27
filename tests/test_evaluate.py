@@ -142,3 +142,49 @@ def test_binary_features_match_a_reference_on_random_clauses(device, dim, patch_
     ref = _reference_score(tm, X)
     assert np.unique(ref).size > 3
     np.testing.assert_array_equal(tm.score(X.reshape(50, *dim), force_repack=True), ref)
+
+
+def _unpack_bits(bits):
+    return np.unpackbits(np.ascontiguousarray(bits).view(np.uint8), axis=1, bitorder="little")
+
+
+@pytest.mark.parametrize(
+    "dim, patch_dim",
+    [((70, 1, 1), None), ((130, 1, 1), None), ((9, 10, 1), (3, 4))],
+    ids=["flat_70", "flat_130", "conv"],
+)
+@pytest.mark.parametrize("negated_literals", [True, False], ids=["negated", "plain"])
+def test_packed_bits_follow_ta_states(dim, patch_dim, negated_literals):
+    """Packed pos/neg bit words of every non contradictory clause equal its included feature literals, tail bits stay 0."""
+    tm = discrete("multi", n_clauses=32, n_classes=2, dim=dim, patch_dim=patch_dim, negated_literals=negated_literals)
+    cfg = tm.config
+    F, P, half = cfg._n_raw_patch_feats, cfg._n_position_feats, cfg._n_literals // 2
+    rng = np.random.default_rng(0)
+
+    def check(states):
+        set_ta_states(tm, states)
+        tm.dev.pack_clauses()
+        pc = tm.dev.get_packed_clauses()
+        inc = states >= cfg._include_state
+        pos = _unpack_bits(pc.clause_pos_bits)
+        neg = _unpack_bits(pc.clause_neg_bits)
+        exp_neg = inc[:, half + P : half + P + F] if negated_literals else np.zeros((len(inc), F), dtype=bool)
+        ok = pc.has_contra == 0
+        assert ok.sum() > 5
+        np.testing.assert_array_equal(pos[ok, :F], inc[ok, P : P + F])
+        np.testing.assert_array_equal(neg[ok, :F], exp_neg[ok])
+        assert not pos[:, F:].any() and not neg[:, F:].any()
+
+    states = np.where(rng.random((cfg._total_clauses, cfg._n_literals)) < 0.02, cfg._include_state, cfg._include_state - 1)
+    check(states)
+
+    if negated_literals:
+        contra = states.copy()
+        contra[0, P] = contra[0, half + P] = cfg._include_state
+        set_ta_states(tm, contra)
+        tm.dev.pack_clauses()
+        assert tm.dev.get_packed_clauses().has_contra[0] == 1
+
+    states[0] = cfg._include_state - 1
+    states[0, P + F - 1] = cfg._include_state
+    check(states)

@@ -46,6 +46,13 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
         self.p_therm_bits = self.therm_bits.ctypes.data_as(fbound_p)
         self.p_literal_offsets = self.literal_offsets.ctypes.data_as(nlits_p)
 
+    def _init_packed_clauses(self):
+        super()._init_packed_clauses()
+        cfg = self.config
+        if cfg._all_binary_feats:
+            self.packed_clauses.clause_pos_bits = np.zeros((cfg._total_clauses, cfg._n_feat_chunks), dtype=np.uint64)
+            self.packed_clauses.clause_neg_bits = np.zeros((cfg._total_clauses, cfg._n_feat_chunks), dtype=np.uint64)
+
     def _to_host(self, arr: np.ndarray) -> np.ndarray:
         return arr.copy()
 
@@ -75,6 +82,8 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
             pc.p_clause_n_feats,
             pc.p_has_contra,
             pc.p_clause_len,
+            pc.p_clause_pos_bits,
+            pc.p_clause_neg_bits,
             pc.p_is_clause_synced,
             c_int(full),
         )

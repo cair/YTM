@@ -215,6 +215,13 @@ class PackedClauses(AutoPtrs):
 
     is_clause_synced : array of shape (total_clauses,)
         0 when the clause changed since it was last packed and needs repacking.
+
+    clause_pos_bits : array of shape (total_clauses, n_feat_chunks)
+        CPU with all binary features only: bit ``fid`` set when the clause includes feature ``fid``. Shape (1,) otherwise.
+
+    clause_neg_bits : array of shape (total_clauses, n_feat_chunks)
+        CPU with all binary features only: bit ``fid`` set when the clause includes the negation of feature ``fid``. Shape (1,)
+        otherwise.
     """
 
     make_ptrs: bool = field(default=True, kw_only=True)
@@ -225,3 +232,5 @@ class PackedClauses(AutoPtrs):
     has_contra: Any  # (total_clauses,) 1 when the clause is unsatisfiable
     clause_len: Any  # (total_clauses,) included literals, 0 means the clause is vacuous
     is_clause_synced: Any  # (total_clauses,) 0 when the clause needs repacking
+    clause_pos_bits: Any  # (total_clauses, n_feat_chunks) literal bits
+    clause_neg_bits: Any  # (total_clauses, n_feat_chunks) negation bits

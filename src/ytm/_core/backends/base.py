@@ -131,6 +131,8 @@ class BaseDevice(abc.ABC, Generic[BuffersT, ConfigT, ArrayT]):
             has_contra=self.xp.empty(cfg._total_clauses, dtype=np.int8),
             clause_len=self.xp.empty(cfg._total_clauses, dtype=cfg._nlits_dtype),
             is_clause_synced=self.xp.zeros(cfg._total_clauses, dtype=np.int8),
+            clause_pos_bits=self.xp.zeros(1, dtype=np.uint64),
+            clause_neg_bits=self.xp.zeros(1, dtype=np.uint64),
         )
 
     def set_threads(self, n: int):
@@ -341,6 +343,8 @@ class BaseDevice(abc.ABC, Generic[BuffersT, ConfigT, ArrayT]):
             has_contra=self._to_host(pc.has_contra),
             clause_len=self._to_host(pc.clause_len),
             is_clause_synced=self._to_host(pc.is_clause_synced),
+            clause_pos_bits=self._to_host(pc.clause_pos_bits),
+            clause_neg_bits=self._to_host(pc.clause_neg_bits),
         )
 
     # =========Saving and loading============
