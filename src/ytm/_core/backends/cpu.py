@@ -144,47 +144,10 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
         )
 
     def _infer_batch(self, Xb: np.ndarray, bs: int) -> np.ndarray:
-        pc = self.packed_clauses
         cfg = self.config
         class_sums = np.empty((bs, cfg.n_classes), dtype=np.float32)
 
-        if cfg._all_binary_feats:
-            n_chunks = (cfg._n_raw_patch_feats - 1 + 64) // 64
-
-            # These have to be zero allocated, to get correct results.
-            clause_pos_bits = np.zeros((cfg._total_clauses, n_chunks), dtype=np.uint64)
-            clause_neg_bits = np.zeros((cfg._total_clauses, n_chunks), dtype=np.uint64)
-            x_bits = np.zeros((bs, cfg._n_patches, n_chunks), dtype=np.uint64)
-
-            clause_outputs = np.empty((bs, cfg._total_clauses), dtype=np.int8)
-            Xb = np.asarray(Xb, dtype=cfg._fbound_dtype, order="C")
-
-            self.lib.bit_pack_clauses(
-                pc.p_clause_feat_bounds,
-                pc.p_clause_feat_ids,
-                pc.p_clause_n_feats,
-                pc.p_has_contra,
-                clause_pos_bits.ctypes.data_as(uint64_p),
-                clause_neg_bits.ctypes.data_as(uint64_p),
-            )
-            self.lib.bit_pack_X(
-                Xb.ctypes.data_as(POINTER(np.ctypeslib.as_ctypes_type(cfg._fbound_dtype))),
-                c_int(bs),
-                x_bits.ctypes.data_as(uint64_p),
-            )
-            self.lib.eval_infer_binary(
-                x_bits.ctypes.data_as(uint64_p),
-                c_int(bs),
-                pc.p_clause_position_bounds,
-                clause_pos_bits.ctypes.data_as(uint64_p),
-                clause_neg_bits.ctypes.data_as(uint64_p),
-                pc.p_has_contra,
-                pc.p_clause_len,
-                clause_outputs.ctypes.data_as(int8_p),
-            )
-        else:
-            clause_outputs = self._clause_outputs(Xb, bs)
-
+        clause_outputs = self._clause_outputs(Xb, bs)
         self.lib.vote_sum(clause_outputs.ctypes.data_as(int8_p), self.p_clause_weights, c_int(bs), class_sums.ctypes.data_as(float_p))
         return class_sums
 
@@ -192,14 +155,24 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
         pc = self.packed_clauses
         cfg = self.config
         Xb = np.asarray(Xb, dtype=cfg._fbound_dtype, order="C")
+        p_Xb = Xb.ctypes.data_as(POINTER(np.ctypeslib.as_ctypes_type(cfg._fbound_dtype)))
         clause_outputs = np.empty((bs, cfg._total_clauses), dtype=np.int8)
+
+        x_bits = None
+        if cfg._all_binary_feats:
+            x_bits = np.empty((bs, cfg._n_patches, cfg._n_feat_chunks), dtype=np.uint64)
+            self.lib.bit_pack_X(p_Xb, c_int(bs), x_bits.ctypes.data_as(uint64_p))
+
         self.lib.eval_infer(
-            Xb.ctypes.data_as(POINTER(np.ctypeslib.as_ctypes_type(cfg._fbound_dtype))),
+            p_Xb,
+            None if x_bits is None else x_bits.ctypes.data_as(uint64_p),
             c_int(bs),
             pc.p_clause_position_bounds,
             pc.p_clause_feat_bounds,
             pc.p_clause_feat_ids,
             pc.p_clause_n_feats,
+            pc.p_clause_pos_bits,
+            pc.p_clause_neg_bits,
             pc.p_has_contra,
             pc.p_clause_len,
             clause_outputs.ctypes.data_as(int8_p),
