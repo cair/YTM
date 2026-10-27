@@ -39,9 +39,9 @@ void wic(int class_id, int polarity, const float* restrict clause_weights, const
         if ((polarity > 0 && w <= 0.0f) || (polarity < 0 && w >= 0.0f))
             continue;
 
-        const FBOUND_T* cfb = &clause_feat_bounds[feat_bounds_offset(clause_id, 0, 0)];
-        const NFEAT_T* cfids = &clause_feat_ids[feat_ids_offset(clause_id, 0)];
-        const int n_feats = (int)clause_n_feats[clause_id];
+        const FBOUND_T* cfb = ALL_BINARY_FEATS ? NULL : &clause_feat_bounds[feat_bounds_offset(clause_id, 0, 0)];
+        const NFEAT_T* cfids = ALL_BINARY_FEATS ? NULL : &clause_feat_ids[feat_ids_offset(clause_id, 0)];
+        const int n_feats = ALL_BINARY_FEATS ? 0 : (int)clause_n_feats[clause_id];
         const uint64_t* pos_bits = ALL_BINARY_FEATS ? &clause_pos_bits[clause_id * N_FEAT_CHUNKS] : NULL;
         const uint64_t* neg_bits = ALL_BINARY_FEATS ? &clause_neg_bits[clause_id * N_FEAT_CHUNKS] : NULL;
 
@@ -86,9 +86,9 @@ void wac_sample(int class_id, int polarity, const int8_t* restrict patch_output,
             continue;
 
         const int8_t* clause_act = &patch_e[clause_id * (ull)N_PATCHES];
-        const FBOUND_T* cfb = &clause_feat_bounds[feat_bounds_offset(clause_id, 0, 0)];
-        const NFEAT_T* cfids = &clause_feat_ids[feat_ids_offset(clause_id, 0)];
-        const int n_feats = (int)clause_n_feats[clause_id];
+        const FBOUND_T* cfb = ALL_BINARY_FEATS ? NULL : &clause_feat_bounds[feat_bounds_offset(clause_id, 0, 0)];
+        const NFEAT_T* cfids = ALL_BINARY_FEATS ? NULL : &clause_feat_ids[feat_ids_offset(clause_id, 0)];
+        const int n_feats = ALL_BINARY_FEATS ? 0 : (int)clause_n_feats[clause_id];
         const uint64_t* pos_bits = ALL_BINARY_FEATS ? &clause_pos_bits[clause_id * N_FEAT_CHUNKS] : NULL;
         const uint64_t* neg_bits = ALL_BINARY_FEATS ? &clause_neg_bits[clause_id * N_FEAT_CHUNKS] : NULL;
         float wm = fabsf(w);

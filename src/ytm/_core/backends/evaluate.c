@@ -86,9 +86,9 @@ void eval_patchwise(const FBOUND_T* restrict X, const uint64_t* restrict x_bits,
 
         const FBOUND_T* Xe = &X[sample_offset(e)];
         const PBOUND_T* pos = &clause_position_bounds[pos_bounds_offset(clause, 0)];
-        const FBOUND_T* cfb = &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
-        const NFEAT_T* bounded_fids = &clause_feat_ids[feat_ids_offset(clause, 0)];
-        int n_bounded_fids = (int)clause_n_feats[clause];
+        const FBOUND_T* cfb = ALL_BINARY_FEATS ? NULL : &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
+        const NFEAT_T* bounded_fids = ALL_BINARY_FEATS ? NULL : &clause_feat_ids[feat_ids_offset(clause, 0)];
+        int n_bounded_fids = ALL_BINARY_FEATS ? 0 : (int)clause_n_feats[clause];
         const uint64_t* xe_bits = ALL_BINARY_FEATS ? &x_bits[e * N_PATCHES * N_FEAT_CHUNKS] : NULL;
         const uint64_t* pos_bits = ALL_BINARY_FEATS ? &clause_pos_bits[clause * N_FEAT_CHUNKS] : NULL;
         const uint64_t* neg_bits = ALL_BINARY_FEATS ? &clause_neg_bits[clause * N_FEAT_CHUNKS] : NULL;
@@ -141,9 +141,9 @@ void eval_infer(const FBOUND_T* restrict X, const uint64_t* restrict x_bits, con
         int out = eval_trivial(clause, has_contra, clause_len);
         if (out < 0) {
             const FBOUND_T* Xe = &X[sample_offset(e)];
-            const FBOUND_T* feat_bounds = &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
-            const NFEAT_T* feat_ids = &clause_feat_ids[feat_ids_offset(clause, 0)];
-            const int n_feats = (int)clause_n_feats[clause];
+            const FBOUND_T* feat_bounds = ALL_BINARY_FEATS ? NULL : &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
+            const NFEAT_T* feat_ids = ALL_BINARY_FEATS ? NULL : &clause_feat_ids[feat_ids_offset(clause, 0)];
+            const int n_feats = ALL_BINARY_FEATS ? 0 : (int)clause_n_feats[clause];
             const uint64_t* xe_bits = ALL_BINARY_FEATS ? &x_bits[e * N_PATCHES * N_FEAT_CHUNKS] : NULL;
             const uint64_t* pos_bits = ALL_BINARY_FEATS ? &clause_pos_bits[clause * N_FEAT_CHUNKS] : NULL;
             const uint64_t* neg_bits = ALL_BINARY_FEATS ? &clause_neg_bits[clause * N_FEAT_CHUNKS] : NULL;
@@ -231,9 +231,9 @@ void eval_fit(const ull* restrict rng_keys, const FBOUND_T* restrict X, const in
         int out = skip ? 0 : eval_trivial(clause, has_contra, clause_len);
         int selected_id = -1;
 
-        const FBOUND_T* feat_bounds = &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
-        const NFEAT_T* feat_ids = &clause_feat_ids[feat_ids_offset(clause, 0)];
-        const int n_feats = (int)clause_n_feats[clause];
+        const FBOUND_T* feat_bounds = ALL_BINARY_FEATS ? NULL : &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
+        const NFEAT_T* feat_ids = ALL_BINARY_FEATS ? NULL : &clause_feat_ids[feat_ids_offset(clause, 0)];
+        const int n_feats = ALL_BINARY_FEATS ? 0 : (int)clause_n_feats[clause];
         const uint64_t* pos_bits = ALL_BINARY_FEATS ? &clause_pos_bits[clause * N_FEAT_CHUNKS] : NULL;
         const uint64_t* neg_bits = ALL_BINARY_FEATS ? &clause_neg_bits[clause * N_FEAT_CHUNKS] : NULL;
 

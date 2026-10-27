@@ -77,14 +77,20 @@ static inline FeatureResult scan_feature_bits(const TA_STATE_T* restrict ta_stat
 
         pos_bits[k] = pos;
         neg_bits[k] = neg;
-        n_includes += (uint)(__builtin_popcountll(pos) + __builtin_popcountll(neg));
-        n_bounded += __builtin_popcountll(pos | neg);
 
+        uint64_t upto = ~0ULL;
         if (pos & neg) {
             all_valid = false;
-            if (!dont_skip)
-                break;
+            if (!dont_skip) {
+                const uint64_t first = (pos & neg) & (~(pos & neg) + 1);
+                upto = first | (first - 1);
+            }
         }
+
+        n_includes += (uint)(__builtin_popcountll(pos & upto) + __builtin_popcountll(neg & upto));
+        n_bounded += __builtin_popcountll((pos | neg) & upto);
+        if (!all_valid && !dont_skip)
+            break;
     }
 
     return (FeatureResult){n_bounded, n_includes, all_valid};
@@ -121,15 +127,17 @@ void pack_clauses(const TA_STATE_T* restrict global_ta_states, const FBOUND_T* r
             continue;
         }
 
-        NFEAT_T* cfids = &clause_feat_ids[feat_ids_offset(clause, 0)];
-        FBOUND_T* cfb = &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
+        FeatureResult fr;
+        if (ALL_BINARY_FEATS) {
+            fr = scan_feature_bits(ta_state, &clause_pos_bits[clause * N_FEAT_CHUNKS], &clause_neg_bits[clause * N_FEAT_CHUNKS],
+                                   dont_skip);
+        } else {
+            NFEAT_T* cfids = &clause_feat_ids[feat_ids_offset(clause, 0)];
+            FBOUND_T* cfb = &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
+            fr = scan_feature_literals(ta_state, therm_bits, literal_offsets, cfids, cfb, dont_skip);
+            clause_n_feats[clause] = (NFEAT_T)fr.n_bounded_feats;
+        }
 
-        FeatureResult fr = scan_feature_literals(ta_state, therm_bits, literal_offsets, cfids, cfb, dont_skip);
-        if (ALL_BINARY_FEATS)
-            scan_feature_bits(ta_state, &clause_pos_bits[clause * N_FEAT_CHUNKS], &clause_neg_bits[clause * N_FEAT_CHUNKS],
-                              dont_skip);
-
-        clause_n_feats[clause] = (NFEAT_T)fr.n_bounded_feats;
         has_contra[clause] = !(pr.valid && fr.all_valid);
         clause_len[clause] = (NLITS_T)(pr.includes + fr.includes);
         is_clause_synced[clause] = 1;

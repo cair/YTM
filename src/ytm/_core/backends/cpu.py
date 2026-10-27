@@ -50,6 +50,9 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
         super()._init_packed_clauses()
         cfg = self.config
         if cfg._all_binary_feats:
+            self.packed_clauses.clause_feat_ids = np.zeros(1, dtype=cfg._nfeat_dtype)
+            self.packed_clauses.clause_feat_bounds = np.zeros(1, dtype=cfg._fbound_dtype)
+            self.packed_clauses.clause_n_feats = np.zeros(1, dtype=cfg._nfeat_dtype)
             self.packed_clauses.clause_pos_bits = np.zeros((cfg._total_clauses, cfg._n_feat_chunks), dtype=np.uint64)
             self.packed_clauses.clause_neg_bits = np.zeros((cfg._total_clauses, cfg._n_feat_chunks), dtype=np.uint64)
 

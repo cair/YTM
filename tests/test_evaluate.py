@@ -188,3 +188,20 @@ def test_packed_bits_follow_ta_states(dim, patch_dim, negated_literals):
     states[0] = cfg._include_state - 1
     states[0, P + F - 1] = cfg._include_state
     check(states)
+
+
+@pytest.mark.parametrize("dim", [(70, 1, 1), (130, 1, 1)], ids=["flat_70", "flat_130"])
+def test_contradictory_clause_len_counts_includes_up_to_first_contradiction(device, dim):
+    """With early skipping, a contradictory clause counts the included literals of features up to its first contradiction."""
+    tm = discrete("multi", device, n_clauses=4, n_classes=2, dim=dim)
+    cfg = tm.config
+    F, half = cfg._n_raw_patch_feats, cfg._n_literals // 2
+    states = np.full((cfg._total_clauses, cfg._n_literals), cfg._include_state - 1)
+    for fid in (3, 64, 66, F - 1):
+        states[0, fid] = cfg._include_state
+    states[0, half + 65] = states[0, half + 66] = cfg._include_state
+    set_ta_states(tm, states)
+    tm.dev.pack_clauses()
+    pc = tm.dev.get_packed_clauses()
+    assert pc.has_contra[0] == 1
+    assert pc.clause_len[0] == 5

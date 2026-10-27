@@ -205,13 +205,16 @@ class PackedClauses(AutoPtrs):
     ----------
     clause_feat_ids : array of shape (total_clauses, n_raw_patch_feats)
         Features each clause constrains. Only the first ``clause_n_feats`` entries are used.
+        Shape (1,) on CPU with all binary features.
 
     clause_feat_bounds : array of shape (total_clauses, n_raw_patch_feats, 2)
         Closed range ``[lower, upper]`` allowed for each of those features, parallel to
         ``clause_feat_ids``.
+        Shape (1,) on CPU with all binary features.
 
     clause_n_feats : array of shape (total_clauses,)
         Number of used entries in the two arrays above.
+        Shape (1,) on CPU with all binary features.
 
     clause_position_bounds : array of shape (total_clauses, 4)
         Closed patch range ``[min_y, max_y, min_x, max_x]`` the clause can match. Shape (1, 1)
