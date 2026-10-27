@@ -77,20 +77,14 @@ static inline FeatureResult scan_feature_bits(const TA_STATE_T* restrict ta_stat
 
         pos_bits[k] = pos;
         neg_bits[k] = neg;
+        n_includes += (uint)(__builtin_popcountll(pos) + __builtin_popcountll(neg));
+        n_bounded += __builtin_popcountll(pos | neg);
 
-        uint64_t upto = ~0ULL;
         if (pos & neg) {
             all_valid = false;
-            if (!dont_skip) {
-                const uint64_t first = (pos & neg) & (~(pos & neg) + 1);
-                upto = first | (first - 1);
-            }
+            if (!dont_skip)
+                break;
         }
-
-        n_includes += (uint)(__builtin_popcountll(pos & upto) + __builtin_popcountll(neg & upto));
-        n_bounded += __builtin_popcountll((pos | neg) & upto);
-        if (!all_valid && !dont_skip)
-            break;
     }
 
     return (FeatureResult){n_bounded, n_includes, all_valid};
