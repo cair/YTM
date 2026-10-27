@@ -148,6 +148,12 @@ class BaseDevice(abc.ABC, Generic[BuffersT, ConfigT, ArrayT]):
             self.buf.lit_drop_mask[start:end] = value
             if cfg.negated_literals:
                 self.buf.lit_drop_mask[half + start : half + end] = value
+            if cfg._all_binary_feats:
+                bit = np.uint64(1) << np.uint64(fid % 64)
+                if value:
+                    self.buf.feat_drop_bits[fid // 64] |= bit
+                else:
+                    self.buf.feat_drop_bits[fid // 64] &= ~bit
 
     # =========Pack clauses============
     @abc.abstractmethod

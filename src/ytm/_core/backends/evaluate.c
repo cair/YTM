@@ -154,26 +154,27 @@ void eval_infer(const FBOUND_T* restrict X, const uint64_t* restrict x_bits, con
     }
 }
 
-void bit_pack_X(const FBOUND_T* restrict X, const int N, uint64_t* restrict x_bits) {
-#pragma omp parallel for schedule(static) if (N > 1) num_threads(ytm_n_threads)
-    for (int e = 0; e < N; e++) {
-        const FBOUND_T* Xe = &X[sample_offset(e)];
+static inline void bit_pack_sample(const FBOUND_T* restrict Xe, uint64_t* restrict xe_bits) {
+    for (int py = 0; py < N_PATCHES_Y; py++) {
+        for (int px = 0; px < N_PATCHES_X; px++) {
+            uint64_t* bits = &xe_bits[(ull)(py * N_PATCHES_X + px) * N_FEAT_CHUNKS];
 
-        for (int py = 0; py < N_PATCHES_Y; py++) {
-            for (int px = 0; px < N_PATCHES_X; px++) {
-                uint64_t* bits = &x_bits[((ull)e * N_PATCHES + py * N_PATCHES_X + px) * N_FEAT_CHUNKS];
-
-                for (int k = 0; k < N_FEAT_CHUNKS; k++) {
-                    const int base = k * FEAT_CHUNK_SIZE;
-                    const int n = N_RAW_PATCH_FEATS - base < FEAT_CHUNK_SIZE ? N_RAW_PATCH_FEATS - base : FEAT_CHUNK_SIZE;
-                    uint64_t word = 0;
-                    for (int b = 0; b < n; b++)
-                        word |= (uint64_t)(get_feature_value(Xe, py, px, base + b) != 0) << b;
-                    bits[k] = word;
-                }
+            for (int k = 0; k < N_FEAT_CHUNKS; k++) {
+                const int base = k * FEAT_CHUNK_SIZE;
+                const int n = N_RAW_PATCH_FEATS - base < FEAT_CHUNK_SIZE ? N_RAW_PATCH_FEATS - base : FEAT_CHUNK_SIZE;
+                uint64_t word = 0;
+                for (int b = 0; b < n; b++)
+                    word |= (uint64_t)(get_feature_value(Xe, py, px, base + b) != 0) << b;
+                bits[k] = word;
             }
         }
     }
+}
+
+void bit_pack_X(const FBOUND_T* restrict X, const int N, uint64_t* restrict x_bits) {
+#pragma omp parallel for schedule(static) if (N > 1) num_threads(ytm_n_threads)
+    for (int e = 0; e < N; e++)
+        bit_pack_sample(&X[sample_offset(e)], &x_bits[(ull)e * N_PATCHES * N_FEAT_CHUNKS]);
 }
 
 /*
@@ -186,11 +187,15 @@ void bit_pack_X(const FBOUND_T* restrict X, const int N, uint64_t* restrict x_bi
  *   clause_drop_mask        1 for clauses dropped this epoch
  *   class_active            1 for classes that get feedback on this sample
  *   lit_drop_mask           1 for literals that get no feedback
+ *   feat_drop_bits          bit set for skipped features, all binary features only
  *   literal_offsets         first literal of each patch feature
+ *   x_bits                  output, (N_PATCHES, N_FEAT_CHUNKS) bit packed current sample, all binary features only
  *   clause_position_bounds  per clause [y_lo, y_hi, x_lo, x_hi] of allowed patches
  *   clause_feat_bounds      per clause [lo, hi] of each bounded feature
  *   clause_feat_ids         per clause ids of its bounded features
  *   clause_n_feats          number of bounded features per clause
+ *   clause_pos_bits         per clause included feature bits, all binary features only
+ *   clause_neg_bits         per clause included negated feature bits, all binary features only
  *   has_contra              1 for clauses with a contradiction
  *   clause_len              number of included literals per clause
  *   clause_output           output, clause outputs
@@ -199,13 +204,17 @@ void bit_pack_X(const FBOUND_T* restrict X, const int N, uint64_t* restrict x_bi
  */
 void eval_fit(const ull* restrict rng_keys, const FBOUND_T* restrict X, const int e, const int8_t* restrict clause_drop_mask,
               const uint8_t* restrict class_active, const uint8_t* restrict lit_drop_mask,
-              const NLITS_T* restrict literal_offsets, const PBOUND_T* restrict clause_position_bounds,
+              const uint64_t* restrict feat_drop_bits, const NLITS_T* restrict literal_offsets,
+              uint64_t* restrict x_bits, const PBOUND_T* restrict clause_position_bounds,
               const FBOUND_T* restrict clause_feat_bounds, const NFEAT_T* restrict clause_feat_ids,
-              const NFEAT_T* restrict clause_n_feats, const int8_t* restrict has_contra,
+              const NFEAT_T* restrict clause_n_feats, const uint64_t* restrict clause_pos_bits,
+              const uint64_t* restrict clause_neg_bits, const int8_t* restrict has_contra,
               const NLITS_T* restrict clause_len, int8_t* restrict clause_output,
               NPATCHES_T* restrict selected_patch_ids, int* restrict patch_weights) {
     const ull seed = rng_keys[e];
     const FBOUND_T* Xe = &X[sample_offset(e)];
+    if (ALL_BINARY_FEATS)
+        bit_pack_sample(Xe, x_bits);
 
 #pragma omp parallel for schedule(static) num_threads(ytm_n_threads)
     for (ull clause = 0; clause < (ull)TOTAL_CLAUSES; clause++) {
@@ -217,6 +226,8 @@ void eval_fit(const ull* restrict rng_keys, const FBOUND_T* restrict X, const in
         const FBOUND_T* feat_bounds = &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
         const NFEAT_T* feat_ids = &clause_feat_ids[feat_ids_offset(clause, 0)];
         const int n_feats = (int)clause_n_feats[clause];
+        const uint64_t* pos_bits = ALL_BINARY_FEATS ? &clause_pos_bits[clause * N_FEAT_CHUNKS] : NULL;
+        const uint64_t* neg_bits = ALL_BINARY_FEATS ? &clause_neg_bits[clause * N_FEAT_CHUNKS] : NULL;
 
         if (N_PATCHES > 1) {
             ull rng_k = rng_hash(seed, clause, 0xDEADBEEFULL);
@@ -230,7 +241,8 @@ void eval_fit(const ull* restrict rng_keys, const FBOUND_T* restrict X, const in
                 int count = 0;
                 for (int py = pos[0]; py <= pos[1]; py++) {
                     for (int px = pos[2]; px <= pos[3]; px++) {
-                        if (!match_patch(Xe, py, px, feat_ids, feat_bounds, n_feats, lit_drop_mask, literal_offsets))
+                        if (!match_clause_patch(Xe, x_bits, py, px, feat_bounds, feat_ids, n_feats, pos_bits, neg_bits,
+                                                feat_drop_bits, lit_drop_mask, literal_offsets))
                             continue;
                         count++;
                         if (rand_int(rng_k, &rng_counter, (uint)count) == 0)
@@ -241,7 +253,8 @@ void eval_fit(const ull* restrict rng_keys, const FBOUND_T* restrict X, const in
             }
         } else {
             if (out < 0)
-                out = match_patch(Xe, 0, 0, feat_ids, feat_bounds, n_feats, lit_drop_mask, literal_offsets);
+                out = match_clause_patch(Xe, x_bits, 0, 0, feat_bounds, feat_ids, n_feats, pos_bits, neg_bits, feat_drop_bits,
+                                         lit_drop_mask, literal_offsets);
         }
 
         clause_output[clause] = (int8_t)out;

@@ -81,6 +81,12 @@ class FitBuffers(AutoPtrs):
     lit_drop_mask : array of shape (n_literals,)
         Literals to skip.
 
+    feat_drop_bits : array of shape (n_feat_chunks,), uint64
+        All binary features only: bit ``fid`` set when feature ``fid`` is skipped. Shape (1,) otherwise.
+
+    x_bits : array of shape (n_patches, n_feat_chunks), uint64
+        All binary features only: bit packed patches of the current sample. Shape (1,) otherwise.
+
     class_active : array of shape (n_classes,), uint8
         1 when the class gives feedback on the current sample.
 
@@ -122,6 +128,8 @@ class FitBuffers(AutoPtrs):
     clause_drop_mask: Any = field(init=False, default=None)  # (total_clauses,) one mask for the whole epoch, per Drop Clause
     rng_keys: Any = field(init=False, default=None)  # (n_samples,) rng key of each sample
     lit_drop_mask: Any = field(init=False)  # (n_literals,) mask to skip a feature
+    feat_drop_bits: Any = field(init=False)  # (n_feat_chunks,) bit mask to skip a feature, all binary features only
+    x_bits: Any = field(init=False)  # (n_patches, n_feat_chunks) bit packed current sample, all binary features only
     class_active: Any = field(init=False)  # (n_classes,) uint8, 1 when the class gets feedback on the current sample
     clause_output: Any = field(init=False)  # (total_clauses,) 1 when the clause fired on this sample
     selected_pids: Any = field(init=False)  # (total_clauses,) patch each clause matched on, only valid where it fired
@@ -138,6 +146,8 @@ class FitBuffers(AutoPtrs):
         cfg, xp = self.cfg, self.xp
         n = cfg._total_clauses
         self.lit_drop_mask = xp.zeros(cfg._n_literals, dtype=np.uint8)
+        self.feat_drop_bits = xp.zeros(cfg._n_feat_chunks if cfg._all_binary_feats else 1, dtype=np.uint64)
+        self.x_bits = xp.empty((cfg._n_patches, cfg._n_feat_chunks) if cfg._all_binary_feats else 1, dtype=np.uint64)
         self.class_active = xp.ones(cfg.n_classes, dtype=np.uint8)
         self.clause_output = xp.empty(n, dtype=np.int8)
         self.selected_pids = xp.empty(n if cfg._n_patches > 1 else 1, dtype=cfg._npatches_dtype)
