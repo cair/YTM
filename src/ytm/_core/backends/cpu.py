@@ -34,21 +34,10 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
 
     def _bind(self):
         cfg = self.config
-        pc = self.packed_clauses
 
         ta_state_p = POINTER(np.ctypeslib.as_ctypes_type(cfg._ta_dtype))
         fbound_p = POINTER(np.ctypeslib.as_ctypes_type(cfg._fbound_dtype))
-        pbound_p = POINTER(np.ctypeslib.as_ctypes_type(cfg._pbound_dtype))
-        nfeat_p = POINTER(np.ctypeslib.as_ctypes_type(cfg._nfeat_dtype))
         nlits_p = POINTER(np.ctypeslib.as_ctypes_type(cfg._nlits_dtype))
-
-        self.p_clause_feat_bounds = pc.clause_feat_bounds.ctypes.data_as(fbound_p)
-        self.p_clause_position_bounds = pc.clause_position_bounds.ctypes.data_as(pbound_p)
-        self.p_clause_feat_ids = pc.clause_feat_ids.ctypes.data_as(nfeat_p)
-        self.p_clause_n_feats = pc.clause_n_feats.ctypes.data_as(nfeat_p)
-        self.p_has_contra = pc.has_contra.ctypes.data_as(int8_p)
-        self.p_clause_len = pc.clause_len.ctypes.data_as(nlits_p)
-        self.p_is_clause_synced = pc.is_clause_synced.ctypes.data_as(int8_p)
 
         self.p_ta_states = self.ta_states.ctypes.data_as(ta_state_p)
         self.p_clause_weights = self.clause_weights.ctypes.data_as(float_p)
@@ -72,25 +61,27 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
         self.lib.set_num_threads(c_int(max(1, n)))
 
     def pack_clauses(self, force_repack: bool = False, full: bool = False):
+        pc = self.packed_clauses
         if force_repack:
-            self.packed_clauses.is_clause_synced.fill(0)
+            pc.is_clause_synced.fill(0)
 
         self.lib.pack_clauses(
             self.p_ta_states,
             self.p_therm_bits,
             self.p_literal_offsets,
-            self.p_clause_position_bounds,
-            self.p_clause_feat_bounds,
-            self.p_clause_feat_ids,
-            self.p_clause_n_feats,
-            self.p_has_contra,
-            self.p_clause_len,
-            self.p_is_clause_synced,
+            pc.p_clause_position_bounds,
+            pc.p_clause_feat_bounds,
+            pc.p_clause_feat_ids,
+            pc.p_clause_n_feats,
+            pc.p_has_contra,
+            pc.p_clause_len,
+            pc.p_is_clause_synced,
             c_int(full),
         )
 
     # == fit steps ==
     def _fit_eval(self, e: int):
+        pc = self.packed_clauses
         buf = self.buf
         self.lib.eval_fit(
             buf.p_rng_keys,
@@ -100,12 +91,12 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
             buf.p_class_active,
             buf.p_lit_drop_mask,
             self.p_literal_offsets,
-            self.p_clause_position_bounds,
-            self.p_clause_feat_bounds,
-            self.p_clause_feat_ids,
-            self.p_clause_n_feats,
-            self.p_has_contra,
-            self.p_clause_len,
+            pc.p_clause_position_bounds,
+            pc.p_clause_feat_bounds,
+            pc.p_clause_feat_ids,
+            pc.p_clause_n_feats,
+            pc.p_has_contra,
+            pc.p_clause_len,
             buf.p_clause_output,
             buf.p_selected_pids,
             self.p_patch_weights,
@@ -116,6 +107,7 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
         self.lib.vote_sum(buf.p_clause_output, self.p_clause_weights, c_int(1), buf.p_votes)
 
     def _fit_apply_fb(self, e: int) -> None:
+        pc = self.packed_clauses
         buf = self.buf
         self.lib.update_t1b(
             buf.p_rng_keys,
@@ -125,7 +117,7 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
             buf.p_t1b_cnt,
             buf.p_lit_drop_mask,
             self.p_ta_states,
-            self.p_is_clause_synced,
+            pc.p_is_clause_synced,
         )
         self.lib.update_t1a_t2(
             buf.p_rng_keys,
@@ -139,10 +131,11 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
             buf.p_t1a_cnt,
             buf.p_t2_cnt,
             self.p_ta_states,
-            self.p_is_clause_synced,
+            pc.p_is_clause_synced,
         )
 
     def _infer_batch(self, Xb: np.ndarray, bs: int) -> np.ndarray:
+        pc = self.packed_clauses
         cfg = self.config
         class_sums = np.empty((bs, cfg.n_classes), dtype=np.float32)
 
@@ -158,10 +151,10 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
             Xb = np.asarray(Xb, dtype=cfg._fbound_dtype, order="C")
 
             self.lib.bit_pack_clauses(
-                self.p_clause_feat_bounds,
-                self.p_clause_feat_ids,
-                self.p_clause_n_feats,
-                self.p_has_contra,
+                pc.p_clause_feat_bounds,
+                pc.p_clause_feat_ids,
+                pc.p_clause_n_feats,
+                pc.p_has_contra,
                 clause_pos_bits.ctypes.data_as(uint64_p),
                 clause_neg_bits.ctypes.data_as(uint64_p),
             )
@@ -173,11 +166,11 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
             self.lib.eval_infer_binary(
                 x_bits.ctypes.data_as(uint64_p),
                 c_int(bs),
-                self.p_clause_position_bounds,
+                pc.p_clause_position_bounds,
                 clause_pos_bits.ctypes.data_as(uint64_p),
                 clause_neg_bits.ctypes.data_as(uint64_p),
-                self.p_has_contra,
-                self.p_clause_len,
+                pc.p_has_contra,
+                pc.p_clause_len,
                 clause_outputs.ctypes.data_as(int8_p),
             )
         else:
@@ -187,39 +180,42 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
         return class_sums
 
     def _clause_outputs(self, Xb: np.ndarray, bs: int) -> np.ndarray:
+        pc = self.packed_clauses
         cfg = self.config
         Xb = np.asarray(Xb, dtype=cfg._fbound_dtype, order="C")
         clause_outputs = np.empty((bs, cfg._total_clauses), dtype=np.int8)
         self.lib.eval_infer(
             Xb.ctypes.data_as(POINTER(np.ctypeslib.as_ctypes_type(cfg._fbound_dtype))),
             c_int(bs),
-            self.p_clause_position_bounds,
-            self.p_clause_feat_bounds,
-            self.p_clause_feat_ids,
-            self.p_clause_n_feats,
-            self.p_has_contra,
-            self.p_clause_len,
+            pc.p_clause_position_bounds,
+            pc.p_clause_feat_bounds,
+            pc.p_clause_feat_ids,
+            pc.p_clause_n_feats,
+            pc.p_has_contra,
+            pc.p_clause_len,
             clause_outputs.ctypes.data_as(int8_p),
         )
         return clause_outputs
 
     def _patch_outputs(self, Xb: np.ndarray, bs: int) -> np.ndarray:
+        pc = self.packed_clauses
         cfg = self.config
         patch_output = np.empty((bs, cfg._total_clauses, cfg._n_patches), dtype=np.int8)
         self.lib.eval_patchwise(
             Xb.ctypes.data_as(POINTER(np.ctypeslib.as_ctypes_type(cfg._fbound_dtype))),
             c_int(bs),
-            self.p_clause_position_bounds,
-            self.p_clause_feat_bounds,
-            self.p_clause_feat_ids,
-            self.p_clause_n_feats,
-            self.p_has_contra,
-            self.p_clause_len,
+            pc.p_clause_position_bounds,
+            pc.p_clause_feat_bounds,
+            pc.p_clause_feat_ids,
+            pc.p_clause_n_feats,
+            pc.p_has_contra,
+            pc.p_clause_len,
             patch_output.ctypes.data_as(int8_p),
         )
         return patch_output
 
     def wic(self, class_id: int, polarity: int, pw_th: float = 0.0, force_repack: bool = False) -> np.ndarray:
+        pc = self.packed_clauses
         cfg = self.config
         self.pack_clauses(force_repack)
 
@@ -232,11 +228,11 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
             c_int(class_id),
             c_int(polarity),
             self.p_clause_weights,
-            self.p_clause_feat_bounds,
-            self.p_clause_feat_ids,
-            self.p_clause_n_feats,
-            self.p_clause_position_bounds,
-            self.p_has_contra,
+            pc.p_clause_feat_bounds,
+            pc.p_clause_feat_ids,
+            pc.p_clause_n_feats,
+            pc.p_clause_position_bounds,
+            pc.p_has_contra,
             pw_norm.ctypes.data_as(float_p),
             self.p_therm_bits,
             c_float(pw_th),
@@ -245,6 +241,7 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
         return output
 
     def _wac_batch(self, Xb: np.ndarray, target_b: np.ndarray, polarity: int, bs: int) -> np.ndarray:
+        pc = self.packed_clauses
         cfg = self.config
         patch_output = self._patch_outputs(Xb, bs)
         p_patch_output = patch_output.ctypes.data_as(int8_p)
@@ -258,10 +255,10 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
                 p_patch_output,
                 c_int(e),
                 self.p_clause_weights,
-                self.p_clause_feat_bounds,
-                self.p_clause_feat_ids,
-                self.p_clause_n_feats,
-                self.p_has_contra,
+                pc.p_clause_feat_bounds,
+                pc.p_clause_feat_ids,
+                pc.p_clause_n_feats,
+                pc.p_has_contra,
                 self.p_therm_bits,
                 p_out_b,
             )

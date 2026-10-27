@@ -123,6 +123,7 @@ class BaseDevice(abc.ABC, Generic[BuffersT, ConfigT, ArrayT]):
     def _init_packed_clauses(self):
         cfg = self.config
         self.packed_clauses = PackedClauses(
+            make_ptrs=self.xp is np,
             clause_feat_ids=self.xp.empty((cfg._total_clauses, cfg._n_raw_patch_feats), dtype=cfg._nfeat_dtype),
             clause_feat_bounds=self.xp.empty((cfg._total_clauses, cfg._n_raw_patch_feats, 2), dtype=cfg._fbound_dtype),
             clause_n_feats=self.xp.empty(cfg._total_clauses, dtype=cfg._nfeat_dtype),
@@ -332,6 +333,7 @@ class BaseDevice(abc.ABC, Generic[BuffersT, ConfigT, ArrayT]):
         """Return packed clauses."""
         pc = self.packed_clauses
         return PackedClauses(
+            make_ptrs=False,
             clause_feat_bounds=self._to_host(pc.clause_feat_bounds),
             clause_position_bounds=self._to_host(pc.clause_position_bounds),
             clause_feat_ids=self._to_host(pc.clause_feat_ids),

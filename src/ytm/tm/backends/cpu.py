@@ -31,7 +31,7 @@ class CPUDevice(CoreCPUDevice[TMFitBuffers, TMConfig]):
         self.lib.decide_feedback(
             buf.p_rng_keys,
             buf.p_clause_output,
-            self.p_clause_len,
+            self.packed_clauses.p_clause_len,
             buf.p_clause_drop_mask,
             buf.p_prob,
             buf.p_label_probs,

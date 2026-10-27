@@ -7,8 +7,29 @@ import numpy as np
 from ..config import BaseTMConfig
 
 
+class AutoPtrs:
+    """With ``make_ptrs``, every numpy array set as an attribute also gets a ctypes pointer ``p_<name>``. It is None when the array is None."""
+
+    make_ptrs: bool
+
+    if TYPE_CHECKING:
+        from ctypes import _Pointer
+
+        def __getattr__(self, name: str) -> _Pointer[Any] | None: ...
+
+    def __setattr__(self, name: str, value: Any) -> None:
+        """Set the attribute, and with ``make_ptrs`` also ``p_<name>``: a ctypes pointer for numpy arrays, None for None."""
+        super().__setattr__(name, value)
+        if not self.make_ptrs:
+            return
+        if isinstance(value, np.ndarray):
+            super().__setattr__(f"p_{name}", value.ctypes.data_as(POINTER(np.ctypeslib.as_ctypes_type(value.dtype))))
+        elif value is None:
+            super().__setattr__(f"p_{name}", None)
+
+
 @dataclass(kw_only=True)
-class FitBuffers:
+class FitBuffers(AutoPtrs):
     """Arrays the fit kernels read and write, kept on the device for a whole epoch.
 
     Work arrays (clause outputs, votes, feedback lists) are made once in ``__post_init__``.
@@ -165,24 +186,9 @@ class FitBuffers:
     def per_sample_bytes(self) -> int:
         return sum(self.epoch_fields[name][0].nbytes for name in self.per_sample_fields)
 
-    if TYPE_CHECKING:
-        from ctypes import _Pointer
-
-        def __getattr__(self, name: str) -> _Pointer[Any] | None: ...
-
-    def __setattr__(self, name: str, value: Any) -> None:
-        """Set the attribute, and with ``make_ptrs`` also ``p_<name>``: a ctypes pointer for numpy arrays, None for None."""
-        super().__setattr__(name, value)
-        if not self.make_ptrs:
-            return
-        if isinstance(value, np.ndarray):
-            super().__setattr__(f"p_{name}", value.ctypes.data_as(POINTER(np.ctypeslib.as_ctypes_type(value.dtype))))
-        elif value is None:
-            super().__setattr__(f"p_{name}", None)
-
 
 @dataclass
-class PackedClauses:
+class PackedClauses(AutoPtrs):
     """Clauses in compact form for evaluation.
 
     Attributes
@@ -211,6 +217,7 @@ class PackedClauses:
         0 when the clause changed since it was last packed and needs repacking.
     """
 
+    make_ptrs: bool = field(default=True, kw_only=True)
     clause_feat_ids: Any  # (total_clauses, n_raw_patch_feats) the features this clause constrains
     clause_feat_bounds: Any  # (total_clauses, n_raw_patch_feats, 2) closed [lower, upper], parallel to the ids
     clause_n_feats: Any  # (total_clauses,) how many entries of the two above are in use
