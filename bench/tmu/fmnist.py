@@ -37,26 +37,40 @@ if __name__ == "__main__":
     parser.add_argument("--s", type=float, default=10.0)
     parser.add_argument("--levels", type=int, default=8)
     parser.add_argument("--epochs", type=int, default=10)
-    parser.add_argument("--seed", type=int, default=10)
+    parser.add_argument("--seeds", type=int, nargs="+", default=[10])
     parser.add_argument("--platform", default="CPU")
     args = parser.parse_args()
 
     expname = "fmnist_conv"
 
-    data = prepare(*load_fmnist(args.levels), levels=args.levels)
-    if args.coalesced and args.platform == "CUDA":
-        from PySparseCoalescedTsetlinMachineCUDA.tm import MultiClassConvolutionalTsetlinMachine2D
+    pysparse = args.coalesced and args.platform == "CUDA"
+    log = RunLog("pysparse" if pysparse else "tmu", expname, {**vars(args), "weighted_clauses": True})
 
-        libname, data = "pysparse", to_csr(*data)
-        tm = PySparseTM(
-            MultiClassConvolutionalTsetlinMachine2D(args.n_clauses, args.T, args.s, (28, 28, args.levels), (args.patch, args.patch))
-        )
-    else:
-        TM = TMCoalescedClassifier if args.coalesced else TMClassifier
-        libname = "tmu"
-        tm = TM(
-            args.n_clauses, args.T, args.s, platform=args.platform, patch_dim=(args.patch, args.patch), weighted_clauses=True, seed=args.seed
-        )
-    log = RunLog(libname, expname, {**vars(args), "weighted_clauses": True})
+    with Profiler() as setup_p:
+        data = prepare(*load_fmnist(args.levels), levels=args.levels)
+        if pysparse:
+            data = to_csr(*data)
+    log.set_setup(setup_p.get_profile())
 
-    train_model(tm, *data, epochs=args.epochs, log=log, expname=expname)
+    for seed in args.seeds:
+        print(f"{expname} seed {seed}")
+        with Profiler() as init_p:
+            if pysparse:
+                from PySparseCoalescedTsetlinMachineCUDA.tm import MultiClassConvolutionalTsetlinMachine2D
+
+                tm = PySparseTM(
+                    MultiClassConvolutionalTsetlinMachine2D(args.n_clauses, args.T, args.s, (28, 28, args.levels), (args.patch, args.patch))
+                )
+            else:
+                TM = TMCoalescedClassifier if args.coalesced else TMClassifier
+                tm = TM(
+                    args.n_clauses,
+                    args.T,
+                    args.s,
+                    platform=args.platform,
+                    patch_dim=(args.patch, args.patch),
+                    weighted_clauses=True,
+                    seed=seed,
+                )
+        log.start(seed, init_p.get_profile())
+        train_model(tm, *data, epochs=args.epochs, log=log, expname=expname)

@@ -6,6 +6,9 @@ import pathlib
 import platform
 import subprocess
 import sys
+import time
+
+import psutil
 
 from ytm.utils.profile import Profile
 
@@ -54,13 +57,27 @@ class RunLog:
                 "python": platform.python_version(),
                 "date": stamp,
             },
-            "epochs": [],
+            "setup": None,
+            "total_s": None,
+            "runs": [],
         }
 
+    def set_setup(self, setup: Profile) -> None:
+        self.run["setup"] = dataclasses.asdict(setup)
+        self._save()
+
+    def start(self, seed: int, init: Profile) -> None:
+        self.run["runs"].append({"seed": seed, "init": dataclasses.asdict(init), "epochs": []})
+        self._save()
+
     def write(self, epoch: int, fit: Profile, predict: Profile, metrics: dict) -> None:
-        self.run["epochs"].append(
+        self.run["runs"][-1]["epochs"].append(
             {"epoch": epoch, "fit": dataclasses.asdict(fit), "predict": dataclasses.asdict(predict), "metrics": metrics}
         )
+        self._save()
+
+    def _save(self) -> None:
+        self.run["total_s"] = time.time() - psutil.Process().create_time()
         tmp = self.path.with_suffix(".tmp")
         tmp.write_text(json.dumps(self.run, indent=2, default=lambda o: o.item()))
         tmp.replace(self.path)

@@ -34,14 +34,22 @@ if __name__ == "__main__":
     parser.add_argument("--T", type=float, default=10000)
     parser.add_argument("--s", type=float, default=1.1)
     parser.add_argument("--epochs", type=int, default=10)
-    parser.add_argument("--seed", type=int, default=10)
+    parser.add_argument("--seeds", type=int, nargs="+", default=[10])
     parser.add_argument("--platform", default="CPU")
     args = parser.parse_args()
 
     expname = "imdb"
 
-    TM = TMCoalescedClassifier if args.coalesced else TMClassifier
-    tm = TM(args.n_clauses, args.T, args.s, platform=args.platform, weighted_clauses=True, seed=args.seed)
     log = RunLog("tmu", expname, {**vars(args), "weighted_clauses": True})
 
-    train_model(tm, *prepare(*load_imdb(args.max_features)), epochs=args.epochs, log=log, expname=expname)
+    with Profiler() as setup_p:
+        data = prepare(*load_imdb(args.max_features))
+    log.set_setup(setup_p.get_profile())
+
+    for seed in args.seeds:
+        print(f"{expname} seed {seed}")
+        with Profiler() as init_p:
+            TM = TMCoalescedClassifier if args.coalesced else TMClassifier
+            tm = TM(args.n_clauses, args.T, args.s, platform=args.platform, weighted_clauses=True, seed=seed)
+        log.start(seed, init_p.get_profile())
+        train_model(tm, *data, epochs=args.epochs, log=log, expname=expname)

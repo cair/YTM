@@ -37,13 +37,23 @@ if __name__ == "__main__":
     parser.add_argument("--s", type=float, default=30.0)
     parser.add_argument("--q", type=float, default=10.0)
     parser.add_argument("--epochs", type=int, default=10)
+    parser.add_argument("--seeds", type=int, nargs="+", default=[10])
     args = parser.parse_args()
 
     expname = "celeba_conv"
     dim = (64, 64, 3 * args.levels)
 
-    tm = PySparseTM(MultiOutputConvolutionalTsetlinMachine2D(args.n_clauses, args.T, args.s, dim, (args.patch, args.patch), q=args.q))
     log = RunLog("pysparse", expname, {**vars(args), "coalesced": 1, "platform": "CUDA", "dim": dim})
 
-    data = prepare(*load_celeba(args.levels), levels=args.levels)
-    train_model(tm, *data, epochs=args.epochs, log=log, expname=expname)
+    with Profiler() as setup_p:
+        data = prepare(*load_celeba(args.levels), levels=args.levels)
+    log.set_setup(setup_p.get_profile())
+
+    for seed in args.seeds:
+        print(f"{expname} seed {seed}")
+        with Profiler() as init_p:
+            tm = PySparseTM(
+                MultiOutputConvolutionalTsetlinMachine2D(args.n_clauses, args.T, args.s, dim, (args.patch, args.patch), q=args.q)
+            )
+        log.start(seed, init_p.get_profile())
+        train_model(tm, *data, epochs=args.epochs, log=log, expname=expname)

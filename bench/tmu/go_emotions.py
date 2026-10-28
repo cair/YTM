@@ -35,11 +35,20 @@ if __name__ == "__main__":
     parser.add_argument("--s", type=float, default=2.0)
     parser.add_argument("--q", type=float, default=1.5)
     parser.add_argument("--epochs", type=int, default=10)
+    parser.add_argument("--seeds", type=int, nargs="+", default=[10])
     args = parser.parse_args()
 
     expname = "go_emotions"
 
-    tm = PySparseTM(MultiOutputTsetlinMachine(args.n_clauses, args.T, args.s, q=args.q))
     log = RunLog("pysparse", expname, {**vars(args), "coalesced": 1, "platform": "CUDA"})
 
-    train_model(tm, *prepare(*load_go_emotions(args.max_features)), epochs=args.epochs, log=log, expname=expname)
+    with Profiler() as setup_p:
+        data = prepare(*load_go_emotions(args.max_features))
+    log.set_setup(setup_p.get_profile())
+
+    for seed in args.seeds:
+        print(f"{expname} seed {seed}")
+        with Profiler() as init_p:
+            tm = PySparseTM(MultiOutputTsetlinMachine(args.n_clauses, args.T, args.s, q=args.q))
+        log.start(seed, init_p.get_profile())
+        train_model(tm, *data, epochs=args.epochs, log=log, expname=expname)

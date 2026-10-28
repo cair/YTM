@@ -27,23 +27,31 @@ if __name__ == "__main__":
     parser.add_argument("--T", type=float, default=1000)
     parser.add_argument("--s", type=float, default=10.0)
     parser.add_argument("--epochs", type=int, default=10)
-    parser.add_argument("--seed", type=int, default=10)
+    parser.add_argument("--seeds", type=int, nargs="+", default=[10])
     parser.add_argument("--device", default="cpu")
     args = parser.parse_args()
 
     expname = "mnist_conv" if args.patch else "mnist_flat"
 
-    tm = MultiClassTM(
-        n_clauses=args.n_clauses,
-        T=args.T,
-        s=args.s,
-        dim=(28, 28, 1),
-        n_classes=10,
-        patch_dim=args.patch,
-        coalesced=bool(args.coalesced),
-        seed=args.seed,
-        device=args.device,
-    )
     log = RunLog("ytm", expname, {**vars(args), "dim": (28, 28, 1), "n_classes": 10})
 
-    train_model(tm, *load_mnist(), epochs=args.epochs, log=log, expname=expname)
+    with Profiler() as setup_p:
+        data = load_mnist()
+    log.set_setup(setup_p.get_profile())
+
+    for seed in args.seeds:
+        print(f"{expname} seed {seed}")
+        with Profiler() as init_p:
+            tm = MultiClassTM(
+                n_clauses=args.n_clauses,
+                T=args.T,
+                s=args.s,
+                dim=(28, 28, 1),
+                n_classes=10,
+                patch_dim=args.patch,
+                coalesced=bool(args.coalesced),
+                seed=seed,
+                device=args.device,
+            )
+        log.start(seed, init_p.get_profile())
+        train_model(tm, *data, epochs=args.epochs, log=log, expname=expname)
