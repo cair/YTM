@@ -1,0 +1,6 @@
+﻿ytm.simple.MultiClassTM
+=======================
+
+.. currentmodule:: ytm.simple
+
+.. autoclass:: MultiClassTM

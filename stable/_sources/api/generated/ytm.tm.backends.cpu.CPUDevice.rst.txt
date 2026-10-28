@@ -1,0 +1,6 @@
+﻿ytm.tm.backends.cpu.CPUDevice
+=============================
+
+.. currentmodule:: ytm.tm.backends.cpu
+
+.. autoclass:: CPUDevice

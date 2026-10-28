@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index &#8212; YTM 1.0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+
+    <script src="_static/documentation_options.js?v=292eb321"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.23.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://cair.github.io/YTM/stable/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">YTM 1.0.1 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#K"><strong>K</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ | <a href="#Y"><strong>Y</strong></a>
+ 
+</div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm.guided.config.TMConfig.html#ytm.guided.config.TMConfig.act_loss">act_loss (ytm.guided.config.TMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm.guided.config.ActFn.html#ytm.guided.config.ActFn">ActFn (class in ytm.guided.config)</a>
+</li>
+      <li><a href="api/generated/ytm.guided.backends.act_loss.ActLoss.html#ytm.guided.backends.act_loss.ActLoss">ActLoss (class in ytm.guided.backends.act_loss)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.allow_polarity_change">allow_polarity_change (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.config.Feedback.html#ytm._core.config.Feedback.as_integer_ratio">as_integer_ratio() (ytm._core.config.Feedback method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.config.ActFn.html#ytm.guided.config.ActFn.as_integer_ratio">(ytm.guided.config.ActFn method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.config.FbSignal.html#ytm.guided.config.FbSignal.as_integer_ratio">(ytm.guided.config.FbSignal method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm.guided.backends.act_loss.ASL.html#ytm.guided.backends.act_loss.ASL">ASL (class in ytm.guided.backends.act_loss)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/utils.html#ytm.pbar.bar">bar() (in module ytm.pbar)</a>
+</li>
+      <li><a href="api/generated/ytm._core.backends.base.BaseDevice.html#ytm._core.backends.base.BaseDevice">BaseDevice (class in ytm._core.backends.base)</a>
+</li>
+      <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM">BaseTM (class in ytm._core.base)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.simple.BaseTM.html#ytm.simple.BaseTM">(class in ytm.simple)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig">BaseTMConfig (class in ytm._core.config)</a>
+</li>
+      <li><a href="api/generated/ytm.utils.Binarizer.html#ytm.utils.Binarizer">Binarizer (class in ytm.utils)</a>
+</li>
+      <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM">BinaryTM (class in ytm.guided)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.simple.BinaryTM.html#ytm.simple.BinaryTM">(class in ytm.simple)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM">(class in ytm.tm)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.config.Feedback.html#ytm._core.config.Feedback.bit_count">bit_count() (ytm._core.config.Feedback method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.config.ActFn.html#ytm.guided.config.ActFn.bit_count">(ytm.guided.config.ActFn method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.config.FbSignal.html#ytm.guided.config.FbSignal.bit_count">(ytm.guided.config.FbSignal method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.config.Feedback.html#ytm._core.config.Feedback.bit_length">bit_length() (ytm._core.config.Feedback method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.config.ActFn.html#ytm.guided.config.ActFn.bit_length">(ytm.guided.config.ActFn method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.config.FbSignal.html#ytm.guided.config.FbSignal.bit_length">(ytm.guided.config.FbSignal method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.device_config.DeviceConfig.html#ytm._core.device_config.DeviceConfig.block_size">block_size (ytm._core.device_config.DeviceConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.boost_tp_dec">boost_tp_dec (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.boost_tp_inc">boost_tp_inc (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm.simple.BaseTM.html#ytm.simple.BaseTM.calc_class_sums">calc_class_sums() (ytm.simple.BaseTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.simple.BinaryTM.html#ytm.simple.BinaryTM.calc_class_sums">(ytm.simple.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiClassTM.html#ytm.simple.MultiClassTM.calc_class_sums">(ytm.simple.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiOutputTM.html#ytm.simple.MultiOutputTM.calc_class_sums">(ytm.simple.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.RegressionTM.html#ytm.simple.RegressionTM.calc_class_sums">(ytm.simple.RegressionTM method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm.simple.BaseTM.html#ytm.simple.BaseTM.clause_outputs">clause_outputs() (ytm.simple.BaseTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.simple.BinaryTM.html#ytm.simple.BinaryTM.clause_outputs">(ytm.simple.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiClassTM.html#ytm.simple.MultiClassTM.clause_outputs">(ytm.simple.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiOutputTM.html#ytm.simple.MultiOutputTM.clause_outputs">(ytm.simple.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.RegressionTM.html#ytm.simple.RegressionTM.clause_outputs">(ytm.simple.RegressionTM method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.info.ClauseInfo.html#ytm._core.info.ClauseInfo.clause_to_str">clause_to_str() (ytm._core.info.ClauseInfo method)</a>
+</li>
+      <li><a href="api/generated/ytm._core.info.ClauseInfo.html#ytm._core.info.ClauseInfo">ClauseInfo (class in ytm._core.info)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.coalesced">coalesced (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm.utils.Binarizer.html#ytm.utils.Binarizer.collapse_bins">collapse_bins() (ytm.utils.Binarizer method)</a>
+</li>
+      <li><a href="api/generated/ytm._core.backends.toolchain.Toolchain.html#ytm._core.backends.toolchain.Toolchain.compile">compile() (ytm._core.backends.toolchain.Toolchain method)</a>
+</li>
+      <li><a href="api/generated/ytm._core.backends.toolchain.compiler_cmd.html#ytm._core.backends.toolchain.compiler_cmd">compiler_cmd() (in module ytm._core.backends.toolchain)</a>
+</li>
+      <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM.config">config (ytm._core.base.BaseTM property)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.config">(ytm.guided.BinaryTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.config">(ytm.guided.MultiClassTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.config">(ytm.guided.MultiOutputTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.config">(ytm.guided.RegressionTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.config">(ytm.tm.BinaryTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.config">(ytm.tm.MultiClassTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.config">(ytm.tm.MultiOutputTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.config">(ytm.tm.RegressionTM property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.config.Feedback.html#ytm._core.config.Feedback.conjugate">conjugate() (ytm._core.config.Feedback method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.config.ActFn.html#ytm.guided.config.ActFn.conjugate">(ytm.guided.config.ActFn method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.config.FbSignal.html#ytm.guided.config.FbSignal.conjugate">(ytm.guided.config.FbSignal method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.initializer.ConstTAInit.html#ytm._core.initializer.ConstTAInit">ConstTAInit (class in ytm._core.initializer)</a>
+</li>
+      <li><a href="api/generated/ytm._core.backends.cpu.CPUDevice.html#ytm._core.backends.cpu.CPUDevice">CPUDevice (class in ytm._core.backends.cpu)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.backends.cpu.CPUDevice.html#ytm.guided.backends.cpu.CPUDevice">(class in ytm.guided.backends.cpu)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cpu.CPUDevice.html#ytm.tm.backends.cpu.CPUDevice">(class in ytm.tm.backends.cpu)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.backends.cuda.CUDADevice.html#ytm._core.backends.cuda.CUDADevice">CUDADevice (class in ytm._core.backends.cuda)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.backends.cuda.CUDADevice.html#ytm.guided.backends.cuda.CUDADevice">(class in ytm.guided.backends.cuda)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cuda.CUDADevice.html#ytm.tm.backends.cuda.CUDADevice">(class in ytm.tm.backends.cuda)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.decision_threshold">decision_threshold (ytm.guided.BinaryTM property)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.decision_threshold">(ytm.guided.MultiClassTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.decision_threshold">(ytm.guided.MultiOutputTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.decision_threshold">(ytm.tm.BinaryTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.decision_threshold">(ytm.tm.MultiClassTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.decision_threshold">(ytm.tm.MultiOutputTM property)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.config.Feedback.html#ytm._core.config.Feedback.denominator">denominator (ytm._core.config.Feedback attribute)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.config.ActFn.html#ytm.guided.config.ActFn.denominator">(ytm.guided.config.ActFn attribute)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.config.FbSignal.html#ytm.guided.config.FbSignal.denominator">(ytm.guided.config.FbSignal attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.device_config.DeviceConfig.html#ytm._core.device_config.DeviceConfig.device">device (ytm._core.device_config.DeviceConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM.device_config">device_config (ytm._core.base.BaseTM property)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.device_config">(ytm.guided.BinaryTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.device_config">(ytm.guided.MultiClassTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.device_config">(ytm.guided.MultiOutputTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.device_config">(ytm.guided.RegressionTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.device_config">(ytm.tm.BinaryTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.device_config">(ytm.tm.MultiClassTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.device_config">(ytm.tm.MultiOutputTM property)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.device_config">(ytm.tm.RegressionTM property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.device_config.DeviceConfig.html#ytm._core.device_config.DeviceConfig">DeviceConfig (class in ytm._core.device_config)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.dim">dim (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/utils.html#ytm.pbar.disable">disable() (in module ytm.pbar)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm.utils.Profiler.html#ytm.utils.Profiler.elapsed">elapsed (ytm.utils.Profiler property)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.utils.Timer.html#ytm.utils.Timer.elapsed">(ytm.utils.Timer property)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.backends.buffers.FitBuffers.html#ytm._core.backends.buffers.FitBuffers.end_epoch">end_epoch() (ytm._core.backends.buffers.FitBuffers method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.backends.buffers.GuidedFitBuffers.html#ytm.guided.backends.buffers.GuidedFitBuffers.end_epoch">(ytm.guided.backends.buffers.GuidedFitBuffers method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.buffers.TMFitBuffers.html#ytm.tm.backends.buffers.TMFitBuffers.end_epoch">(ytm.tm.backends.buffers.TMFitBuffers method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.config.enum_to_header.html#ytm._core.config.enum_to_header">enum_to_header() (in module ytm._core.config)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm.guided.config.TMConfig.html#ytm.guided.config.TMConfig.fb_signal">fb_signal (ytm.guided.config.TMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm.guided.config.FbSignal.html#ytm.guided.config.FbSignal">FbSignal (class in ytm.guided.config)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.feat_maxs">feat_maxs (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.feat_mins">feat_mins (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.Feedback.html#ytm._core.config.Feedback">Feedback (class in ytm._core.config)</a>
+</li>
+      <li><a href="api/generated/ytm.simple.BaseTM.html#ytm.simple.BaseTM.feedback">feedback() (ytm.simple.BaseTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.simple.BinaryTM.html#ytm.simple.BinaryTM.feedback">(ytm.simple.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiClassTM.html#ytm.simple.MultiClassTM.feedback">(ytm.simple.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiOutputTM.html#ytm.simple.MultiOutputTM.feedback">(ytm.simple.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.RegressionTM.html#ytm.simple.RegressionTM.feedback">(ytm.simple.RegressionTM method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.fit">fit() (ytm.guided.BinaryTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.fit">(ytm.guided.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.fit">(ytm.guided.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.fit">(ytm.guided.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.BaseTM.html#ytm.simple.BaseTM.fit">(ytm.simple.BaseTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.BinaryTM.html#ytm.simple.BinaryTM.fit">(ytm.simple.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiClassTM.html#ytm.simple.MultiClassTM.fit">(ytm.simple.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiOutputTM.html#ytm.simple.MultiOutputTM.fit">(ytm.simple.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.RegressionTM.html#ytm.simple.RegressionTM.fit">(ytm.simple.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.fit">(ytm.tm.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.fit">(ytm.tm.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.fit">(ytm.tm.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.fit">(ytm.tm.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.utils.Binarizer.html#ytm.utils.Binarizer.fit">(ytm.utils.Binarizer method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.backends.base.BaseDevice.html#ytm._core.backends.base.BaseDevice.fit_epoch">fit_epoch() (ytm._core.backends.base.BaseDevice method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm._core.backends.cpu.CPUDevice.html#ytm._core.backends.cpu.CPUDevice.fit_epoch">(ytm._core.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm._core.backends.cuda.CUDADevice.html#ytm._core.backends.cuda.CUDADevice.fit_epoch">(ytm._core.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cpu.CPUDevice.html#ytm.guided.backends.cpu.CPUDevice.fit_epoch">(ytm.guided.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cuda.CUDADevice.html#ytm.guided.backends.cuda.CUDADevice.fit_epoch">(ytm.guided.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cpu.CPUDevice.html#ytm.tm.backends.cpu.CPUDevice.fit_epoch">(ytm.tm.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cuda.CUDADevice.html#ytm.tm.backends.cuda.CUDADevice.fit_epoch">(ytm.tm.backends.cuda.CUDADevice method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.backends.base.BaseDevice.html#ytm._core.backends.base.BaseDevice.fit_sample">fit_sample() (ytm._core.backends.base.BaseDevice method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm._core.backends.cpu.CPUDevice.html#ytm._core.backends.cpu.CPUDevice.fit_sample">(ytm._core.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm._core.backends.cuda.CUDADevice.html#ytm._core.backends.cuda.CUDADevice.fit_sample">(ytm._core.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cpu.CPUDevice.html#ytm.guided.backends.cpu.CPUDevice.fit_sample">(ytm.guided.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cuda.CUDADevice.html#ytm.guided.backends.cuda.CUDADevice.fit_sample">(ytm.guided.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cpu.CPUDevice.html#ytm.tm.backends.cpu.CPUDevice.fit_sample">(ytm.tm.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cuda.CUDADevice.html#ytm.tm.backends.cuda.CUDADevice.fit_sample">(ytm.tm.backends.cuda.CUDADevice method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm.utils.Binarizer.html#ytm.utils.Binarizer.fit_transform">fit_transform() (ytm.utils.Binarizer method)</a>
+</li>
+      <li><a href="api/generated/ytm._core.backends.buffers.FitBuffers.html#ytm._core.backends.buffers.FitBuffers">FitBuffers (class in ytm._core.backends.buffers)</a>
+</li>
+      <li><a href="api/generated/ytm.guided.backends.act_loss.FocalBCE.html#ytm.guided.backends.act_loss.FocalBCE">FocalBCE (class in ytm.guided.backends.act_loss)</a>
+</li>
+      <li><a href="api/generated/ytm.guided.backends.act_loss.FocalCE.html#ytm.guided.backends.act_loss.FocalCE">FocalCE (class in ytm.guided.backends.act_loss)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.Feedback.html#ytm._core.config.Feedback.from_bytes">from_bytes() (ytm._core.config.Feedback class method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.config.ActFn.html#ytm.guided.config.ActFn.from_bytes">(ytm.guided.config.ActFn class method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.config.FbSignal.html#ytm.guided.config.FbSignal.from_bytes">(ytm.guided.config.FbSignal class method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM.get_clauses">get_clauses() (ytm._core.base.BaseTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.get_clauses">(ytm.guided.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.get_clauses">(ytm.guided.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.get_clauses">(ytm.guided.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.get_clauses">(ytm.guided.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.get_clauses">(ytm.tm.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.get_clauses">(ytm.tm.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.get_clauses">(ytm.tm.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.get_clauses">(ytm.tm.RegressionTM method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM.get_literals">get_literals() (ytm._core.base.BaseTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.get_literals">(ytm.guided.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.get_literals">(ytm.guided.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.get_literals">(ytm.guided.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.get_literals">(ytm.guided.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.get_literals">(ytm.tm.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.get_literals">(ytm.tm.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.get_literals">(ytm.tm.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.get_literals">(ytm.tm.RegressionTM method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.backends.base.BaseDevice.html#ytm._core.backends.base.BaseDevice.get_packed_clauses">get_packed_clauses() (ytm._core.backends.base.BaseDevice method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm._core.backends.cpu.CPUDevice.html#ytm._core.backends.cpu.CPUDevice.get_packed_clauses">(ytm._core.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm._core.backends.cuda.CUDADevice.html#ytm._core.backends.cuda.CUDADevice.get_packed_clauses">(ytm._core.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cpu.CPUDevice.html#ytm.guided.backends.cpu.CPUDevice.get_packed_clauses">(ytm.guided.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cuda.CUDADevice.html#ytm.guided.backends.cuda.CUDADevice.get_packed_clauses">(ytm.guided.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cpu.CPUDevice.html#ytm.tm.backends.cpu.CPUDevice.get_packed_clauses">(ytm.tm.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cuda.CUDADevice.html#ytm.tm.backends.cuda.CUDADevice.get_packed_clauses">(ytm.tm.backends.cuda.CUDADevice method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM.get_patch_weights">get_patch_weights() (ytm._core.base.BaseTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.get_patch_weights">(ytm.guided.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.get_patch_weights">(ytm.guided.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.get_patch_weights">(ytm.guided.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.get_patch_weights">(ytm.guided.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.get_patch_weights">(ytm.tm.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.get_patch_weights">(ytm.tm.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.get_patch_weights">(ytm.tm.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.get_patch_weights">(ytm.tm.RegressionTM method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm.utils.Profiler.html#ytm.utils.Profiler.get_profile">get_profile() (ytm.utils.Profiler method)</a>
+</li>
+      <li><a href="api/generated/ytm._core.backends.base.BaseDevice.html#ytm._core.backends.base.BaseDevice.get_state_dict">get_state_dict() (ytm._core.backends.base.BaseDevice method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm._core.backends.cpu.CPUDevice.html#ytm._core.backends.cpu.CPUDevice.get_state_dict">(ytm._core.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm._core.backends.cuda.CUDADevice.html#ytm._core.backends.cuda.CUDADevice.get_state_dict">(ytm._core.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cpu.CPUDevice.html#ytm.guided.backends.cpu.CPUDevice.get_state_dict">(ytm.guided.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cuda.CUDADevice.html#ytm.guided.backends.cuda.CUDADevice.get_state_dict">(ytm.guided.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cpu.CPUDevice.html#ytm.tm.backends.cpu.CPUDevice.get_state_dict">(ytm.tm.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cuda.CUDADevice.html#ytm.tm.backends.cuda.CUDADevice.get_state_dict">(ytm.tm.backends.cuda.CUDADevice method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM.get_ta_states">get_ta_states() (ytm._core.base.BaseTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.get_ta_states">(ytm.guided.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.get_ta_states">(ytm.guided.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.get_ta_states">(ytm.guided.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.get_ta_states">(ytm.guided.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.get_ta_states">(ytm.tm.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.get_ta_states">(ytm.tm.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.get_ta_states">(ytm.tm.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.get_ta_states">(ytm.tm.RegressionTM method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM.get_weights">get_weights() (ytm._core.base.BaseTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.get_weights">(ytm.guided.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.get_weights">(ytm.guided.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.get_weights">(ytm.guided.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.get_weights">(ytm.guided.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.get_weights">(ytm.tm.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.get_weights">(ytm.tm.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.get_weights">(ytm.tm.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.get_weights">(ytm.tm.RegressionTM method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm.guided.backends.buffers.GuidedFitBuffers.html#ytm.guided.backends.buffers.GuidedFitBuffers">GuidedFitBuffers (class in ytm.guided.backends.buffers)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm.guided.backends.act_loss.Huber.html#ytm.guided.backends.act_loss.Huber">Huber (class in ytm.guided.backends.act_loss)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.config.Feedback.html#ytm._core.config.Feedback.imag">imag (ytm._core.config.Feedback attribute)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.config.ActFn.html#ytm.guided.config.ActFn.imag">(ytm.guided.config.ActFn attribute)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.config.FbSignal.html#ytm.guided.config.FbSignal.imag">(ytm.guided.config.FbSignal attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.include_state">include_state (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.backends.base.BaseDevice.html#ytm._core.backends.base.BaseDevice.infer">infer() (ytm._core.backends.base.BaseDevice method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm._core.backends.cpu.CPUDevice.html#ytm._core.backends.cpu.CPUDevice.infer">(ytm._core.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm._core.backends.cuda.CUDADevice.html#ytm._core.backends.cuda.CUDADevice.infer">(ytm._core.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cpu.CPUDevice.html#ytm.guided.backends.cpu.CPUDevice.infer">(ytm.guided.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cuda.CUDADevice.html#ytm.guided.backends.cuda.CUDADevice.infer">(ytm.guided.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cpu.CPUDevice.html#ytm.tm.backends.cpu.CPUDevice.infer">(ytm.tm.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cuda.CUDADevice.html#ytm.tm.backends.cuda.CUDADevice.infer">(ytm.tm.backends.cuda.CUDADevice method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.config.Feedback.html#ytm._core.config.Feedback.is_integer">is_integer() (ytm._core.config.Feedback method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.config.ActFn.html#ytm.guided.config.ActFn.is_integer">(ytm.guided.config.ActFn method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.config.FbSignal.html#ytm.guided.config.FbSignal.is_integer">(ytm.guided.config.FbSignal method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="K">K</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.backends.cuda.Kernel.html#ytm._core.backends.cuda.Kernel">Kernel (class in ytm._core.backends.cuda)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/utils.html#ytm.pbar.KWARGS">KWARGS (in module ytm.pbar)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm.guided.config.TMConfig.html#ytm.guided.config.TMConfig.lambda_">lambda_ (ytm.guided.config.TMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.backends.cuda.Launcher.html#ytm._core.backends.cuda.Launcher">Launcher (class in ytm._core.backends.cuda)</a>
+</li>
+      <li><a href="api/generated/ytm._core.backends.buffers.FitBuffers.html#ytm._core.backends.buffers.FitBuffers.load_chunk">load_chunk() (ytm._core.backends.buffers.FitBuffers method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.backends.buffers.GuidedFitBuffers.html#ytm.guided.backends.buffers.GuidedFitBuffers.load_chunk">(ytm.guided.backends.buffers.GuidedFitBuffers method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.buffers.TMFitBuffers.html#ytm.tm.backends.buffers.TMFitBuffers.load_chunk">(ytm.tm.backends.buffers.TMFitBuffers method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.backends.base.BaseDevice.html#ytm._core.backends.base.BaseDevice.load_state_dict">load_state_dict() (ytm._core.backends.base.BaseDevice method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm._core.backends.cpu.CPUDevice.html#ytm._core.backends.cpu.CPUDevice.load_state_dict">(ytm._core.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm._core.backends.cuda.CUDADevice.html#ytm._core.backends.cuda.CUDADevice.load_state_dict">(ytm._core.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cpu.CPUDevice.html#ytm.guided.backends.cpu.CPUDevice.load_state_dict">(ytm.guided.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cuda.CUDADevice.html#ytm.guided.backends.cuda.CUDADevice.load_state_dict">(ytm.guided.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cpu.CPUDevice.html#ytm.tm.backends.cpu.CPUDevice.load_state_dict">(ytm.tm.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cuda.CUDADevice.html#ytm.tm.backends.cuda.CUDADevice.load_state_dict">(ytm.tm.backends.cuda.CUDADevice method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm.guided.config.TMConfig.html#ytm.guided.config.TMConfig.lr">lr (ytm.guided.config.TMConfig attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm.guided.backends.act_loss.MAE.html#ytm.guided.backends.act_loss.MAE">MAE (class in ytm.guided.backends.act_loss)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.max_includes">max_includes (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.max_weight">max_weight (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li>
+    module
+
+      <ul>
+        <li><a href="api/utils.html#module-ytm.pbar">ytm.pbar</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm.guided.backends.act_loss.MSE.html#ytm.guided.backends.act_loss.MSE">MSE (class in ytm.guided.backends.act_loss)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM">MultiClassTM (class in ytm.guided)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.simple.MultiClassTM.html#ytm.simple.MultiClassTM">(class in ytm.simple)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM">(class in ytm.tm)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM">MultiOutputTM (class in ytm.guided)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.simple.MultiOutputTM.html#ytm.simple.MultiOutputTM">(class in ytm.simple)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM">(class in ytm.tm)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.n_classes">n_classes (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.n_clauses">n_clauses (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.n_states">n_states (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.negated_literals">negated_literals (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.negative_clauses">negative_clauses (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm.utils.norm_asymmetric.html#ytm.utils.norm_asymmetric">norm_asymmetric() (in module ytm.utils)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.Feedback.html#ytm._core.config.Feedback.numerator">numerator (ytm._core.config.Feedback attribute)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.config.ActFn.html#ytm.guided.config.ActFn.numerator">(ytm.guided.config.ActFn attribute)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.config.FbSignal.html#ytm.guided.config.FbSignal.numerator">(ytm.guided.config.FbSignal attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.backends.buffers.PackedClauses.html#ytm._core.backends.buffers.PackedClauses">PackedClauses (class in ytm._core.backends.buffers)</a>
+</li>
+      <li><a href="api/generated/ytm._core.device_config.parse_device.html#ytm._core.device_config.parse_device">parse_device() (in module ytm._core.device_config)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.patch_dim">patch_dim (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.position_literals">position_literals (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.predict">predict() (ytm.guided.BinaryTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.predict">(ytm.guided.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.predict">(ytm.guided.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.predict">(ytm.guided.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.BinaryTM.html#ytm.simple.BinaryTM.predict">(ytm.simple.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiClassTM.html#ytm.simple.MultiClassTM.predict">(ytm.simple.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiOutputTM.html#ytm.simple.MultiOutputTM.predict">(ytm.simple.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.RegressionTM.html#ytm.simple.RegressionTM.predict">(ytm.simple.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.predict">(ytm.tm.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.predict">(ytm.tm.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.predict">(ytm.tm.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.predict">(ytm.tm.RegressionTM method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.prepare_X">prepare_X() (ytm._core.config.BaseTMConfig method)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.prepare_Y">prepare_Y() (ytm._core.config.BaseTMConfig method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.tm.config.RegressionConfig.html#ytm.tm.config.RegressionConfig.prepare_Y">(ytm.tm.config.RegressionConfig method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.info.ClauseInfo.html#ytm._core.info.ClauseInfo.print">print() (ytm._core.info.ClauseInfo method)</a>
+</li>
+      <li><a href="api/generated/ytm.utils.print_table.html#ytm.utils.print_table">print_table() (in module ytm.utils)</a>
+</li>
+      <li><a href="api/generated/ytm.utils.Profiler.html#ytm.utils.Profiler">Profiler (class in ytm.utils)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm.tm.config.TMConfig.html#ytm.tm.config.TMConfig.q">q (ytm.tm.config.TMConfig attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.config.Feedback.html#ytm._core.config.Feedback.real">real (ytm._core.config.Feedback attribute)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.config.ActFn.html#ytm.guided.config.ActFn.real">(ytm.guided.config.ActFn attribute)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.config.FbSignal.html#ytm.guided.config.FbSignal.real">(ytm.guided.config.FbSignal attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm.tm.config.RegressionConfig.html#ytm.tm.config.RegressionConfig">RegressionConfig (class in ytm.tm.config)</a>
+</li>
+      <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM">RegressionTM (class in ytm.guided)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.simple.RegressionTM.html#ytm.simple.RegressionTM">(class in ytm.simple)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM">(class in ytm.tm)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.s">s (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.initializer.SampleTAInit.html#ytm._core.initializer.SampleTAInit">SampleTAInit (class in ytm._core.initializer)</a>
+</li>
+      <li><a href="api/generated/ytm.guided.backends.act_loss.SCE.html#ytm.guided.backends.act_loss.SCE">SCE (class in ytm.guided.backends.act_loss)</a>
+</li>
+      <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM.score">score() (ytm._core.base.BaseTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.score">(ytm.guided.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.score">(ytm.guided.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.score">(ytm.guided.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.score">(ytm.guided.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.BaseTM.html#ytm.simple.BaseTM.score">(ytm.simple.BaseTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.BinaryTM.html#ytm.simple.BinaryTM.score">(ytm.simple.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiClassTM.html#ytm.simple.MultiClassTM.score">(ytm.simple.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiOutputTM.html#ytm.simple.MultiOutputTM.score">(ytm.simple.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.RegressionTM.html#ytm.simple.RegressionTM.score">(ytm.simple.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.score">(ytm.tm.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.score">(ytm.tm.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.score">(ytm.tm.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.score">(ytm.tm.RegressionTM method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.seed">seed (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/utils.html#ytm.pbar.set_config">set_config() (in module ytm.pbar)</a>
+</li>
+      <li><a href="api/generated/ytm._core.backends.base.BaseDevice.html#ytm._core.backends.base.BaseDevice.set_feat_drop">set_feat_drop() (ytm._core.backends.base.BaseDevice method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm._core.backends.cpu.CPUDevice.html#ytm._core.backends.cpu.CPUDevice.set_feat_drop">(ytm._core.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm._core.backends.cuda.CUDADevice.html#ytm._core.backends.cuda.CUDADevice.set_feat_drop">(ytm._core.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cpu.CPUDevice.html#ytm.guided.backends.cpu.CPUDevice.set_feat_drop">(ytm.guided.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cuda.CUDADevice.html#ytm.guided.backends.cuda.CUDADevice.set_feat_drop">(ytm.guided.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cpu.CPUDevice.html#ytm.tm.backends.cpu.CPUDevice.set_feat_drop">(ytm.tm.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cuda.CUDADevice.html#ytm.tm.backends.cuda.CUDADevice.set_feat_drop">(ytm.tm.backends.cuda.CUDADevice method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM.set_threads">set_threads() (ytm._core.base.BaseTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.set_threads">(ytm.guided.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.set_threads">(ytm.guided.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.set_threads">(ytm.guided.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.set_threads">(ytm.guided.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.set_threads">(ytm.tm.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.set_threads">(ytm.tm.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.set_threads">(ytm.tm.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.set_threads">(ytm.tm.RegressionTM method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm.guided.backends.act_loss.SigmoidBCE.html#ytm.guided.backends.act_loss.SigmoidBCE">SigmoidBCE (class in ytm.guided.backends.act_loss)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.skip_t1a_fb">skip_t1a_fb (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.skip_t1b_fb">skip_t1b_fb (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.skip_t2_fb">skip_t2_fb (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm.guided.backends.act_loss.SoftmaxCE.html#ytm.guided.backends.act_loss.SoftmaxCE">SoftmaxCE (class in ytm.guided.backends.act_loss)</a>
+</li>
+      <li><a href="api/generated/ytm._core.device_config.split_device_kwargs.html#ytm._core.device_config.split_device_kwargs">split_device_kwargs() (in module ytm._core.device_config)</a>
+</li>
+      <li><a href="api/generated/ytm._core.backends.buffers.FitBuffers.html#ytm._core.backends.buffers.FitBuffers.start_epoch">start_epoch() (ytm._core.backends.buffers.FitBuffers method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.backends.buffers.GuidedFitBuffers.html#ytm.guided.backends.buffers.GuidedFitBuffers.start_epoch">(ytm.guided.backends.buffers.GuidedFitBuffers method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.buffers.TMFitBuffers.html#ytm.tm.backends.buffers.TMFitBuffers.start_epoch">(ytm.tm.backends.buffers.TMFitBuffers method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.stride">stride (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm.utils.Profiler.html#ytm.utils.Profiler.summary">summary() (ytm.utils.Profiler method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm.tm.config.TMConfig.html#ytm.tm.config.TMConfig.T">T (ytm.tm.config.TMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm.simple.BaseTM.html#ytm.simple.BaseTM.t1a">t1a() (ytm.simple.BaseTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.simple.BinaryTM.html#ytm.simple.BinaryTM.t1a">(ytm.simple.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiClassTM.html#ytm.simple.MultiClassTM.t1a">(ytm.simple.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiOutputTM.html#ytm.simple.MultiOutputTM.t1a">(ytm.simple.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.RegressionTM.html#ytm.simple.RegressionTM.t1a">(ytm.simple.RegressionTM method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm.simple.BaseTM.html#ytm.simple.BaseTM.t1b">t1b() (ytm.simple.BaseTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.simple.BinaryTM.html#ytm.simple.BinaryTM.t1b">(ytm.simple.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiClassTM.html#ytm.simple.MultiClassTM.t1b">(ytm.simple.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiOutputTM.html#ytm.simple.MultiOutputTM.t1b">(ytm.simple.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.RegressionTM.html#ytm.simple.RegressionTM.t1b">(ytm.simple.RegressionTM method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm.simple.BaseTM.html#ytm.simple.BaseTM.t2">t2() (ytm.simple.BaseTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.simple.BinaryTM.html#ytm.simple.BinaryTM.t2">(ytm.simple.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiClassTM.html#ytm.simple.MultiClassTM.t2">(ytm.simple.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.MultiOutputTM.html#ytm.simple.MultiOutputTM.t2">(ytm.simple.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.simple.RegressionTM.html#ytm.simple.RegressionTM.t2">(ytm.simple.RegressionTM method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.ta_init">ta_init (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.initializer.TAInit.html#ytm._core.initializer.TAInit">TAInit (class in ytm._core.initializer)</a>
+</li>
+      <li><a href="api/generated/ytm.utils.Timer.html#ytm.utils.Timer">Timer (class in ytm.utils)</a>
+</li>
+      <li><a href="api/generated/ytm.guided.config.TMConfig.html#ytm.guided.config.TMConfig">TMConfig (class in ytm.guided.config)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.tm.config.TMConfig.html#ytm.tm.config.TMConfig">(class in ytm.tm.config)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm.tm.backends.buffers.TMFitBuffers.html#ytm.tm.backends.buffers.TMFitBuffers">TMFitBuffers (class in ytm.tm.backends.buffers)</a>
+</li>
+      <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM.to">to() (ytm._core.base.BaseTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.to">(ytm.guided.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.to">(ytm.guided.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.to">(ytm.guided.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.to">(ytm.guided.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.to">(ytm.tm.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.to">(ytm.tm.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.to">(ytm.tm.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.to">(ytm.tm.RegressionTM method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.config.Feedback.html#ytm._core.config.Feedback.to_bytes">to_bytes() (ytm._core.config.Feedback method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.config.ActFn.html#ytm.guided.config.ActFn.to_bytes">(ytm.guided.config.ActFn method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.config.FbSignal.html#ytm.guided.config.FbSignal.to_bytes">(ytm.guided.config.FbSignal method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM.to_prob">to_prob() (ytm._core.base.BaseTM method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.to_prob">(ytm.guided.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.to_prob">(ytm.guided.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.to_prob">(ytm.guided.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.to_prob">(ytm.guided.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.to_prob">(ytm.tm.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.to_prob">(ytm.tm.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.to_prob">(ytm.tm.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.to_prob">(ytm.tm.RegressionTM method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.backends.toolchain.Toolchain.html#ytm._core.backends.toolchain.Toolchain">Toolchain (class in ytm._core.backends.toolchain)</a>
+</li>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.track_patch_weights">track_patch_weights (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.backends.base.BaseDevice.html#ytm._core.backends.base.BaseDevice.transform">transform() (ytm._core.backends.base.BaseDevice method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm._core.backends.cpu.CPUDevice.html#ytm._core.backends.cpu.CPUDevice.transform">(ytm._core.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm._core.backends.cuda.CUDADevice.html#ytm._core.backends.cuda.CUDADevice.transform">(ytm._core.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM.transform">(ytm._core.base.BaseTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cpu.CPUDevice.html#ytm.guided.backends.cpu.CPUDevice.transform">(ytm.guided.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cuda.CUDADevice.html#ytm.guided.backends.cuda.CUDADevice.transform">(ytm.guided.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.transform">(ytm.guided.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.transform">(ytm.guided.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.transform">(ytm.guided.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.transform">(ytm.guided.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cpu.CPUDevice.html#ytm.tm.backends.cpu.CPUDevice.transform">(ytm.tm.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cuda.CUDADevice.html#ytm.tm.backends.cuda.CUDADevice.transform">(ytm.tm.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.transform">(ytm.tm.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.transform">(ytm.tm.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.transform">(ytm.tm.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.transform">(ytm.tm.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.utils.Binarizer.html#ytm.utils.Binarizer.transform">(ytm.utils.Binarizer method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm._core.backends.base.BaseDevice.html#ytm._core.backends.base.BaseDevice.transform_patchwise">transform_patchwise() (ytm._core.backends.base.BaseDevice method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm._core.backends.cpu.CPUDevice.html#ytm._core.backends.cpu.CPUDevice.transform_patchwise">(ytm._core.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm._core.backends.cuda.CUDADevice.html#ytm._core.backends.cuda.CUDADevice.transform_patchwise">(ytm._core.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM.transform_patchwise">(ytm._core.base.BaseTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cpu.CPUDevice.html#ytm.guided.backends.cpu.CPUDevice.transform_patchwise">(ytm.guided.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cuda.CUDADevice.html#ytm.guided.backends.cuda.CUDADevice.transform_patchwise">(ytm.guided.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.transform_patchwise">(ytm.guided.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.transform_patchwise">(ytm.guided.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.transform_patchwise">(ytm.guided.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.transform_patchwise">(ytm.guided.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cpu.CPUDevice.html#ytm.tm.backends.cpu.CPUDevice.transform_patchwise">(ytm.tm.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cuda.CUDADevice.html#ytm.tm.backends.cuda.CUDADevice.transform_patchwise">(ytm.tm.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.transform_patchwise">(ytm.tm.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.transform_patchwise">(ytm.tm.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.transform_patchwise">(ytm.tm.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.transform_patchwise">(ytm.tm.RegressionTM method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm.guided.backends.act_loss.Tversky.html#ytm.guided.backends.act_loss.Tversky">Tversky (class in ytm.guided.backends.act_loss)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.initializer.UniformTAInit.html#ytm._core.initializer.UniformTAInit">UniformTAInit (class in ytm._core.initializer)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.backends.base.BaseDevice.html#ytm._core.backends.base.BaseDevice.wac">wac() (ytm._core.backends.base.BaseDevice method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm._core.backends.cpu.CPUDevice.html#ytm._core.backends.cpu.CPUDevice.wac">(ytm._core.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm._core.backends.cuda.CUDADevice.html#ytm._core.backends.cuda.CUDADevice.wac">(ytm._core.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM.wac">(ytm._core.base.BaseTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cpu.CPUDevice.html#ytm.guided.backends.cpu.CPUDevice.wac">(ytm.guided.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cuda.CUDADevice.html#ytm.guided.backends.cuda.CUDADevice.wac">(ytm.guided.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.wac">(ytm.guided.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.wac">(ytm.guided.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.wac">(ytm.guided.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.wac">(ytm.guided.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cpu.CPUDevice.html#ytm.tm.backends.cpu.CPUDevice.wac">(ytm.tm.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cuda.CUDADevice.html#ytm.tm.backends.cuda.CUDADevice.wac">(ytm.tm.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.wac">(ytm.tm.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.wac">(ytm.tm.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.wac">(ytm.tm.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.wac">(ytm.tm.RegressionTM method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/ytm.guided.config.TMConfig.html#ytm.guided.config.TMConfig.weight_init">weight_init (ytm.guided.config.TMConfig attribute)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm.tm.config.TMConfig.html#ytm.tm.config.TMConfig.weight_init">(ytm.tm.config.TMConfig attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm._core.config.BaseTMConfig.html#ytm._core.config.BaseTMConfig.weighted">weighted (ytm._core.config.BaseTMConfig attribute)</a>
+</li>
+      <li><a href="api/generated/ytm._core.backends.base.BaseDevice.html#ytm._core.backends.base.BaseDevice.wic">wic() (ytm._core.backends.base.BaseDevice method)</a>
+
+      <ul>
+        <li><a href="api/generated/ytm._core.backends.cpu.CPUDevice.html#ytm._core.backends.cpu.CPUDevice.wic">(ytm._core.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm._core.backends.cuda.CUDADevice.html#ytm._core.backends.cuda.CUDADevice.wic">(ytm._core.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm._core.base.BaseTM.html#ytm._core.base.BaseTM.wic">(ytm._core.base.BaseTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cpu.CPUDevice.html#ytm.guided.backends.cpu.CPUDevice.wic">(ytm.guided.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.backends.cuda.CUDADevice.html#ytm.guided.backends.cuda.CUDADevice.wic">(ytm.guided.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.BinaryTM.html#ytm.guided.BinaryTM.wic">(ytm.guided.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiClassTM.html#ytm.guided.MultiClassTM.wic">(ytm.guided.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.MultiOutputTM.html#ytm.guided.MultiOutputTM.wic">(ytm.guided.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.guided.RegressionTM.html#ytm.guided.RegressionTM.wic">(ytm.guided.RegressionTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cpu.CPUDevice.html#ytm.tm.backends.cpu.CPUDevice.wic">(ytm.tm.backends.cpu.CPUDevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.backends.cuda.CUDADevice.html#ytm.tm.backends.cuda.CUDADevice.wic">(ytm.tm.backends.cuda.CUDADevice method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.BinaryTM.html#ytm.tm.BinaryTM.wic">(ytm.tm.BinaryTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiClassTM.html#ytm.tm.MultiClassTM.wic">(ytm.tm.MultiClassTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.MultiOutputTM.html#ytm.tm.MultiOutputTM.wic">(ytm.tm.MultiOutputTM method)</a>
+</li>
+        <li><a href="api/generated/ytm.tm.RegressionTM.html#ytm.tm.RegressionTM.wic">(ytm.tm.RegressionTM method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Y">Y</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/ytm.tm.config.RegressionConfig.html#ytm.tm.config.RegressionConfig.y_range">y_range (ytm.tm.config.RegressionConfig attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    ytm.pbar
+
+      <ul>
+        <li><a href="api/utils.html#module-ytm.pbar">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.2.0.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+﻿ytm.tm.BinaryTM
+===============
+
+.. currentmodule:: ytm.tm
+
+.. autoclass:: BinaryTM

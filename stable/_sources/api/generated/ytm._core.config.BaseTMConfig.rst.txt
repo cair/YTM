@@ -1,0 +1,8 @@
+﻿ytm.\_core.config.BaseTMConfig
+==============================
+
+.. currentmodule:: ytm._core.config
+
+.. autoclass:: BaseTMConfig
+   :member-order: bysource
+   :no-inherited-members:

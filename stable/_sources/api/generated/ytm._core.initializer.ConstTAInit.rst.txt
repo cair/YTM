@@ -1,0 +1,6 @@
+﻿ytm.\_core.initializer.ConstTAInit
+==================================
+
+.. currentmodule:: ytm._core.initializer
+
+.. autoclass:: ConstTAInit

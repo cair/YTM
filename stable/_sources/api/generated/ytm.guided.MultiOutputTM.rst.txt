@@ -1,0 +1,6 @@
+﻿ytm.guided.MultiOutputTM
+========================
+
+.. currentmodule:: ytm.guided
+
+.. autoclass:: MultiOutputTM

@@ -1,0 +1,6 @@
+﻿ytm.simple.BaseTM
+=================
+
+.. currentmodule:: ytm.simple
+
+.. autoclass:: BaseTM

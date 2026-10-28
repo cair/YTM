@@ -1,0 +1,6 @@
+﻿ytm.tm.RegressionTM
+===================
+
+.. currentmodule:: ytm.tm
+
+.. autoclass:: RegressionTM

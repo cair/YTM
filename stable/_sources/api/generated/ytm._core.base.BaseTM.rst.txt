@@ -1,0 +1,6 @@
+﻿ytm.\_core.base.BaseTM
+======================
+
+.. currentmodule:: ytm._core.base
+
+.. autoclass:: BaseTM

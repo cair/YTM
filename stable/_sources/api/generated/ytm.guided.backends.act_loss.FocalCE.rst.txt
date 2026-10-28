@@ -1,0 +1,6 @@
+﻿ytm.guided.backends.act\_loss.FocalCE
+=====================================
+
+.. currentmodule:: ytm.guided.backends.act_loss
+
+.. autoclass:: FocalCE

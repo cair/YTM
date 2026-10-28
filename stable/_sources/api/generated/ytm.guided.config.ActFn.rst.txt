@@ -1,0 +1,6 @@
+﻿ytm.guided.config.ActFn
+=======================
+
+.. currentmodule:: ytm.guided.config
+
+.. autoclass:: ActFn

@@ -1,0 +1,6 @@
+﻿ytm.\_core.device\_config.split\_device\_kwargs
+===============================================
+
+.. currentmodule:: ytm._core.device_config
+
+.. autofunction:: split_device_kwargs

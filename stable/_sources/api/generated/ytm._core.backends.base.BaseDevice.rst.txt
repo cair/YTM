@@ -1,0 +1,6 @@
+﻿ytm.\_core.backends.base.BaseDevice
+===================================
+
+.. currentmodule:: ytm._core.backends.base
+
+.. autoclass:: BaseDevice

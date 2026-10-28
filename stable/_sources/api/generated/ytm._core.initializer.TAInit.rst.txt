@@ -1,0 +1,6 @@
+﻿ytm.\_core.initializer.TAInit
+=============================
+
+.. currentmodule:: ytm._core.initializer
+
+.. autoclass:: TAInit

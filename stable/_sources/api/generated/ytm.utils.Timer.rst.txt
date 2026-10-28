@@ -1,0 +1,6 @@
+﻿ytm.utils.Timer
+===============
+
+.. currentmodule:: ytm.utils
+
+.. autoclass:: Timer

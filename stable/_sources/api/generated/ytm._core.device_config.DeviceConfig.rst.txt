@@ -1,0 +1,8 @@
+﻿ytm.\_core.device\_config.DeviceConfig
+======================================
+
+.. currentmodule:: ytm._core.device_config
+
+.. autoclass:: DeviceConfig
+   :member-order: bysource
+   :no-inherited-members:

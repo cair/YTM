@@ -1,0 +1,6 @@
+﻿ytm.tm.backends.cuda.CUDADevice
+===============================
+
+.. currentmodule:: ytm.tm.backends.cuda
+
+.. autoclass:: CUDADevice

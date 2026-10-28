@@ -1,0 +1,6 @@
+﻿ytm.\_core.device\_config.parse\_device
+=======================================
+
+.. currentmodule:: ytm._core.device_config
+
+.. autofunction:: parse_device

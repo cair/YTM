@@ -1,0 +1,6 @@
+﻿ytm.\_core.config.Feedback
+==========================
+
+.. currentmodule:: ytm._core.config
+
+.. autoclass:: Feedback

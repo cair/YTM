@@ -1,0 +1,6 @@
+﻿ytm.utils.Binarizer
+===================
+
+.. currentmodule:: ytm.utils
+
+.. autoclass:: Binarizer

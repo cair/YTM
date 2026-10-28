@@ -1,0 +1,6 @@
+﻿ytm.guided.backends.buffers.GuidedFitBuffers
+============================================
+
+.. currentmodule:: ytm.guided.backends.buffers
+
+.. autoclass:: GuidedFitBuffers
