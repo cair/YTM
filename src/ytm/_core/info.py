@@ -132,10 +132,12 @@ class ClauseInfo:
             Feature names. Defaults to ``X0, X1, ...``.
         sort : str, default="w0"
             Comma-separated sort keys, applied in order for positive and negative polarities.
-            Possible keys :
-              - ``wK``: class K |weight|, largest first.
-              - ``len``: shortest first.
-              - ``!``: contradictions last.
+            Possible keys:
+
+            - ``wK``: class K ``|weight|``, largest first.
+            - ``len``: shortest first.
+            - ``!``: contradictions last.
+
             A ``-`` prefix reverses a key. For non-coalesced ``K`` in ``wK`` will be ignored.
         top_k : int, optional
             Show at most this many rows per section.
