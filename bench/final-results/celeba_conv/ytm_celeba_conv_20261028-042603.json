@@ -1,0 +1,1529 @@
+{
+  "libname": "ytm",
+  "expname": "celeba_conv",
+  "params": {
+    "patch": 3,
+    "levels": 8,
+    "n_clauses": 80000,
+    "T": 80000,
+    "s": 30.0,
+    "q": 10.0,
+    "epochs": 10,
+    "seeds": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "device": "cuda",
+    "coalesced": 1,
+    "dim": [
+      64,
+      64,
+      3
+    ],
+    "n_classes": 40
+  },
+  "meta": {
+    "lib_version": "1.0.0",
+    "lib_sha": "d6a8ee7",
+    "machine": "Linux-6.8.0-136-generic-x86_64-with-glibc2.43 | Intel(R) Xeon(R) Platinum 8480C",
+    "python": "3.14.7",
+    "date": "20261028-042603"
+  },
+  "setup": {
+    "elapsed": 106.45962990354747,
+    "ram_start": 254332928,
+    "ram_peak": 19418599424,
+    "ram_mean": 2695296592,
+    "ram_delta": 2293481472,
+    "vram_start": null,
+    "vram_peak": null,
+    "vram_mean": null,
+    "vram_delta": null
+  },
+  "total_s": 4985.451254367828,
+  "runs": [
+    {
+      "seed": 10,
+      "init": {
+        "elapsed": 3.117437833920121,
+        "ram_start": 2547855360,
+        "ram_peak": 3498037248,
+        "ram_mean": 2924134253,
+        "ram_delta": 950181888,
+        "vram_start": null,
+        "vram_peak": null,
+        "vram_mean": null,
+        "vram_delta": null
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "fit": {
+            "elapsed": 86.9778652517125,
+            "ram_start": 3098435584,
+            "ram_peak": 7315890176,
+            "ram_mean": 6422147594,
+            "ram_delta": 4217454592,
+            "vram_start": 1862270976,
+            "vram_peak": 3921674240,
+            "vram_mean": 3484431413,
+            "vram_delta": 2059403264
+          },
+          "predict": {
+            "elapsed": 3.3794831056147814,
+            "ram_start": 5315772416,
+            "ram_peak": 5584228352,
+            "ram_mean": 5407217543,
+            "ram_delta": 268455936,
+            "vram_start": 3921674240,
+            "vram_peak": 3921674240,
+            "vram_mean": 3797818910,
+            "vram_delta": -218103808
+          },
+          "metrics": {
+            "acc": 0.45653643251287973
+          }
+        },
+        {
+          "epoch": 2,
+          "fit": {
+            "elapsed": 82.41336536034942,
+            "ram_start": 5584400384,
+            "ram_peak": 7584776192,
+            "ram_mean": 7144938762,
+            "ram_delta": 2000375808,
+            "vram_start": 3703570432,
+            "vram_peak": 3923771392,
+            "vram_mean": 3874315054,
+            "vram_delta": 220200960
+          },
+          "predict": {
+            "elapsed": 3.2743932101875544,
+            "ram_start": 5584646144,
+            "ram_peak": 5584654336,
+            "ram_mean": 5584654087,
+            "ram_delta": 8192,
+            "vram_start": 3923771392,
+            "vram_peak": 3923771392,
+            "vram_mean": 3850371072,
+            "vram_delta": -220200960
+          },
+          "metrics": {
+            "acc": 0.5059201755774174
+          }
+        },
+        {
+          "epoch": 3,
+          "fit": {
+            "elapsed": 82.79998541995883,
+            "ram_start": 5584646144,
+            "ram_peak": 7584780288,
+            "ram_mean": 7147437135,
+            "ram_delta": 2000134144,
+            "vram_start": 3703570432,
+            "vram_peak": 3923771392,
+            "vram_mean": 3874562487,
+            "vram_delta": 220200960
+          },
+          "predict": {
+            "elapsed": 3.228804290294647,
+            "ram_start": 5584650240,
+            "ram_peak": 5584658432,
+            "ram_mean": 5584658183,
+            "ram_delta": 8192,
+            "vram_start": 3923771392,
+            "vram_peak": 3923771392,
+            "vram_mean": 3850371072,
+            "vram_delta": -220200960
+          },
+          "metrics": {
+            "acc": 0.5277152239975559
+          }
+        },
+        {
+          "epoch": 4,
+          "fit": {
+            "elapsed": 86.76389565691352,
+            "ram_start": 5584650240,
+            "ram_peak": 7584780288,
+            "ram_mean": 7168305185,
+            "ram_delta": 2000130048,
+            "vram_start": 3703570432,
+            "vram_peak": 3923771392,
+            "vram_mean": 3876934997,
+            "vram_delta": 220200960
+          },
+          "predict": {
+            "elapsed": 3.214672589674592,
+            "ram_start": 5584650240,
+            "ram_peak": 5584658432,
+            "ram_mean": 5584658176,
+            "ram_delta": 8192,
+            "vram_start": 3923771392,
+            "vram_peak": 3923771392,
+            "vram_mean": 3854958592,
+            "vram_delta": -220200960
+          },
+          "metrics": {
+            "acc": 0.5369236230870931
+          }
+        },
+        {
+          "epoch": 5,
+          "fit": {
+            "elapsed": 85.97725849132985,
+            "ram_start": 5584650240,
+            "ram_peak": 7584780288,
+            "ram_mean": 7163719815,
+            "ram_delta": 2000130048,
+            "vram_start": 3703570432,
+            "vram_peak": 3923771392,
+            "vram_mean": 3876438498,
+            "vram_delta": 220200960
+          },
+          "predict": {
+            "elapsed": 3.2426059022545815,
+            "ram_start": 5584650240,
+            "ram_peak": 5584658432,
+            "ram_mean": 5584658183,
+            "ram_delta": 8192,
+            "vram_start": 3923771392,
+            "vram_peak": 3923771392,
+            "vram_mean": 3850371072,
+            "vram_delta": -220200960
+          },
+          "metrics": {
+            "acc": 0.5419736837600377
+          }
+        },
+        {
+          "epoch": 6,
+          "fit": {
+            "elapsed": 86.00801661983132,
+            "ram_start": 5584650240,
+            "ram_peak": 7584780288,
+            "ram_mean": 7163830291,
+            "ram_delta": 2000130048,
+            "vram_start": 3703570432,
+            "vram_peak": 3923771392,
+            "vram_mean": 3876494184,
+            "vram_delta": 220200960
+          },
+          "predict": {
+            "elapsed": 3.241340928710997,
+            "ram_start": 5584650240,
+            "ram_peak": 5584658432,
+            "ram_mean": 5584658183,
+            "ram_delta": 8192,
+            "vram_start": 3923771392,
+            "vram_peak": 3923771392,
+            "vram_mean": 3850371072,
+            "vram_delta": -220200960
+          },
+          "metrics": {
+            "acc": 0.546386953765469
+          }
+        },
+        {
+          "epoch": 7,
+          "fit": {
+            "elapsed": 84.75218130555004,
+            "ram_start": 5584654336,
+            "ram_peak": 7584784384,
+            "ram_mean": 7156313100,
+            "ram_delta": 2000130048,
+            "vram_start": 3703570432,
+            "vram_peak": 3923771392,
+            "vram_mean": 3875554413,
+            "vram_delta": 220200960
+          },
+          "predict": {
+            "elapsed": 3.2244777707383037,
+            "ram_start": 5584658432,
+            "ram_peak": 5584666624,
+            "ram_mean": 5584666375,
+            "ram_delta": 8192,
+            "vram_start": 3923771392,
+            "vram_peak": 3923771392,
+            "vram_mean": 3850371072,
+            "vram_delta": -220200960
+          },
+          "metrics": {
+            "acc": 0.5508049912509032
+          }
+        },
+        {
+          "epoch": 8,
+          "fit": {
+            "elapsed": 86.454575676471,
+            "ram_start": 5584658432,
+            "ram_peak": 7584788480,
+            "ram_mean": 7166080270,
+            "ram_delta": 2000130048,
+            "vram_start": 3703570432,
+            "vram_peak": 3923771392,
+            "vram_mean": 3876715623,
+            "vram_delta": 220200960
+          },
+          "predict": {
+            "elapsed": 3.199535060673952,
+            "ram_start": 5584658432,
+            "ram_peak": 5584666624,
+            "ram_mean": 5584666368,
+            "ram_delta": 8192,
+            "vram_start": 3923771392,
+            "vram_peak": 3923771392,
+            "vram_mean": 3854958592,
+            "vram_delta": -220200960
+          },
+          "metrics": {
+            "acc": 0.553417432429533
+          }
+        },
+        {
+          "epoch": 9,
+          "fit": {
+            "elapsed": 85.07693309523165,
+            "ram_start": 5584658432,
+            "ram_peak": 7584788480,
+            "ram_mean": 7158764010,
+            "ram_delta": 2000130048,
+            "vram_start": 3703570432,
+            "vram_peak": 3923771392,
+            "vram_mean": 3875840398,
+            "vram_delta": 220200960
+          },
+          "predict": {
+            "elapsed": 3.2386880423873663,
+            "ram_start": 5584658432,
+            "ram_peak": 5584666624,
+            "ram_mean": 5584666375,
+            "ram_delta": 8192,
+            "vram_start": 3923771392,
+            "vram_peak": 3923771392,
+            "vram_mean": 3850371072,
+            "vram_delta": -220200960
+          },
+          "metrics": {
+            "acc": 0.5562393212933056
+          }
+        },
+        {
+          "epoch": 10,
+          "fit": {
+            "elapsed": 86.37351456098258,
+            "ram_start": 5584666624,
+            "ram_peak": 7584796672,
+            "ram_mean": 7166356269,
+            "ram_delta": 2000130048,
+            "vram_start": 3703570432,
+            "vram_peak": 3923771392,
+            "vram_mean": 3876825566,
+            "vram_delta": 220200960
+          },
+          "predict": {
+            "elapsed": 3.1841513384133577,
+            "ram_start": 5584666624,
+            "ram_peak": 5584674816,
+            "ram_mean": 5584674560,
+            "ram_delta": 8192,
+            "vram_start": 3923771392,
+            "vram_peak": 3923771392,
+            "vram_mean": 3854958592,
+            "vram_delta": -220200960
+          },
+          "metrics": {
+            "acc": 0.5558540867878363
+          }
+        }
+      ]
+    },
+    {
+      "seed": 20,
+      "init": {
+        "elapsed": 0.19612631760537624,
+        "ram_start": 5584666624,
+        "ram_peak": 5774049280,
+        "ram_mean": 5679357952,
+        "ram_delta": 189382656,
+        "vram_start": 3703570432,
+        "vram_peak": 3703570432,
+        "vram_mean": 3703570432,
+        "vram_delta": 0
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "fit": {
+            "elapsed": 86.41849238518625,
+            "ram_start": 5584674816,
+            "ram_peak": 7584804864,
+            "ram_mean": 7165964014,
+            "ram_delta": 2000130048,
+            "vram_start": 3703570432,
+            "vram_peak": 4389339136,
+            "vram_mean": 4243362639,
+            "vram_delta": 685768704
+          },
+          "predict": {
+            "elapsed": 3.3606611685827374,
+            "ram_start": 5584674816,
+            "ram_peak": 5584683008,
+            "ram_mean": 5584682767,
+            "ram_delta": 8192,
+            "vram_start": 4389339136,
+            "vram_peak": 4389339136,
+            "vram_mean": 4244265562,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.4637994725257039
+          }
+        },
+        {
+          "epoch": 2,
+          "fit": {
+            "elapsed": 84.04180771578103,
+            "ram_start": 5584674816,
+            "ram_peak": 7584804864,
+            "ram_mean": 7138100558,
+            "ram_delta": 2000130048,
+            "vram_start": 3978297344,
+            "vram_peak": 4389339136,
+            "vram_mean": 4295784829,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.4226485239341855,
+            "ram_start": 5584674816,
+            "ram_peak": 5584683008,
+            "ram_mean": 5584682767,
+            "ram_delta": 8192,
+            "vram_start": 4389339136,
+            "vram_peak": 4389339136,
+            "vram_mean": 4256355026,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5105269231534884
+          }
+        },
+        {
+          "epoch": 3,
+          "fit": {
+            "elapsed": 84.47958244010806,
+            "ram_start": 5584674816,
+            "ram_peak": 7584804864,
+            "ram_mean": 7143389935,
+            "ram_delta": 2000130048,
+            "vram_start": 3978297344,
+            "vram_peak": 4389339136,
+            "vram_mean": 4297014336,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.396045950241387,
+            "ram_start": 5584674816,
+            "ram_peak": 5584683008,
+            "ram_mean": 5584682767,
+            "ram_delta": 8192,
+            "vram_start": 4389339136,
+            "vram_peak": 4389339136,
+            "vram_mean": 4256355026,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5332213424491674
+          }
+        },
+        {
+          "epoch": 4,
+          "fit": {
+            "elapsed": 84.4861841276288,
+            "ram_start": 5584678912,
+            "ram_peak": 7584808960,
+            "ram_mean": 7142088105,
+            "ram_delta": 2000130048,
+            "vram_start": 3978297344,
+            "vram_peak": 4389339136,
+            "vram_mean": 4296793199,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.382802914828062,
+            "ram_start": 5584678912,
+            "ram_peak": 5584687104,
+            "ram_mean": 5584686863,
+            "ram_delta": 8192,
+            "vram_start": 4389339136,
+            "vram_peak": 4389339136,
+            "vram_mean": 4256355026,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5421799230805868
+          }
+        },
+        {
+          "epoch": 5,
+          "fit": {
+            "elapsed": 85.37636498082429,
+            "ram_start": 5584678912,
+            "ram_peak": 7584808960,
+            "ram_mean": 7146939723,
+            "ram_delta": 2000130048,
+            "vram_start": 3978297344,
+            "vram_peak": 4389339136,
+            "vram_mean": 4295631642,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.354944952763617,
+            "ram_start": 5584678912,
+            "ram_peak": 5584687104,
+            "ram_mean": 5584686863,
+            "ram_delta": 8192,
+            "vram_start": 4389339136,
+            "vram_peak": 4389339136,
+            "vram_mean": 4256355026,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5472550754756178
+          }
+        },
+        {
+          "epoch": 6,
+          "fit": {
+            "elapsed": 84.71354931406677,
+            "ram_start": 5584678912,
+            "ram_peak": 7584808960,
+            "ram_mean": 7145007962,
+            "ram_delta": 2000130048,
+            "vram_start": 3978297344,
+            "vram_peak": 4389339136,
+            "vram_mean": 4297344068,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.3581655165180564,
+            "ram_start": 5584678912,
+            "ram_peak": 5584687104,
+            "ram_mean": 5584686863,
+            "ram_delta": 8192,
+            "vram_start": 4389339136,
+            "vram_peak": 4389339136,
+            "vram_mean": 4256355026,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5537445478966422
+          }
+        },
+        {
+          "epoch": 7,
+          "fit": {
+            "elapsed": 86.85974437464029,
+            "ram_start": 5584678912,
+            "ram_peak": 7584808960,
+            "ram_mean": 7156665259,
+            "ram_delta": 2000130048,
+            "vram_start": 3978297344,
+            "vram_peak": 4389339136,
+            "vram_mean": 4299587850,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.388639730401337,
+            "ram_start": 5584678912,
+            "ram_peak": 5584687104,
+            "ram_mean": 5584686863,
+            "ram_delta": 8192,
+            "vram_start": 4389339136,
+            "vram_peak": 4389339136,
+            "vram_mean": 4256355026,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5570475162274595
+          }
+        },
+        {
+          "epoch": 8,
+          "fit": {
+            "elapsed": 88.45393995568156,
+            "ram_start": 5584683008,
+            "ram_peak": 7584813056,
+            "ram_mean": 7163136685,
+            "ram_delta": 2000130048,
+            "vram_start": 3978297344,
+            "vram_peak": 4389339136,
+            "vram_mean": 4301325631,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.37007372174412,
+            "ram_start": 5584683008,
+            "ram_peak": 5584691200,
+            "ram_mean": 5584690959,
+            "ram_delta": 8192,
+            "vram_start": 4389339136,
+            "vram_peak": 4389339136,
+            "vram_mean": 4256355026,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5604972375565984
+          }
+        },
+        {
+          "epoch": 9,
+          "fit": {
+            "elapsed": 91.27734229620546,
+            "ram_start": 5584687104,
+            "ram_peak": 7584817152,
+            "ram_mean": 7177497273,
+            "ram_delta": 2000130048,
+            "vram_start": 3978297344,
+            "vram_peak": 4389339136,
+            "vram_mean": 4304139734,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.3639310114085674,
+            "ram_start": 5584687104,
+            "ram_peak": 5584695296,
+            "ram_mean": 5584695055,
+            "ram_delta": 8192,
+            "vram_start": 4389339136,
+            "vram_peak": 4389339136,
+            "vram_mean": 4256355026,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5629385589906437
+          }
+        },
+        {
+          "epoch": 10,
+          "fit": {
+            "elapsed": 89.0387121187523,
+            "ram_start": 5584691200,
+            "ram_peak": 7584821248,
+            "ram_mean": 7168155643,
+            "ram_delta": 2000130048,
+            "vram_start": 3978297344,
+            "vram_peak": 4389339136,
+            "vram_mean": 4302387987,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.365014223381877,
+            "ram_start": 5584691200,
+            "ram_peak": 5584699392,
+            "ram_mean": 5584699151,
+            "ram_delta": 8192,
+            "vram_start": 4389339136,
+            "vram_peak": 4389339136,
+            "vram_mean": 4256355026,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5596239817025751
+          }
+        }
+      ]
+    },
+    {
+      "seed": 30,
+      "init": {
+        "elapsed": 0.2008865950629115,
+        "ram_start": 5584691200,
+        "ram_peak": 5763588096,
+        "ram_mean": 5674139648,
+        "ram_delta": 178896896,
+        "vram_start": 3978297344,
+        "vram_peak": 3978297344,
+        "vram_mean": 3978297344,
+        "vram_delta": 0
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "fit": {
+            "elapsed": 88.37119797151536,
+            "ram_start": 5584691200,
+            "ram_peak": 7584821248,
+            "ram_mean": 7165879135,
+            "ram_delta": 2000130048,
+            "vram_start": 3978297344,
+            "vram_peak": 4387241984,
+            "vram_mean": 4300143296,
+            "vram_delta": 408944640
+          },
+          "predict": {
+            "elapsed": 3.4409533534199,
+            "ram_start": 5584691200,
+            "ram_peak": 5584699392,
+            "ram_mean": 5584699157,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4246313369,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.465382172980101
+          }
+        },
+        {
+          "epoch": 2,
+          "fit": {
+            "elapsed": 83.68803001660854,
+            "ram_start": 5584691200,
+            "ram_peak": 7584821248,
+            "ram_mean": 7139368738,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4294250579,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.3941824790090322,
+            "ram_start": 5584691200,
+            "ram_peak": 5584699392,
+            "ram_mean": 5584699151,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4254257874,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5163502323081575
+          }
+        },
+        {
+          "epoch": 3,
+          "fit": {
+            "elapsed": 83.3981978436932,
+            "ram_start": 5584695296,
+            "ram_peak": 7584825344,
+            "ram_mean": 7138100802,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4293913654,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.364417504519224,
+            "ram_start": 5584695296,
+            "ram_peak": 5584703488,
+            "ram_mean": 5584703247,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4254257874,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5325478441012355
+          }
+        },
+        {
+          "epoch": 4,
+          "fit": {
+            "elapsed": 83.8032271489501,
+            "ram_start": 5584695296,
+            "ram_peak": 7584825344,
+            "ram_mean": 7141362628,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4294362348,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.366278369911015,
+            "ram_start": 5584695296,
+            "ram_peak": 5584703488,
+            "ram_mean": 5584703247,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4254257874,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5443300958581777
+          }
+        },
+        {
+          "epoch": 5,
+          "fit": {
+            "elapsed": 89.46295046620071,
+            "ram_start": 5584695296,
+            "ram_peak": 7584825344,
+            "ram_mean": 7167201851,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4299855146,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.394382228143513,
+            "ram_start": 5584695296,
+            "ram_peak": 5584703488,
+            "ram_mean": 5584703247,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4254257874,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.54601021538833
+          }
+        },
+        {
+          "epoch": 6,
+          "fit": {
+            "elapsed": 89.48956180084497,
+            "ram_start": 5584695296,
+            "ram_peak": 7584825344,
+            "ram_mean": 7169104388,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4300219622,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.339867320843041,
+            "ram_start": 5584695296,
+            "ram_peak": 5584703488,
+            "ram_mean": 5584703247,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4254257874,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.557435595528028
+          }
+        },
+        {
+          "epoch": 7,
+          "fit": {
+            "elapsed": 85.50469759572297,
+            "ram_start": 5584695296,
+            "ram_peak": 7584825344,
+            "ram_mean": 7150099786,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4296329211,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.3333129845559597,
+            "ram_start": 5584695296,
+            "ram_peak": 5584703488,
+            "ram_mean": 5584703247,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4254257874,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5593284786531243
+          }
+        },
+        {
+          "epoch": 8,
+          "fit": {
+            "elapsed": 90.47200222592801,
+            "ram_start": 5584695296,
+            "ram_peak": 7584825344,
+            "ram_mean": 7174163081,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4301284412,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.3669453831389546,
+            "ram_start": 5584695296,
+            "ram_peak": 5584703488,
+            "ram_mean": 5584703247,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4254257874,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5588283068536019
+          }
+        },
+        {
+          "epoch": 9,
+          "fit": {
+            "elapsed": 85.94278782047331,
+            "ram_start": 5584703488,
+            "ram_peak": 7584833536,
+            "ram_mean": 7154098228,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4297236345,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.32436425704509,
+            "ram_start": 5584703488,
+            "ram_peak": 5584711680,
+            "ram_mean": 5584711439,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4195414256,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5608367112378636
+          }
+        },
+        {
+          "epoch": 10,
+          "fit": {
+            "elapsed": 85.20359357725829,
+            "ram_start": 5584703488,
+            "ram_peak": 7584833536,
+            "ram_mean": 7152657206,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4296977788,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.3277135165408254,
+            "ram_start": 5584703488,
+            "ram_peak": 5584711680,
+            "ram_mean": 5584711431,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4202057107,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5670822536080399
+          }
+        }
+      ]
+    },
+    {
+      "seed": 40,
+      "init": {
+        "elapsed": 0.20220024418085814,
+        "ram_start": 5584703488,
+        "ram_peak": 5753114624,
+        "ram_mean": 5668909056,
+        "ram_delta": 168411136,
+        "vram_start": 3976200192,
+        "vram_peak": 3976200192,
+        "vram_mean": 3976200192,
+        "vram_delta": 0
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "fit": {
+            "elapsed": 86.22324237506837,
+            "ram_start": 5584707584,
+            "ram_peak": 7584837632,
+            "ram_mean": 7151541903,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4296380114,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.4870373867452145,
+            "ram_start": 5584707584,
+            "ram_peak": 5584715776,
+            "ram_mean": 5584715627,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4312507112,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.45034509889418056
+          }
+        },
+        {
+          "epoch": 2,
+          "fit": {
+            "elapsed": 104.12707886379212,
+            "ram_start": 5584707584,
+            "ram_peak": 7584849920,
+            "ram_mean": 6871833574,
+            "ram_delta": 2000142336,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4237989915,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.380781661719084,
+            "ram_start": 5584719872,
+            "ram_peak": 5584728064,
+            "ram_mean": 5584727912,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4281685333,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5036068134280374
+          }
+        },
+        {
+          "epoch": 3,
+          "fit": {
+            "elapsed": 101.9119094889611,
+            "ram_start": 5584719872,
+            "ram_peak": 7584849920,
+            "ram_mean": 6858851108,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4235140209,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.439797503873706,
+            "ram_start": 5584719872,
+            "ram_peak": 5584728064,
+            "ram_mean": 5584727912,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4318735018,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5236244806390102
+          }
+        },
+        {
+          "epoch": 4,
+          "fit": {
+            "elapsed": 101.73852496780455,
+            "ram_start": 5584719872,
+            "ram_peak": 7584849920,
+            "ram_mean": 6854258989,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4234429230,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.419900873675942,
+            "ram_start": 5584719872,
+            "ram_peak": 5584728064,
+            "ram_mean": 5584727912,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4318735018,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5341034419820867
+          }
+        },
+        {
+          "epoch": 5,
+          "fit": {
+            "elapsed": 102.23945812880993,
+            "ram_start": 5584719872,
+            "ram_peak": 7584849920,
+            "ram_mean": 6857390953,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4235184980,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.410137955099344,
+            "ram_start": 5584719872,
+            "ram_peak": 5584728064,
+            "ram_mean": 5584727912,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4318735018,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5373810549925928
+          }
+        },
+        {
+          "epoch": 6,
+          "fit": {
+            "elapsed": 103.32626500539482,
+            "ram_start": 5584719872,
+            "ram_peak": 7584849920,
+            "ram_mean": 6862404937,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4235869100,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.442947526462376,
+            "ram_start": 5584719872,
+            "ram_peak": 5584728064,
+            "ram_mean": 5584727912,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4318735018,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5477550786247833
+          }
+        },
+        {
+          "epoch": 7,
+          "fit": {
+            "elapsed": 102.51638812106103,
+            "ram_start": 5584719872,
+            "ram_peak": 7584849920,
+            "ram_mean": 6856450282,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4234824120,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 4.881120129488409,
+            "ram_start": 5584719872,
+            "ram_peak": 5584728064,
+            "ram_mean": 5584727896,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4270914246,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5491030495472975
+          }
+        },
+        {
+          "epoch": 8,
+          "fit": {
+            "elapsed": 94.00871999748051,
+            "ram_start": 5584723968,
+            "ram_peak": 7584854016,
+            "ram_mean": 6957358606,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4255973798,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.911493702791631,
+            "ram_start": 5584723968,
+            "ram_peak": 5584732160,
+            "ram_mean": 5584731949,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4292386185,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5515341310515701
+          }
+        },
+        {
+          "epoch": 9,
+          "fit": {
+            "elapsed": 89.87101811915636,
+            "ram_start": 5584732160,
+            "ram_peak": 7584862208,
+            "ram_mean": 7026767404,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4269801472,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.372010761871934,
+            "ram_start": 5584732160,
+            "ram_peak": 5584740352,
+            "ram_mean": 5584740200,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4318735018,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5523648070570233
+          }
+        },
+        {
+          "epoch": 10,
+          "fit": {
+            "elapsed": 109.1919898353517,
+            "ram_start": 5584732160,
+            "ram_peak": 7584866304,
+            "ram_mean": 6905651919,
+            "ram_delta": 2000134144,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4245031410,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.413166424259543,
+            "ram_start": 5584736256,
+            "ram_peak": 5584744448,
+            "ram_mean": 5584744296,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4281685333,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5543046480310633
+          }
+        }
+      ]
+    },
+    {
+      "seed": 50,
+      "init": {
+        "elapsed": 0.39249100629240274,
+        "ram_start": 5584740352,
+        "ram_peak": 6017392640,
+        "ram_mean": 5751261184,
+        "ram_delta": 432652288,
+        "vram_start": 3976200192,
+        "vram_peak": 3976200192,
+        "vram_mean": 3976200192,
+        "vram_delta": 0
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "fit": {
+            "elapsed": 133.95919079706073,
+            "ram_start": 5584740352,
+            "ram_peak": 7584882688,
+            "ram_mean": 7030243683,
+            "ram_delta": 2000142336,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4271219621,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.66306671872735,
+            "ram_start": 5584752640,
+            "ram_peak": 5584760832,
+            "ram_mean": 5584760685,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4270775149,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.4610744765374058
+          }
+        },
+        {
+          "epoch": 2,
+          "fit": {
+            "elapsed": 110.51552467979491,
+            "ram_start": 5584756736,
+            "ram_peak": 7584886784,
+            "ram_mean": 7029908290,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4271143342,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.609306431375444,
+            "ram_start": 5584756736,
+            "ram_peak": 5584764928,
+            "ram_mean": 5584764781,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4270775149,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5052104102389725
+          }
+        },
+        {
+          "epoch": 3,
+          "fit": {
+            "elapsed": 103.50983499921858,
+            "ram_start": 5584760832,
+            "ram_peak": 7584890880,
+            "ram_mean": 6866427616,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4237115392,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.6070729261264205,
+            "ram_start": 5584760832,
+            "ram_peak": 5584769024,
+            "ram_mean": 5584768877,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4270775149,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5277115424256664
+          }
+        },
+        {
+          "epoch": 4,
+          "fit": {
+            "elapsed": 105.50481890700758,
+            "ram_start": 5584760832,
+            "ram_peak": 7584890880,
+            "ram_mean": 6882380297,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4240385098,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.616998627781868,
+            "ram_start": 5584760832,
+            "ram_peak": 5584769024,
+            "ram_mean": 5584768877,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4270775149,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5394487919446462
+          }
+        },
+        {
+          "epoch": 5,
+          "fit": {
+            "elapsed": 106.1206290340051,
+            "ram_start": 5584760832,
+            "ram_peak": 7584890880,
+            "ram_mean": 6884379915,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4240832812,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.0623059421777725,
+            "ram_start": 5584760832,
+            "ram_peak": 5584769024,
+            "ram_mean": 5584768863,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4259356832,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5429129487678995
+          }
+        },
+        {
+          "epoch": 6,
+          "fit": {
+            "elapsed": 101.6219048127532,
+            "ram_start": 5584764928,
+            "ram_peak": 7584894976,
+            "ram_mean": 6937647831,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4251455043,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.089180673472583,
+            "ram_start": 5584764928,
+            "ram_peak": 5584773120,
+            "ram_mean": 5584772959,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4259356832,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5505829811452112
+          }
+        },
+        {
+          "epoch": 7,
+          "fit": {
+            "elapsed": 100.52119942568243,
+            "ram_start": 5584769024,
+            "ram_peak": 7584899072,
+            "ram_mean": 6930145898,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4249952371,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.60322474502027,
+            "ram_start": 5584769024,
+            "ram_peak": 5584777216,
+            "ram_mean": 5584777069,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4306501632,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5525992915231008
+          }
+        },
+        {
+          "epoch": 8,
+          "fit": {
+            "elapsed": 105.27458239812404,
+            "ram_start": 5584769024,
+            "ram_peak": 7584899072,
+            "ram_mean": 6877797959,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4239172174,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.596538091078401,
+            "ram_start": 5584769024,
+            "ram_peak": 5584777216,
+            "ram_mean": 5584777069,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4270775149,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5561487121046287
+          }
+        },
+        {
+          "epoch": 9,
+          "fit": {
+            "elapsed": 100.01180859934539,
+            "ram_start": 5584769024,
+            "ram_peak": 7584899072,
+            "ram_mean": 6937557112,
+            "ram_delta": 2000130048,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4251204731,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 5.0789347272366285,
+            "ram_start": 5584769024,
+            "ram_peak": 5584777216,
+            "ram_mean": 5584777055,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4259356832,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.561545625645229
+          }
+        },
+        {
+          "epoch": 10,
+          "fit": {
+            "elapsed": 100.60676774568856,
+            "ram_start": 5584769024,
+            "ram_peak": 7584899072,
+            "ram_mean": 6933423415,
+            "ram_delta": 8192,
+            "vram_start": 3976200192,
+            "vram_peak": 4387241984,
+            "vram_mean": 4250779417,
+            "vram_delta": 411041792
+          },
+          "predict": {
+            "elapsed": 3.987941642291844,
+            "ram_start": 5584769024,
+            "ram_peak": 5584777216,
+            "ram_mean": 5584777011,
+            "ram_delta": 8192,
+            "vram_start": 4387241984,
+            "vram_peak": 4387241984,
+            "vram_mean": 4274205491,
+            "vram_delta": -411041792
+          },
+          "metrics": {
+            "acc": 0.5639528547201369
+          }
+        }
+      ]
+    }
+  ]
+}
