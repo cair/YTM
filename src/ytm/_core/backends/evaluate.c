@@ -294,16 +294,21 @@ static inline float vote_dot(const int8_t* restrict out, const float* restrict w
  * Arguments:
  *   clause_outputs  (N, TOTAL_CLAUSES) clause outputs
  *   clause_weights  clause weights per class
+ *   class_active    1 for classes to sum, others get 0
  *   N               number of samples
  *   class_sums      output, (N, CLASSES)
  */
-void vote_sum(const int8_t* restrict clause_outputs, const float* restrict clause_weights, const int N,
-              float* restrict class_sums) {
+void vote_sum(const int8_t* restrict clause_outputs, const float* restrict clause_weights,
+              const uint8_t* restrict class_active, const int N, float* restrict class_sums) {
 #pragma omp parallel for schedule(static) if (N > 1) num_threads(ytm_n_threads)
     for (int e = 0; e < N; e++) {
         const int8_t* out_e = &clause_outputs[clause_output_offset(e, 0)];
         float* sums_e = &class_sums[(ull)e * CLASSES];
         for (int class_id = 0; class_id < CLASSES; class_id++) {
+            if (!class_active[class_id]) {
+                sums_e[class_id] = 0.0f;
+                continue;
+            }
             ull first = COALESCED ? 0 : (ull)class_id * CLAUSES_PER_CLASS;
             sums_e[class_id] =
                 vote_dot(&out_e[first], &clause_weights[weight_offset(class_id, first)], CLAUSES_PER_CLASS);

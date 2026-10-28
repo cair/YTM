@@ -334,12 +334,14 @@ eval_fit(const ull* __restrict__ rng_keys, const FBOUND_T* __restrict__ X, const
  * Arguments:
  *   clause_outputs  (N, TOTAL_CLAUSES) clause outputs
  *   clause_weights  clause weights per class
+ *   class_active    1 for classes to sum, others get 0
  *   N               number of samples
  *   chunks          number of chunks per class
  *   chunk_sums      output, (N, CLASSES, chunks)
  */
 extern "C" __global__ void vote_over_clause_chunks(const int8_t* __restrict__ clause_outputs,
-                                                   const float* __restrict__ clause_weights, const int N,
+                                                   const float* __restrict__ clause_weights,
+                                                   const uint8_t* __restrict__ class_active, const int N,
                                                    const int chunks, float* __restrict__ chunk_sums) {
     auto [warp, lane, warp_id, total_warps] = warp_grid();
     const int chunk_len = (CLAUSES_PER_CLASS + chunks - 1) / chunks;
@@ -356,9 +358,10 @@ extern "C" __global__ void vote_over_clause_chunks(const int8_t* __restrict__ cl
         const float* weights = &clause_weights[weight_offset(class_id, first_clause)];
 
         float s = 0.0f;
-        for (int clause_id = clause_start + lane; clause_id < clause_end; clause_id += WARP_SIZE)
-            if (outputs[clause_id])
-                s += weights[clause_id];
+        if (class_active[class_id])
+            for (int clause_id = clause_start + lane; clause_id < clause_end; clause_id += WARP_SIZE)
+                if (outputs[clause_id])
+                    s += weights[clause_id];
         s = cg::reduce(warp, s, cg::plus<float>());
         if (lane == 0)
             chunk_sums[chunk_sums_offset(e, class_id, chunk, chunks)] = s;

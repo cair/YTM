@@ -60,9 +60,12 @@ decide_feedback(const ull* __restrict__ rng_keys, const int8_t* __restrict__ cla
 
                 bool sampled, update;
                 if (COALESCED) {
-                    int2 d = bernoulli2(rng_k, &rng_counter, label_probs_e[class_id], fabsf(prob[class_id]));
-                    sampled = d.x;
-                    update = d.y;
+                    sampled = update = false;
+                    if (class_active[class_id]) {
+                        int2 d = bernoulli2(rng_k, &rng_counter, label_probs_e[class_id], fabsf(prob[class_id]));
+                        sampled = d.x;
+                        update = d.y;
+                    }
                 } else {
                     sampled = class_active[class_id];
                     update = sampled && target != 0 && bernoulli(rng_k, &rng_counter, fabsf(prob[class_id]));

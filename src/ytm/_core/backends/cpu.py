@@ -1,6 +1,6 @@
 import pathlib
 import warnings
-from ctypes import CDLL, POINTER, c_float, c_int, c_int8, c_int32, c_uint32, c_uint64
+from ctypes import CDLL, POINTER, c_float, c_int, c_int8, c_int32, c_uint8, c_uint32, c_uint64
 
 import numpy as np
 
@@ -9,6 +9,7 @@ from .toolchain import Toolchain
 
 int8_p = POINTER(c_int8)
 int32_p = POINTER(c_int32)
+uint8_p = POINTER(c_uint8)
 uint32_p = POINTER(c_uint32)
 uint64_p = POINTER(c_uint64)
 float_p = POINTER(c_float)
@@ -110,7 +111,7 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
 
     def _fit_voting(self):
         buf = self.buf
-        self.lib.vote_sum(buf.p_clause_output, self.p_clause_weights, c_int(1), buf.p_votes)
+        self.lib.vote_sum(buf.p_clause_output, self.p_clause_weights, buf.p_class_active, c_int(1), buf.p_votes)
 
     def _fit_apply_fb(self, e: int) -> None:
         pc = self.packed_clauses
@@ -143,9 +144,16 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
     def _infer_batch(self, Xb: np.ndarray, bs: int) -> np.ndarray:
         cfg = self.config
         class_sums = np.empty((bs, cfg.n_classes), dtype=np.float32)
+        class_active = np.ones(cfg.n_classes, dtype=np.uint8)
 
         clause_outputs = self._clause_outputs(Xb, bs)
-        self.lib.vote_sum(clause_outputs.ctypes.data_as(int8_p), self.p_clause_weights, c_int(bs), class_sums.ctypes.data_as(float_p))
+        self.lib.vote_sum(
+            clause_outputs.ctypes.data_as(int8_p),
+            self.p_clause_weights,
+            class_active.ctypes.data_as(uint8_p),
+            c_int(bs),
+            class_sums.ctypes.data_as(float_p),
+        )
         return class_sums
 
     def _bit_pack_X(self, p_Xb, bs: int) -> np.ndarray | None:

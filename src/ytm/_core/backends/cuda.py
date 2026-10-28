@@ -151,7 +151,7 @@ class CUDADevice(BaseDevice[BuffersT, ConfigT, cp.ndarray]):
             ),
         )
 
-    def _vote_sum(self, clause_outputs, N: int, class_sums, chunks: int = 1) -> None:
+    def _vote_sum(self, clause_outputs, N: int, class_sums, class_active, chunks: int = 1) -> None:
         """Class sums of N samples, calculated using chunks"""
         n_sums = N * self.config.n_classes
 
@@ -159,14 +159,14 @@ class CUDADevice(BaseDevice[BuffersT, ConfigT, cp.ndarray]):
         out = class_sums if chunks == 1 else self._chunk_sums
         self.cu.vote_over_clause_chunks(
             n_sums * chunks * self._warp_size,
-            (clause_outputs, self.clause_weights, np.int32(N), np.int32(chunks), out),
+            (clause_outputs, self.clause_weights, class_active, np.int32(N), np.int32(chunks), out),
         )
         if chunks > 1:
             self.cu.vote_combine_chunks(n_sums, (self._chunk_sums, np.int32(N), np.int32(chunks), class_sums))
 
     def _fit_voting(self):
         buf = self.buf
-        self._vote_sum(buf.clause_output, 1, buf.votes, self._fit_vote_chunks)
+        self._vote_sum(buf.clause_output, 1, buf.votes, buf.class_active, self._fit_vote_chunks)
 
     def _fit_apply_fb(self, e: int) -> None:
         buf = self.buf
@@ -203,7 +203,8 @@ class CUDADevice(BaseDevice[BuffersT, ConfigT, cp.ndarray]):
 
     def _infer_batch(self, Xb: cp.ndarray, bs: int) -> cp.ndarray:
         class_sums = cp.zeros((bs, self.config.n_classes), dtype=np.float32)
-        self._vote_sum(self._clause_outputs(Xb, bs), bs, class_sums)
+        class_active = cp.ones(self.config.n_classes, dtype=np.uint8)
+        self._vote_sum(self._clause_outputs(Xb, bs), bs, class_sums, class_active)
         return class_sums
 
     def _bit_pack_X(self, Xb: cp.ndarray, bs: int) -> cp.ndarray:
