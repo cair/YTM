@@ -1,0 +1,1527 @@
+{
+  "libname": "ytm",
+  "expname": "mnist_flat",
+  "params": {
+    "patch": null,
+    "coalesced": 0,
+    "n_clauses": 50,
+    "T": 100.0,
+    "s": 10.0,
+    "epochs": 10,
+    "seeds": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "device": "cpu",
+    "dim": [
+      28,
+      28,
+      1
+    ],
+    "n_classes": 10
+  },
+  "meta": {
+    "lib_version": "1.0.0",
+    "lib_sha": "d6a8ee7-dirty",
+    "machine": "macOS-27.0.1-arm64-arm-64bit-Mach-O | Apple M3",
+    "python": "3.14.7",
+    "date": "20261028-100402"
+  },
+  "setup": {
+    "elapsed": 9.339596499979962,
+    "ram_start": 274546688,
+    "ram_peak": 551665664,
+    "ram_mean": 310244258,
+    "ram_delta": 198443008,
+    "vram_start": null,
+    "vram_peak": null,
+    "vram_mean": null,
+    "vram_delta": null
+  },
+  "total_s": 69.07229900360107,
+  "runs": [
+    {
+      "seed": 10,
+      "init": {
+        "elapsed": 2.2659017500118352,
+        "ram_start": 452345856,
+        "ram_peak": 452657152,
+        "ram_mean": 452495132,
+        "ram_delta": 311296,
+        "vram_start": null,
+        "vram_peak": null,
+        "vram_mean": null,
+        "vram_delta": null
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "fit": {
+            "elapsed": 1.1926096660026815,
+            "ram_start": 459718656,
+            "ram_peak": 468729856,
+            "ram_mean": 467978922,
+            "ram_delta": 9011200,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.047590333997504786,
+            "ram_start": 468729856,
+            "ram_peak": 468729856,
+            "ram_mean": 468729856,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.8827
+          }
+        },
+        {
+          "epoch": 2,
+          "fit": {
+            "elapsed": 0.8400877919921186,
+            "ram_start": 468729856,
+            "ram_peak": 468729856,
+            "ram_mean": 468729856,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04749962501227856,
+            "ram_start": 468729856,
+            "ram_peak": 468729856,
+            "ram_mean": 468729856,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.892
+          }
+        },
+        {
+          "epoch": 3,
+          "fit": {
+            "elapsed": 0.8035347090044525,
+            "ram_start": 468762624,
+            "ram_peak": 471187456,
+            "ram_mean": 470884352,
+            "ram_delta": 2424832,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.046583791001467034,
+            "ram_start": 471187456,
+            "ram_peak": 471187456,
+            "ram_mean": 471187456,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9053
+          }
+        },
+        {
+          "epoch": 4,
+          "fit": {
+            "elapsed": 0.7810257080127485,
+            "ram_start": 471187456,
+            "ram_peak": 471203840,
+            "ram_mean": 471201792,
+            "ram_delta": 16384,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.046623250003904104,
+            "ram_start": 471203840,
+            "ram_peak": 471203840,
+            "ram_mean": 471203840,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9124
+          }
+        },
+        {
+          "epoch": 5,
+          "fit": {
+            "elapsed": 0.7666444999922533,
+            "ram_start": 471203840,
+            "ram_peak": 480821248,
+            "ram_mean": 479619072,
+            "ram_delta": 9617408,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04571179099730216,
+            "ram_start": 480821248,
+            "ram_peak": 480821248,
+            "ram_mean": 480821248,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9171
+          }
+        },
+        {
+          "epoch": 6,
+          "fit": {
+            "elapsed": 0.7639052500016987,
+            "ram_start": 480821248,
+            "ram_peak": 480821248,
+            "ram_mean": 480821248,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04632891700020991,
+            "ram_start": 480821248,
+            "ram_peak": 480821248,
+            "ram_mean": 480821248,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.917
+          }
+        },
+        {
+          "epoch": 7,
+          "fit": {
+            "elapsed": 0.7527716250042431,
+            "ram_start": 480821248,
+            "ram_peak": 480821248,
+            "ram_mean": 480821248,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04595712499576621,
+            "ram_start": 480821248,
+            "ram_peak": 480821248,
+            "ram_mean": 480821248,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9145
+          }
+        },
+        {
+          "epoch": 8,
+          "fit": {
+            "elapsed": 0.7427160420047585,
+            "ram_start": 480821248,
+            "ram_peak": 483262464,
+            "ram_mean": 482957312,
+            "ram_delta": 2441216,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.0463271249900572,
+            "ram_start": 483262464,
+            "ram_peak": 483262464,
+            "ram_mean": 483262464,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9179
+          }
+        },
+        {
+          "epoch": 9,
+          "fit": {
+            "elapsed": 0.7381400419981219,
+            "ram_start": 483262464,
+            "ram_peak": 483262464,
+            "ram_mean": 483262464,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04600983398267999,
+            "ram_start": 483262464,
+            "ram_peak": 483262464,
+            "ram_mean": 483262464,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9226
+          }
+        },
+        {
+          "epoch": 10,
+          "fit": {
+            "elapsed": 0.7470685839944053,
+            "ram_start": 483262464,
+            "ram_peak": 483262464,
+            "ram_mean": 483262464,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.047716708009829745,
+            "ram_start": 483262464,
+            "ram_peak": 483262464,
+            "ram_mean": 483262464,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9235
+          }
+        }
+      ]
+    },
+    {
+      "seed": 20,
+      "init": {
+        "elapsed": 0.002712499990593642,
+        "ram_start": 483262464,
+        "ram_peak": 483262464,
+        "ram_mean": 483262464,
+        "ram_delta": 0,
+        "vram_start": null,
+        "vram_peak": null,
+        "vram_mean": null,
+        "vram_delta": null
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "fit": {
+            "elapsed": 1.1612058329919819,
+            "ram_start": 483262464,
+            "ram_peak": 483262464,
+            "ram_mean": 483262464,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04774108401034027,
+            "ram_start": 483262464,
+            "ram_peak": 483262464,
+            "ram_mean": 483262464,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.8851
+          }
+        },
+        {
+          "epoch": 2,
+          "fit": {
+            "elapsed": 0.8347426660184283,
+            "ram_start": 483262464,
+            "ram_peak": 485670912,
+            "ram_mean": 485369856,
+            "ram_delta": 2408448,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04602441700990312,
+            "ram_start": 485670912,
+            "ram_peak": 485670912,
+            "ram_mean": 485670912,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9007
+          }
+        },
+        {
+          "epoch": 3,
+          "fit": {
+            "elapsed": 0.7933389999961946,
+            "ram_start": 485687296,
+            "ram_peak": 485687296,
+            "ram_mean": 485687296,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.046474457980366424,
+            "ram_start": 485687296,
+            "ram_peak": 485687296,
+            "ram_mean": 485687296,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9092
+          }
+        },
+        {
+          "epoch": 4,
+          "fit": {
+            "elapsed": 0.7762352499994449,
+            "ram_start": 485687296,
+            "ram_peak": 485687296,
+            "ram_mean": 485687296,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.0466237920045387,
+            "ram_start": 485687296,
+            "ram_peak": 485687296,
+            "ram_mean": 485687296,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9097
+          }
+        },
+        {
+          "epoch": 5,
+          "fit": {
+            "elapsed": 0.7672359999851324,
+            "ram_start": 485687296,
+            "ram_peak": 485687296,
+            "ram_mean": 485687296,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.045759125001495704,
+            "ram_start": 485687296,
+            "ram_peak": 485687296,
+            "ram_mean": 485687296,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9174
+          }
+        },
+        {
+          "epoch": 6,
+          "fit": {
+            "elapsed": 0.7630011670116801,
+            "ram_start": 485687296,
+            "ram_peak": 485687296,
+            "ram_mean": 485687296,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04623041598824784,
+            "ram_start": 485687296,
+            "ram_peak": 485687296,
+            "ram_mean": 485687296,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9221
+          }
+        },
+        {
+          "epoch": 7,
+          "fit": {
+            "elapsed": 0.750028124981327,
+            "ram_start": 485687296,
+            "ram_peak": 485687296,
+            "ram_mean": 485687296,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.046307707991218194,
+            "ram_start": 485687296,
+            "ram_peak": 485687296,
+            "ram_mean": 485687296,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9251
+          }
+        },
+        {
+          "epoch": 8,
+          "fit": {
+            "elapsed": 0.7400829589751083,
+            "ram_start": 485687296,
+            "ram_peak": 485687296,
+            "ram_mean": 485687296,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.045852209004806355,
+            "ram_start": 485687296,
+            "ram_peak": 485687296,
+            "ram_mean": 485687296,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9238
+          }
+        },
+        {
+          "epoch": 9,
+          "fit": {
+            "elapsed": 0.7359930409875233,
+            "ram_start": 485687296,
+            "ram_peak": 488112128,
+            "ram_mean": 487765723,
+            "ram_delta": 2424832,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04565687500871718,
+            "ram_start": 488112128,
+            "ram_peak": 488112128,
+            "ram_mean": 488112128,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9186
+          }
+        },
+        {
+          "epoch": 10,
+          "fit": {
+            "elapsed": 0.7307168749975972,
+            "ram_start": 488112128,
+            "ram_peak": 488128512,
+            "ram_mean": 488126171,
+            "ram_delta": 16384,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04506454098736867,
+            "ram_start": 488128512,
+            "ram_peak": 488128512,
+            "ram_mean": 488128512,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9256
+          }
+        }
+      ]
+    },
+    {
+      "seed": 30,
+      "init": {
+        "elapsed": 0.002732499997364357,
+        "ram_start": 495108096,
+        "ram_peak": 495108096,
+        "ram_mean": 495108096,
+        "ram_delta": 0,
+        "vram_start": null,
+        "vram_peak": null,
+        "vram_mean": null,
+        "vram_delta": null
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "fit": {
+            "elapsed": 1.1751283750054426,
+            "ram_start": 495108096,
+            "ram_peak": 495108096,
+            "ram_mean": 495108096,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04855254199355841,
+            "ram_start": 495108096,
+            "ram_peak": 495108096,
+            "ram_mean": 495108096,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.8841
+          }
+        },
+        {
+          "epoch": 2,
+          "fit": {
+            "elapsed": 0.8589467089914251,
+            "ram_start": 495108096,
+            "ram_peak": 495108096,
+            "ram_mean": 495108096,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04732016701018438,
+            "ram_start": 495108096,
+            "ram_peak": 495108096,
+            "ram_mean": 495108096,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.8989
+          }
+        },
+        {
+          "epoch": 3,
+          "fit": {
+            "elapsed": 0.8131149580003694,
+            "ram_start": 495108096,
+            "ram_peak": 495108096,
+            "ram_mean": 495108096,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04699175001587719,
+            "ram_start": 495108096,
+            "ram_peak": 495108096,
+            "ram_mean": 495108096,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9008
+          }
+        },
+        {
+          "epoch": 4,
+          "fit": {
+            "elapsed": 0.7912992089986801,
+            "ram_start": 495190016,
+            "ram_peak": 495190016,
+            "ram_mean": 495190016,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04517462500371039,
+            "ram_start": 495190016,
+            "ram_peak": 495190016,
+            "ram_mean": 495190016,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9115
+          }
+        },
+        {
+          "epoch": 5,
+          "fit": {
+            "elapsed": 0.784169541002484,
+            "ram_start": 495190016,
+            "ram_peak": 495190016,
+            "ram_mean": 495190016,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04661041699000634,
+            "ram_start": 495190016,
+            "ram_peak": 495190016,
+            "ram_mean": 495190016,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.912
+          }
+        },
+        {
+          "epoch": 6,
+          "fit": {
+            "elapsed": 0.7734618750109803,
+            "ram_start": 495222784,
+            "ram_peak": 495239168,
+            "ram_mean": 495237120,
+            "ram_delta": 16384,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04488745899288915,
+            "ram_start": 495239168,
+            "ram_peak": 495239168,
+            "ram_mean": 495239168,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9129
+          }
+        },
+        {
+          "epoch": 7,
+          "fit": {
+            "elapsed": 0.7532881670049392,
+            "ram_start": 495239168,
+            "ram_peak": 495239168,
+            "ram_mean": 495239168,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04490570799680427,
+            "ram_start": 495239168,
+            "ram_peak": 495239168,
+            "ram_mean": 495239168,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9242
+          }
+        },
+        {
+          "epoch": 8,
+          "fit": {
+            "elapsed": 0.7486137090018019,
+            "ram_start": 495239168,
+            "ram_peak": 495239168,
+            "ram_mean": 495239168,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04517470899736509,
+            "ram_start": 495239168,
+            "ram_peak": 495239168,
+            "ram_mean": 495239168,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9109
+          }
+        },
+        {
+          "epoch": 9,
+          "fit": {
+            "elapsed": 0.7421750419889577,
+            "ram_start": 495239168,
+            "ram_peak": 495239168,
+            "ram_mean": 495239168,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.0450974999985192,
+            "ram_start": 495239168,
+            "ram_peak": 495239168,
+            "ram_mean": 495239168,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9169
+          }
+        },
+        {
+          "epoch": 10,
+          "fit": {
+            "elapsed": 0.7388510000018869,
+            "ram_start": 495239168,
+            "ram_peak": 495239168,
+            "ram_mean": 495239168,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04430362497805618,
+            "ram_start": 495239168,
+            "ram_peak": 495239168,
+            "ram_mean": 495239168,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9161
+          }
+        }
+      ]
+    },
+    {
+      "seed": 40,
+      "init": {
+        "elapsed": 0.0025670000177342445,
+        "ram_start": 495271936,
+        "ram_peak": 495271936,
+        "ram_mean": 495271936,
+        "ram_delta": 0,
+        "vram_start": null,
+        "vram_peak": null,
+        "vram_mean": null,
+        "vram_delta": null
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "fit": {
+            "elapsed": 1.1612289580225479,
+            "ram_start": 495271936,
+            "ram_peak": 495271936,
+            "ram_mean": 495271936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.048276082990923896,
+            "ram_start": 495271936,
+            "ram_peak": 495271936,
+            "ram_mean": 495271936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.8799
+          }
+        },
+        {
+          "epoch": 2,
+          "fit": {
+            "elapsed": 0.8462862090091221,
+            "ram_start": 495271936,
+            "ram_peak": 495271936,
+            "ram_mean": 495271936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04742145899217576,
+            "ram_start": 495271936,
+            "ram_peak": 495271936,
+            "ram_mean": 495271936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.8986
+          }
+        },
+        {
+          "epoch": 3,
+          "fit": {
+            "elapsed": 0.8050398339983076,
+            "ram_start": 495271936,
+            "ram_peak": 495271936,
+            "ram_mean": 495271936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04685941699426621,
+            "ram_start": 495271936,
+            "ram_peak": 495271936,
+            "ram_mean": 495271936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9055
+          }
+        },
+        {
+          "epoch": 4,
+          "fit": {
+            "elapsed": 0.7774271669914015,
+            "ram_start": 495271936,
+            "ram_peak": 495271936,
+            "ram_mean": 495271936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.046799875010037795,
+            "ram_start": 495271936,
+            "ram_peak": 495271936,
+            "ram_mean": 495271936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9079
+          }
+        },
+        {
+          "epoch": 5,
+          "fit": {
+            "elapsed": 0.7666957499750424,
+            "ram_start": 495271936,
+            "ram_peak": 495271936,
+            "ram_mean": 495271936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.046550832979846746,
+            "ram_start": 495271936,
+            "ram_peak": 495271936,
+            "ram_mean": 495271936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9156
+          }
+        },
+        {
+          "epoch": 6,
+          "fit": {
+            "elapsed": 0.7592131250130478,
+            "ram_start": 495304704,
+            "ram_peak": 495304704,
+            "ram_mean": 495304704,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04537145799258724,
+            "ram_start": 495304704,
+            "ram_peak": 495304704,
+            "ram_mean": 495304704,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9187
+          }
+        },
+        {
+          "epoch": 7,
+          "fit": {
+            "elapsed": 0.7458614160132129,
+            "ram_start": 495304704,
+            "ram_peak": 495304704,
+            "ram_mean": 495304704,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04609562500263564,
+            "ram_start": 495304704,
+            "ram_peak": 495304704,
+            "ram_mean": 495304704,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9212
+          }
+        },
+        {
+          "epoch": 8,
+          "fit": {
+            "elapsed": 0.7414150830009021,
+            "ram_start": 495337472,
+            "ram_peak": 495337472,
+            "ram_mean": 495337472,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.046262624993687496,
+            "ram_start": 495337472,
+            "ram_peak": 495337472,
+            "ram_mean": 495337472,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.918
+          }
+        },
+        {
+          "epoch": 9,
+          "fit": {
+            "elapsed": 0.7439315000083297,
+            "ram_start": 495337472,
+            "ram_peak": 495337472,
+            "ram_mean": 495337472,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.046794709021924064,
+            "ram_start": 495337472,
+            "ram_peak": 495337472,
+            "ram_mean": 495337472,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9172
+          }
+        },
+        {
+          "epoch": 10,
+          "fit": {
+            "elapsed": 0.744034625007771,
+            "ram_start": 495337472,
+            "ram_peak": 495337472,
+            "ram_mean": 495337472,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.0456266250112094,
+            "ram_start": 495337472,
+            "ram_peak": 495337472,
+            "ram_mean": 495337472,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9162
+          }
+        }
+      ]
+    },
+    {
+      "seed": 50,
+      "init": {
+        "elapsed": 0.00260529198567383,
+        "ram_start": 495337472,
+        "ram_peak": 495337472,
+        "ram_mean": 495337472,
+        "ram_delta": 0,
+        "vram_start": null,
+        "vram_peak": null,
+        "vram_mean": null,
+        "vram_delta": null
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "fit": {
+            "elapsed": 1.1607577920076437,
+            "ram_start": 495337472,
+            "ram_peak": 495337472,
+            "ram_mean": 495337472,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.046572166989790276,
+            "ram_start": 495337472,
+            "ram_peak": 495337472,
+            "ram_mean": 495337472,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.8801
+          }
+        },
+        {
+          "epoch": 2,
+          "fit": {
+            "elapsed": 0.8434773750195745,
+            "ram_start": 500350976,
+            "ram_peak": 500350976,
+            "ram_mean": 500350976,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04626274999463931,
+            "ram_start": 500350976,
+            "ram_peak": 500350976,
+            "ram_mean": 500350976,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9031
+          }
+        },
+        {
+          "epoch": 3,
+          "fit": {
+            "elapsed": 0.8020994159742258,
+            "ram_start": 500350976,
+            "ram_peak": 500350976,
+            "ram_mean": 500350976,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.046580958005506545,
+            "ram_start": 500350976,
+            "ram_peak": 500350976,
+            "ram_mean": 500350976,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9007
+          }
+        },
+        {
+          "epoch": 4,
+          "fit": {
+            "elapsed": 0.7774349999963306,
+            "ram_start": 500350976,
+            "ram_peak": 500350976,
+            "ram_mean": 500350976,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04529675000230782,
+            "ram_start": 500350976,
+            "ram_peak": 500350976,
+            "ram_mean": 500350976,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9037
+          }
+        },
+        {
+          "epoch": 5,
+          "fit": {
+            "elapsed": 0.7617136659973767,
+            "ram_start": 500350976,
+            "ram_peak": 500350976,
+            "ram_mean": 500350976,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04581212502671406,
+            "ram_start": 500350976,
+            "ram_peak": 500350976,
+            "ram_mean": 500350976,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9163
+          }
+        },
+        {
+          "epoch": 6,
+          "fit": {
+            "elapsed": 0.7606651250098366,
+            "ram_start": 500350976,
+            "ram_peak": 500350976,
+            "ram_mean": 500350976,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04483812500257045,
+            "ram_start": 500350976,
+            "ram_peak": 500350976,
+            "ram_mean": 500350976,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9068
+          }
+        },
+        {
+          "epoch": 7,
+          "fit": {
+            "elapsed": 0.7480749169772025,
+            "ram_start": 500350976,
+            "ram_peak": 500350976,
+            "ram_mean": 500350976,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04455616700579412,
+            "ram_start": 500350976,
+            "ram_peak": 500350976,
+            "ram_mean": 500350976,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9181
+          }
+        },
+        {
+          "epoch": 8,
+          "fit": {
+            "elapsed": 0.7441129999933764,
+            "ram_start": 501415936,
+            "ram_peak": 501415936,
+            "ram_mean": 501415936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.0438048749929294,
+            "ram_start": 501415936,
+            "ram_peak": 501415936,
+            "ram_mean": 501415936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9174
+          }
+        },
+        {
+          "epoch": 9,
+          "fit": {
+            "elapsed": 0.7415117499767803,
+            "ram_start": 501415936,
+            "ram_peak": 501415936,
+            "ram_mean": 501415936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04401237500132993,
+            "ram_start": 501415936,
+            "ram_peak": 501415936,
+            "ram_mean": 501415936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9204
+          }
+        },
+        {
+          "epoch": 10,
+          "fit": {
+            "elapsed": 0.7378530410060193,
+            "ram_start": 501415936,
+            "ram_peak": 501415936,
+            "ram_mean": 501415936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "predict": {
+            "elapsed": 0.04427945800125599,
+            "ram_start": 501415936,
+            "ram_peak": 501415936,
+            "ram_mean": 501415936,
+            "ram_delta": 0,
+            "vram_start": null,
+            "vram_peak": null,
+            "vram_mean": null,
+            "vram_delta": null
+          },
+          "metrics": {
+            "acc": 0.9099
+          }
+        }
+      ]
+    }
+  ]
+}

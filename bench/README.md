@@ -16,10 +16,10 @@ CUDA Runs: Nvidia H100, 80GB VRAM
 
 | Experiment | Fit (epoch 1) | Fit (avg epoch 2-10) | Predict | Peak RAM (MB) | Acc |
 |---|---|---|---|---|---|
-| MNIST flat | 1.33s / 2.21s | 0.78s / 1.92s | 0.05s / 0.58s | 479 / 740 | 92.35% / 92.12% |
-| MNIST conv | 2.93s / 9.45s | 3.05s / 4.88s | 0.70s / 17.15s | 534 / 1509 | 96.50% / 96.56% |
-| FMNIST conv | 16.09s / 83.06s | 17.08s / 72.09s | 2.05s / 64.95s | 808 / 3691 | 87.15% / 86.24% |
-| IMDb | 223.24s / 86.91min* | 70.76s / - | 3.43s / 4.14s* | 2134 / 3680* | 86.24% / - |
+| MNIST flat | 1.17 ± 0.01s / 2.17 ± 0.01s | 0.77 ± 0.00s / 1.91 ± 0.00s | 0.05 ± 0.00s / 0.58 ± 0.00s | 493 ± 7 / 875 ± 16 | 91.83 ± 0.63% / 92.38 ± 0.37% |
+| MNIST conv | 3.51 ± 1.12s / 9.59 ± 0.17s | 3.02 ± 0.20s / 4.94 ± 0.05s | 0.59 ± 0.03s / 17.18 ± 0.07s | 369 ± 53 / 1735 ± 73 | 96.29 ± 0.19% / 96.36 ± 0.37% |
+| FMNIST conv | 17.00 ± 1.21s / 83.06s | 17.12 ± 0.38s / 72.09s | 1.98 ± 0.04s / 64.95s | 822 ± 9 / 3691 | 87.19 ± 0.14% / 86.24% |
+| IMDb | 185.36 ± 14.82s / 86.91min* | 46.10 ± 0.71s / - | 3.53 ± 0.03s / 4.14s* | 1476 ± 20 / 3680* | 86.01 ± 0.38% / - |
 
 \* Ran only for 1 epoch.
 
@@ -44,9 +44,9 @@ CUDA Runs: Nvidia H100, 80GB VRAM
 
 | Experiment | Fit (epoch 1) | Fit (avg epoch 2-10) | Predict | Peak RAM (MB) | Acc |
 |---|---|---|---|---|---|
-| MNIST flat | 10.73s / 7.87s | 4.72s / 5.42s | 0.06s / 0.21s | 483 / 765 | 94.80% / 95.41% |
-| MNIST conv | 13.93s / 28.04s | 13.42s / 19.55s | 0.61s / 5.77s | 533 / 1531 | 97.61% / 97.77% |
-| FMNIST conv | 28.25s / 448.25s | 23.84s / 353.52s | 1.31s / 82.87s | 805 / 3231 | 87.78% / 87.65% |
+| MNIST flat | 8.28 ± 0.07s / 7.69 ± 0.03s | 3.63 ± 0.01s / 5.34 ± 0.01s | 0.05 ± 0.00s / 0.21 ± 0.00s | 496 ± 4 / 881 ± 25 | 95.17 ± 0.25% / 95.35 ± 0.12% |
+| MNIST conv | 5.65 ± 0.21s / 28.15 ± 0.39s | 4.79 ± 0.22s / 19.67 ± 0.30s | 0.49 ± 0.01s / 5.72 ± 0.11s | 483 ± 84 / 1692 ± 87 | 97.70 ± 0.08% / 97.83 ± 0.09% |
+| FMNIST conv | 29.53 ± 1.35s / 448.25s | 24.75 ± 1.07s / 353.52s | 1.31 ± 0.02s / 82.87s | 821 ± 13 / 3231 | 87.70 ± 0.07% / 87.65% |
 
 
 #### CUDA
@@ -70,7 +70,7 @@ Note:
 - CIFAR-10, AG News, CelebA and GoEmotions are CUDA only.
 - CelebA and GoEmotions are multi-label and coalesced only. Acc is that case is macro F1.
 - PySparse has no seed argument, so results for it can vary.
-- YTM CUDA rows: mean ± std over 5 seeds (10, 20, 30, 40, 50). Other cells: single run, seed 10.
+- Mean ± std over 5 seeds (10, 20, 30, 40, 50): all YTM cells, TMU MNIST CPU cells. Other cells: single run, seed 10.
 
 ## Hyperparameters
 
@@ -93,79 +93,79 @@ From the repo root. CPU runs use the `bench` environment, CUDA runs use `bench-c
 - MNIST flat
 
   ```bash
-  pixi run -e bench python -m bench.ytm.mnist --patch none --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seed 10 --device cpu
-  pixi run -e bench python -m bench.tmu.mnist --patch none --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seed 10 --platform CPU
-  pixi run -e bench python -m bench.ytm.mnist --patch none --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seed 10 --device cpu
-  pixi run -e bench python -m bench.tmu.mnist --patch none --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seed 10 --platform CPU
-  pixi run -e bench-cuda python -m bench.ytm.mnist --patch none --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seed 10 --device cuda
-  pixi run -e bench-cuda python -m bench.tmu.mnist --patch none --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seed 10 --platform CUDA
-  pixi run -e bench-cuda python -m bench.ytm.mnist --patch none --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seed 10 --device cuda
-  pixi run -e bench-cuda python -m bench.tmu.mnist --patch none --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seed 10 --platform CUDA
+  pixi run -e bench python -m bench.ytm.mnist --patch none --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seeds 10 20 30 40 50 --device cpu
+  pixi run -e bench python -m bench.tmu.mnist --patch none --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seeds 10 20 30 40 50 --platform CPU
+  pixi run -e bench python -m bench.ytm.mnist --patch none --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seeds 10 20 30 40 50 --device cpu
+  pixi run -e bench python -m bench.tmu.mnist --patch none --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seeds 10 20 30 40 50 --platform CPU
+  pixi run -e bench-cuda python -m bench.ytm.mnist --patch none --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seeds 10 20 30 40 50 --device cuda
+  pixi run -e bench-cuda python -m bench.tmu.mnist --patch none --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seeds 10 --platform CUDA
+  pixi run -e bench-cuda python -m bench.ytm.mnist --patch none --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seeds 10 20 30 40 50 --device cuda
+  pixi run -e bench-cuda python -m bench.tmu.mnist --patch none --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seeds 10 --platform CUDA
   ```
 
 - MNIST conv
 
   ```bash
-  pixi run -e bench python -m bench.ytm.mnist --patch 10 --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seed 10 --device cpu
-  pixi run -e bench python -m bench.tmu.mnist --patch 10 --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seed 10 --platform CPU
-  pixi run -e bench python -m bench.ytm.mnist --patch 10 --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seed 10 --device cpu
-  pixi run -e bench python -m bench.tmu.mnist --patch 10 --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seed 10 --platform CPU
-  pixi run -e bench-cuda python -m bench.ytm.mnist --patch 10 --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seed 10 --device cuda
-  pixi run -e bench-cuda python -m bench.tmu.mnist --patch 10 --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seed 10 --platform CUDA
-  pixi run -e bench-cuda python -m bench.ytm.mnist --patch 10 --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seed 10 --device cuda
-  pixi run -e bench-cuda python -m bench.tmu.mnist --patch 10 --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seed 10 --platform CUDA
+  pixi run -e bench python -m bench.ytm.mnist --patch 10 --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seeds 10 20 30 40 50 --device cpu
+  pixi run -e bench python -m bench.tmu.mnist --patch 10 --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seeds 10 20 30 40 50 --platform CPU
+  pixi run -e bench python -m bench.ytm.mnist --patch 10 --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seeds 10 20 30 40 50 --device cpu
+  pixi run -e bench python -m bench.tmu.mnist --patch 10 --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seeds 10 20 30 40 50 --platform CPU
+  pixi run -e bench-cuda python -m bench.ytm.mnist --patch 10 --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seeds 10 20 30 40 50 --device cuda
+  pixi run -e bench-cuda python -m bench.tmu.mnist --patch 10 --coalesced 1 --n_clauses 500 --T 1000 --s 10 --epochs 10 --seeds 10 --platform CUDA
+  pixi run -e bench-cuda python -m bench.ytm.mnist --patch 10 --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seeds 10 20 30 40 50 --device cuda
+  pixi run -e bench-cuda python -m bench.tmu.mnist --patch 10 --coalesced 0 --n_clauses 50 --T 100 --s 10 --epochs 10 --seeds 10 --platform CUDA
   ```
 
 - FMNIST conv
 
   ```bash
-  pixi run -e bench python -m bench.ytm.fmnist --patch 3 --coalesced 1 --n_clauses 6000 --T 10000 --s 10 --levels 8 --epochs 10 --seed 10 --device cpu:8
-  pixi run -e bench python -m bench.tmu.fmnist --patch 3 --coalesced 1 --n_clauses 6000 --T 10000 --s 10 --levels 8 --epochs 10 --seed 10 --platform CPU
-  pixi run -e bench python -m bench.ytm.fmnist --patch 3 --coalesced 0 --n_clauses 600 --T 1000 --s 10 --levels 8 --epochs 10 --seed 10 --device cpu:8
-  pixi run -e bench python -m bench.tmu.fmnist --patch 3 --coalesced 0 --n_clauses 600 --T 1000 --s 10 --levels 8 --epochs 10 --seed 10 --platform CPU
-  pixi run -e bench-cuda python -m bench.ytm.fmnist --patch 3 --coalesced 1 --n_clauses 6000 --T 10000 --s 10 --levels 8 --epochs 10 --seed 10 --device cuda
-  pixi run -e bench-cuda python -m bench.tmu.fmnist --patch 3 --coalesced 1 --n_clauses 6000 --T 10000 --s 10 --levels 8 --epochs 10 --seed 10 --platform CUDA
-  pixi run -e bench-cuda python -m bench.ytm.fmnist --patch 3 --coalesced 0 --n_clauses 600 --T 1000 --s 10 --levels 8 --epochs 10 --seed 10 --device cuda
-  pixi run -e bench-cuda python -m bench.tmu.fmnist --patch 3 --coalesced 0 --n_clauses 600 --T 1000 --s 10 --levels 8 --epochs 10 --seed 10 --platform CUDA
+  pixi run -e bench python -m bench.ytm.fmnist --patch 3 --coalesced 1 --n_clauses 6000 --T 10000 --s 10 --levels 8 --epochs 10 --seeds 10 20 30 40 50 --device cpu:8
+  pixi run -e bench python -m bench.tmu.fmnist --patch 3 --coalesced 1 --n_clauses 6000 --T 10000 --s 10 --levels 8 --epochs 10 --seeds 10 --platform CPU
+  pixi run -e bench python -m bench.ytm.fmnist --patch 3 --coalesced 0 --n_clauses 600 --T 1000 --s 10 --levels 8 --epochs 10 --seeds 10 20 30 40 50 --device cpu:8
+  pixi run -e bench python -m bench.tmu.fmnist --patch 3 --coalesced 0 --n_clauses 600 --T 1000 --s 10 --levels 8 --epochs 10 --seeds 10 --platform CPU
+  pixi run -e bench-cuda python -m bench.ytm.fmnist --patch 3 --coalesced 1 --n_clauses 6000 --T 10000 --s 10 --levels 8 --epochs 10 --seeds 10 20 30 40 50 --device cuda
+  pixi run -e bench-cuda python -m bench.tmu.fmnist --patch 3 --coalesced 1 --n_clauses 6000 --T 10000 --s 10 --levels 8 --epochs 10 --seeds 10 --platform CUDA
+  pixi run -e bench-cuda python -m bench.ytm.fmnist --patch 3 --coalesced 0 --n_clauses 600 --T 1000 --s 10 --levels 8 --epochs 10 --seeds 10 20 30 40 50 --device cuda
+  pixi run -e bench-cuda python -m bench.tmu.fmnist --patch 3 --coalesced 0 --n_clauses 600 --T 1000 --s 10 --levels 8 --epochs 10 --seeds 10 --platform CUDA
   ```
 
 - IMDb
 
   ```bash
-  pixi run -e bench python -m bench.ytm.imdb --max_features 12000 --coalesced 0 --n_clauses 5000 --T 10000 --s 1.1 --epochs 10 --seed 10 --device cpu:8
-  pixi run -e bench python -m bench.tmu.imdb --max_features 12000 --coalesced 0 --n_clauses 5000 --T 10000 --s 1.1 --epochs 1 --seed 10 --platform CPU
-  pixi run -e bench-cuda python -m bench.ytm.imdb --max_features 12000 --coalesced 0 --n_clauses 5000 --T 10000 --s 1.1 --epochs 10 --seed 10 --device cuda
-  pixi run -e bench-cuda python -m bench.tmu.imdb --max_features 12000 --coalesced 0 --n_clauses 5000 --T 10000 --s 1.1 --epochs 10 --seed 10 --platform CUDA
+  pixi run -e bench python -m bench.ytm.imdb --max_features 12000 --coalesced 0 --n_clauses 5000 --T 10000 --s 1.1 --epochs 10 --seeds 10 20 30 40 50 --device cpu:8
+  pixi run -e bench python -m bench.tmu.imdb --max_features 12000 --coalesced 0 --n_clauses 5000 --T 10000 --s 1.1 --epochs 1 --seeds 10 --platform CPU
+  pixi run -e bench-cuda python -m bench.ytm.imdb --max_features 12000 --coalesced 0 --n_clauses 5000 --T 10000 --s 1.1 --epochs 10 --seeds 10 20 30 40 50 --device cuda
+  pixi run -e bench-cuda python -m bench.tmu.imdb --max_features 12000 --coalesced 0 --n_clauses 5000 --T 10000 --s 1.1 --epochs 10 --seeds 10 --platform CUDA
   ```
 
 - CIFAR-10 conv
 
   ```bash
-  pixi run -e bench-cuda python -m bench.ytm.cifar10 --patch 5 --coalesced 1 --n_clauses 15000 --T 20000 --s 10 --epochs 10 --seed 10 --device cuda
-  pixi run -e bench-cuda python -m bench.tmu.cifar10 --patch 5 --coalesced 1 --n_clauses 15000 --T 20000 --s 10 --epochs 10 --seed 10 --platform CUDA
-  pixi run -e bench-cuda python -m bench.ytm.cifar10 --patch 5 --coalesced 0 --n_clauses 1500 --T 2000 --s 10 --epochs 10 --seed 10 --device cuda
-  pixi run -e bench-cuda python -m bench.tmu.cifar10 --patch 5 --coalesced 0 --n_clauses 1500 --T 2000 --s 10 --epochs 10 --seed 10 --platform CUDA
+  pixi run -e bench-cuda python -m bench.ytm.cifar10 --patch 5 --coalesced 1 --n_clauses 15000 --T 20000 --s 10 --epochs 10 --seeds 10 20 30 40 50 --device cuda
+  pixi run -e bench-cuda python -m bench.tmu.cifar10 --patch 5 --coalesced 1 --n_clauses 15000 --T 20000 --s 10 --epochs 10 --seeds 10 --platform CUDA
+  pixi run -e bench-cuda python -m bench.ytm.cifar10 --patch 5 --coalesced 0 --n_clauses 1500 --T 2000 --s 10 --epochs 10 --seeds 10 20 30 40 50 --device cuda
+  pixi run -e bench-cuda python -m bench.tmu.cifar10 --patch 5 --coalesced 0 --n_clauses 1500 --T 2000 --s 10 --epochs 10 --seeds 10 --platform CUDA
   ```
 
 - AG News
 
   ```bash
-  pixi run -e bench-cuda python -m bench.ytm.ag_news --max_features 2000 --coalesced 1 --n_clauses 8000 --T 40000 --s 2 --epochs 10 --seed 10 --device cuda
-  pixi run -e bench-cuda python -m bench.tmu.ag_news --max_features 2000 --coalesced 1 --n_clauses 8000 --T 40000 --s 2 --epochs 10 --seed 10 --platform CUDA
-  pixi run -e bench-cuda python -m bench.ytm.ag_news --max_features 2000 --coalesced 0 --n_clauses 2000 --T 10000 --s 2 --epochs 10 --seed 10 --device cuda
-  pixi run -e bench-cuda python -m bench.tmu.ag_news --max_features 2000 --coalesced 0 --n_clauses 2000 --T 10000 --s 2 --epochs 10 --seed 10 --platform CUDA
+  pixi run -e bench-cuda python -m bench.ytm.ag_news --max_features 2000 --coalesced 1 --n_clauses 8000 --T 40000 --s 2 --epochs 10 --seeds 10 20 30 40 50 --device cuda
+  pixi run -e bench-cuda python -m bench.tmu.ag_news --max_features 2000 --coalesced 1 --n_clauses 8000 --T 40000 --s 2 --epochs 10 --seeds 10 --platform CUDA
+  pixi run -e bench-cuda python -m bench.ytm.ag_news --max_features 2000 --coalesced 0 --n_clauses 2000 --T 10000 --s 2 --epochs 10 --seeds 10 20 30 40 50 --device cuda
+  pixi run -e bench-cuda python -m bench.tmu.ag_news --max_features 2000 --coalesced 0 --n_clauses 2000 --T 10000 --s 2 --epochs 10 --seeds 10 --platform CUDA
   ```
 
 - CelebA conv
 
   ```bash
-  pixi run -e bench-cuda python -m bench.ytm.celeba --patch 3 --levels 8 --n_clauses 80000 --T 80000 --s 30 --q 10 --epochs 10 --seed 10 --device cuda
+  pixi run -e bench-cuda python -m bench.ytm.celeba --patch 3 --levels 8 --n_clauses 80000 --T 80000 --s 30 --q 10 --epochs 10 --seeds 10 20 30 40 50 --device cuda
   pixi run -e bench-cuda python -m bench.tmu.celeba --patch 3 --levels 8 --n_clauses 80000 --T 80000 --s 30 --q 10 --epochs 10
   ```
 
 - GoEmotions
 
   ```bash
-  pixi run -e bench-cuda python -m bench.ytm.go_emotions --max_features 10000 --n_clauses 22400 --T 25000 --s 2 --q 1.5 --epochs 10 --seed 10 --device cuda
+  pixi run -e bench-cuda python -m bench.ytm.go_emotions --max_features 10000 --n_clauses 22400 --T 25000 --s 2 --q 1.5 --epochs 10 --seeds 10 20 30 40 50 --device cuda
   pixi run -e bench-cuda python -m bench.tmu.go_emotions --max_features 10000 --n_clauses 22400 --T 25000 --s 2 --q 1.5 --epochs 10
   ```
