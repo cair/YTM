@@ -1,0 +1,6 @@
+﻿ytm.utils.norm\_asymmetric
+==========================
+
+.. currentmodule:: ytm.utils
+
+.. autofunction:: norm_asymmetric

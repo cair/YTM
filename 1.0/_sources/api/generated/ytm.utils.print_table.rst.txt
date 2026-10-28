@@ -1,0 +1,6 @@
+﻿ytm.utils.print\_table
+======================
+
+.. currentmodule:: ytm.utils
+
+.. autofunction:: print_table

@@ -1,0 +1,6 @@
+﻿ytm.simple.RegressionTM
+=======================
+
+.. currentmodule:: ytm.simple
+
+.. autoclass:: RegressionTM

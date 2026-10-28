@@ -1,0 +1,6 @@
+﻿ytm.guided.config.FbSignal
+==========================
+
+.. currentmodule:: ytm.guided.config
+
+.. autoclass:: FbSignal

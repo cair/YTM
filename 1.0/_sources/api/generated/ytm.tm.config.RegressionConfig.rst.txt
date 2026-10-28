@@ -1,0 +1,8 @@
+﻿ytm.tm.config.RegressionConfig
+==============================
+
+.. currentmodule:: ytm.tm.config
+
+.. autoclass:: RegressionConfig
+   :member-order: bysource
+   :no-inherited-members:

@@ -1,0 +1,6 @@
+﻿ytm.\_core.info.ClauseInfo
+==========================
+
+.. currentmodule:: ytm._core.info
+
+.. autoclass:: ClauseInfo

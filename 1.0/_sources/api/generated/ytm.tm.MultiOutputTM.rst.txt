@@ -1,0 +1,6 @@
+﻿ytm.tm.MultiOutputTM
+====================
+
+.. currentmodule:: ytm.tm
+
+.. autoclass:: MultiOutputTM

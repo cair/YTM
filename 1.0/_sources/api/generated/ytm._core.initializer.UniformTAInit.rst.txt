@@ -1,0 +1,6 @@
+﻿ytm.\_core.initializer.UniformTAInit
+====================================
+
+.. currentmodule:: ytm._core.initializer
+
+.. autoclass:: UniformTAInit

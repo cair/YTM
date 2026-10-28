@@ -1,0 +1,6 @@
+﻿ytm.guided.backends.cpu.CPUDevice
+=================================
+
+.. currentmodule:: ytm.guided.backends.cpu
+
+.. autoclass:: CPUDevice

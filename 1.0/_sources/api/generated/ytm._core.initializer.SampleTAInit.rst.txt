@@ -1,0 +1,6 @@
+﻿ytm.\_core.initializer.SampleTAInit
+===================================
+
+.. currentmodule:: ytm._core.initializer
+
+.. autoclass:: SampleTAInit

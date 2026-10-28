@@ -1,0 +1,6 @@
+﻿ytm.guided.BinaryTM
+===================
+
+.. currentmodule:: ytm.guided
+
+.. autoclass:: BinaryTM

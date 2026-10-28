@@ -1,0 +1,6 @@
+﻿ytm.\_core.backends.toolchain.compiler\_cmd
+===========================================
+
+.. currentmodule:: ytm._core.backends.toolchain
+
+.. autofunction:: compiler_cmd

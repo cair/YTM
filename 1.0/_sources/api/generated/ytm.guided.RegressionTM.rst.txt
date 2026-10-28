@@ -1,0 +1,6 @@
+﻿ytm.guided.RegressionTM
+=======================
+
+.. currentmodule:: ytm.guided
+
+.. autoclass:: RegressionTM

@@ -1,0 +1,6 @@
+﻿ytm.\_core.config.enum\_to\_header
+==================================
+
+.. currentmodule:: ytm._core.config
+
+.. autofunction:: enum_to_header

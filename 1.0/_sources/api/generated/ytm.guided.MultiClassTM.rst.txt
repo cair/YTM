@@ -1,0 +1,6 @@
+﻿ytm.guided.MultiClassTM
+=======================
+
+.. currentmodule:: ytm.guided
+
+.. autoclass:: MultiClassTM

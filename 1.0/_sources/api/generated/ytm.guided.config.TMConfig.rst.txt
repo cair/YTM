@@ -1,0 +1,8 @@
+﻿ytm.guided.config.TMConfig
+==========================
+
+.. currentmodule:: ytm.guided.config
+
+.. autoclass:: TMConfig
+   :member-order: bysource
+   :no-inherited-members:

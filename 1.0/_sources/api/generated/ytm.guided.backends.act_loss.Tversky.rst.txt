@@ -1,0 +1,6 @@
+﻿ytm.guided.backends.act\_loss.Tversky
+=====================================
+
+.. currentmodule:: ytm.guided.backends.act_loss
+
+.. autoclass:: Tversky

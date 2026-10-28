@@ -1,0 +1,6 @@
+﻿ytm.tm.backends.buffers.TMFitBuffers
+====================================
+
+.. currentmodule:: ytm.tm.backends.buffers
+
+.. autoclass:: TMFitBuffers
