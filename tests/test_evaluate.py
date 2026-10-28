@@ -154,9 +154,9 @@ def _unpack_bits(bits):
     ids=["flat_70", "flat_130", "conv"],
 )
 @pytest.mark.parametrize("negated_literals", [True, False], ids=["negated", "plain"])
-def test_packed_bits_follow_ta_states(dim, patch_dim, negated_literals):
+def test_packed_bits_follow_ta_states(device, dim, patch_dim, negated_literals):
     """Packed pos/neg bit words of every non contradictory clause equal its included feature literals, tail bits stay 0."""
-    tm = discrete("multi", n_clauses=32, n_classes=2, dim=dim, patch_dim=patch_dim, negated_literals=negated_literals)
+    tm = discrete("multi", device, n_clauses=32, n_classes=2, dim=dim, patch_dim=patch_dim, negated_literals=negated_literals)
     cfg = tm.config
     F, P, half = cfg._n_raw_patch_feats, cfg._n_position_feats, cfg._n_literals // 2
     rng = np.random.default_rng(0)

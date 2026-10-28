@@ -81,10 +81,10 @@ class FitBuffers(AutoPtrs):
     lit_drop_mask : array of shape (n_literals,)
         Literals to skip.
 
-    feat_drop_bits : array of shape (n_feat_chunks,), uint64
+    feat_drop_bits : array of shape (n_bin_feat_chunks,), uint64
         All binary features only: bit ``fid`` set when feature ``fid`` is skipped. Shape (1,) otherwise.
 
-    x_bits : array of shape (n_patches, n_feat_chunks), uint64
+    x_bits : array of shape (n_patches, n_bin_feat_chunks), uint64
         All binary features only: bit packed patches of the current sample. Shape (1,) otherwise.
 
     class_active : array of shape (n_classes,), uint8
@@ -128,8 +128,8 @@ class FitBuffers(AutoPtrs):
     clause_drop_mask: Any = field(init=False, default=None)  # (total_clauses,) one mask for the whole epoch, per Drop Clause
     rng_keys: Any = field(init=False, default=None)  # (n_samples,) rng key of each sample
     lit_drop_mask: Any = field(init=False)  # (n_literals,) mask to skip a feature
-    feat_drop_bits: Any = field(init=False)  # (n_feat_chunks,) bit mask to skip a feature, all binary features only
-    x_bits: Any = field(init=False)  # (n_patches, n_feat_chunks) bit packed current sample, all binary features only
+    feat_drop_bits: Any = field(init=False)  # (n_bin_feat_chunks,) bit mask to skip a feature, all binary features only
+    x_bits: Any = field(init=False)  # (n_patches, n_bin_feat_chunks) bit packed current sample, all binary features only
     class_active: Any = field(init=False)  # (n_classes,) uint8, 1 when the class gets feedback on the current sample
     clause_output: Any = field(init=False)  # (total_clauses,) 1 when the clause fired on this sample
     selected_pids: Any = field(init=False)  # (total_clauses,) patch each clause matched on, only valid where it fired
@@ -146,8 +146,8 @@ class FitBuffers(AutoPtrs):
         cfg, xp = self.cfg, self.xp
         n = cfg._total_clauses
         self.lit_drop_mask = xp.zeros(cfg._n_literals, dtype=np.uint8)
-        self.feat_drop_bits = xp.zeros(cfg._n_feat_chunks if cfg._all_binary_feats else 1, dtype=np.uint64)
-        self.x_bits = xp.empty((cfg._n_patches, cfg._n_feat_chunks) if cfg._all_binary_feats else 1, dtype=np.uint64)
+        self.feat_drop_bits = xp.zeros(cfg._n_bin_feat_chunks if cfg._all_binary_feats else 1, dtype=np.uint64)
+        self.x_bits = xp.empty((cfg._n_patches, cfg._n_bin_feat_chunks) if cfg._all_binary_feats else 1, dtype=np.uint64)
         self.class_active = xp.ones(cfg.n_classes, dtype=np.uint8)
         self.clause_output = xp.empty(n, dtype=np.int8)
         self.selected_pids = xp.empty(n if cfg._n_patches > 1 else 1, dtype=cfg._npatches_dtype)
@@ -229,10 +229,10 @@ class PackedClauses(AutoPtrs):
     is_clause_synced : array of shape (total_clauses,)
         0 when the clause changed since it was last packed and needs repacking.
 
-    clause_pos_bits : array of shape (total_clauses, n_feat_chunks)
+    clause_pos_bits : array of shape (total_clauses, n_bin_feat_chunks)
         CPU with all binary features only: bit ``fid`` set when the clause includes feature ``fid``. Shape (1,) otherwise.
 
-    clause_neg_bits : array of shape (total_clauses, n_feat_chunks)
+    clause_neg_bits : array of shape (total_clauses, n_bin_feat_chunks)
         CPU with all binary features only: bit ``fid`` set when the clause includes the negation of feature ``fid``. Shape (1,)
         otherwise.
     """
@@ -245,5 +245,5 @@ class PackedClauses(AutoPtrs):
     has_contra: Any  # (total_clauses,) 1 when the clause is unsatisfiable
     clause_len: Any  # (total_clauses,) included literals, 0 means the clause is vacuous
     is_clause_synced: Any  # (total_clauses,) 0 when the clause needs repacking
-    clause_pos_bits: Any  # (total_clauses, n_feat_chunks) literal bits
-    clause_neg_bits: Any  # (total_clauses, n_feat_chunks) negation bits
+    clause_pos_bits: Any  # (total_clauses, n_bin_feat_chunks) literal bits
+    clause_neg_bits: Any  # (total_clauses, n_bin_feat_chunks) negation bits

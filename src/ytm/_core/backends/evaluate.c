@@ -15,14 +15,14 @@ static inline int eval_trivial(ull clause, const int8_t* restrict has_contra, co
 static inline bool match_bits(const uint64_t* restrict x, const uint64_t* restrict pos, const uint64_t* restrict neg,
                               const uint64_t* restrict drop) {
     int k = 0;
-    for (; k + 4 <= N_FEAT_CHUNKS; k += 4) {
+    for (; k + 4 <= N_BIN_FEAT_CHUNKS; k += 4) {
         uint64_t miss = 0;
         for (int u = 0; u < 4; u++)
             miss |= ((pos[k + u] & ~x[k + u]) | (neg[k + u] & x[k + u])) & (drop ? ~drop[k + u] : ~0ULL);
         if (miss)
             return false;
     }
-    for (; k < N_FEAT_CHUNKS; k++)
+    for (; k < N_BIN_FEAT_CHUNKS; k++)
         if (((pos[k] & ~x[k]) | (neg[k] & x[k])) & (drop ? ~drop[k] : ~0ULL))
             return false;
     return true;
@@ -34,7 +34,7 @@ static inline bool match_clause_patch(const FBOUND_T* restrict Xe, const uint64_
                                       const uint64_t* restrict drop_bits, const uint8_t* restrict lit_drop_mask,
                                       const NLITS_T* restrict literal_offsets) {
     if (ALL_BINARY_FEATS)
-        return match_bits(&xe_bits[(ull)(py * N_PATCHES_X + px) * N_FEAT_CHUNKS], pos, neg, drop_bits);
+        return match_bits(&xe_bits[(ull)(py * N_PATCHES_X + px) * N_BIN_FEAT_CHUNKS], pos, neg, drop_bits);
     return match_patch(Xe, py, px, feat_ids, feat_bounds, n_feats, lit_drop_mask, literal_offsets);
 }
 
@@ -53,7 +53,7 @@ static inline bool match_window(const FBOUND_T* restrict Xe, const uint64_t* res
  *
  * Arguments:
  *   X                       features of the batch
- *   x_bits                  (N, N_PATCHES, N_FEAT_CHUNKS) bit packed X, all binary features only
+ *   x_bits                  (N, N_PATCHES, N_BIN_FEAT_CHUNKS) bit packed X, all binary features only
  *   N                       number of samples in the batch
  *   clause_position_bounds  per clause [y_lo, y_hi, x_lo, x_hi] of allowed patches
  *   clause_feat_bounds      per clause [lo, hi] of each bounded feature
@@ -89,9 +89,9 @@ void eval_patchwise(const FBOUND_T* restrict X, const uint64_t* restrict x_bits,
         const FBOUND_T* cfb = ALL_BINARY_FEATS ? NULL : &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
         const NFEAT_T* bounded_fids = ALL_BINARY_FEATS ? NULL : &clause_feat_ids[feat_ids_offset(clause, 0)];
         int n_bounded_fids = ALL_BINARY_FEATS ? 0 : (int)clause_n_feats[clause];
-        const uint64_t* xe_bits = ALL_BINARY_FEATS ? &x_bits[e * N_PATCHES * N_FEAT_CHUNKS] : NULL;
-        const uint64_t* pos_bits = ALL_BINARY_FEATS ? &clause_pos_bits[clause * N_FEAT_CHUNKS] : NULL;
-        const uint64_t* neg_bits = ALL_BINARY_FEATS ? &clause_neg_bits[clause * N_FEAT_CHUNKS] : NULL;
+        const uint64_t* xe_bits = ALL_BINARY_FEATS ? &x_bits[e * N_PATCHES * N_BIN_FEAT_CHUNKS] : NULL;
+        const uint64_t* pos_bits = ALL_BINARY_FEATS ? &clause_pos_bits[clause * N_BIN_FEAT_CHUNKS] : NULL;
+        const uint64_t* neg_bits = ALL_BINARY_FEATS ? &clause_neg_bits[clause * N_BIN_FEAT_CHUNKS] : NULL;
 
         for (int patch = 0; patch < N_PATCHES; patch++) {
             int py = patch / N_PATCHES_X;
@@ -115,7 +115,7 @@ void eval_patchwise(const FBOUND_T* restrict X, const uint64_t* restrict x_bits,
  *
  * Arguments:
  *   X                       features of the batch
- *   x_bits                  (N, N_PATCHES, N_FEAT_CHUNKS) bit packed X, all binary features only
+ *   x_bits                  (N, N_PATCHES, N_BIN_FEAT_CHUNKS) bit packed X, all binary features only
  *   N                       number of samples in the batch
  *   clause_position_bounds  per clause [y_lo, y_hi, x_lo, x_hi] of allowed patches
  *   clause_feat_bounds      per clause [lo, hi] of each bounded feature
@@ -144,9 +144,9 @@ void eval_infer(const FBOUND_T* restrict X, const uint64_t* restrict x_bits, con
             const FBOUND_T* feat_bounds = ALL_BINARY_FEATS ? NULL : &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
             const NFEAT_T* feat_ids = ALL_BINARY_FEATS ? NULL : &clause_feat_ids[feat_ids_offset(clause, 0)];
             const int n_feats = ALL_BINARY_FEATS ? 0 : (int)clause_n_feats[clause];
-            const uint64_t* xe_bits = ALL_BINARY_FEATS ? &x_bits[e * N_PATCHES * N_FEAT_CHUNKS] : NULL;
-            const uint64_t* pos_bits = ALL_BINARY_FEATS ? &clause_pos_bits[clause * N_FEAT_CHUNKS] : NULL;
-            const uint64_t* neg_bits = ALL_BINARY_FEATS ? &clause_neg_bits[clause * N_FEAT_CHUNKS] : NULL;
+            const uint64_t* xe_bits = ALL_BINARY_FEATS ? &x_bits[e * N_PATCHES * N_BIN_FEAT_CHUNKS] : NULL;
+            const uint64_t* pos_bits = ALL_BINARY_FEATS ? &clause_pos_bits[clause * N_BIN_FEAT_CHUNKS] : NULL;
+            const uint64_t* neg_bits = ALL_BINARY_FEATS ? &clause_neg_bits[clause * N_BIN_FEAT_CHUNKS] : NULL;
 
             if (N_PATCHES > 1) {
                 // Conv
@@ -165,11 +165,11 @@ void eval_infer(const FBOUND_T* restrict X, const uint64_t* restrict x_bits, con
 static inline void bit_pack_sample(const FBOUND_T* restrict Xe, uint64_t* restrict xe_bits) {
     for (int py = 0; py < N_PATCHES_Y; py++) {
         for (int px = 0; px < N_PATCHES_X; px++) {
-            uint64_t* bits = &xe_bits[(ull)(py * N_PATCHES_X + px) * N_FEAT_CHUNKS];
+            uint64_t* bits = &xe_bits[(ull)(py * N_PATCHES_X + px) * N_BIN_FEAT_CHUNKS];
 
-            for (int k = 0; k < N_FEAT_CHUNKS; k++) {
-                const int base = k * FEAT_CHUNK_SIZE;
-                const int n = N_RAW_PATCH_FEATS - base < FEAT_CHUNK_SIZE ? N_RAW_PATCH_FEATS - base : FEAT_CHUNK_SIZE;
+            for (int k = 0; k < N_BIN_FEAT_CHUNKS; k++) {
+                const int base = k * BIN_FEAT_CHUNK_SZ;
+                const int n = N_RAW_PATCH_FEATS - base < BIN_FEAT_CHUNK_SZ ? N_RAW_PATCH_FEATS - base : BIN_FEAT_CHUNK_SZ;
                 uint64_t word = 0;
                 for (int b = 0; b < n; b++)
                     word |= (uint64_t)(get_feature_value(Xe, py, px, base + b) != 0) << b;
@@ -182,7 +182,7 @@ static inline void bit_pack_sample(const FBOUND_T* restrict Xe, uint64_t* restri
 void bit_pack_X(const FBOUND_T* restrict X, const int N, uint64_t* restrict x_bits) {
 #pragma omp parallel for schedule(static) if (N > 1) num_threads(ytm_n_threads)
     for (int e = 0; e < N; e++)
-        bit_pack_sample(&X[sample_offset(e)], &x_bits[(ull)e * N_PATCHES * N_FEAT_CHUNKS]);
+        bit_pack_sample(&X[sample_offset(e)], &x_bits[(ull)e * N_PATCHES * N_BIN_FEAT_CHUNKS]);
 }
 
 /*
@@ -197,7 +197,7 @@ void bit_pack_X(const FBOUND_T* restrict X, const int N, uint64_t* restrict x_bi
  *   lit_drop_mask           1 for literals that get no feedback
  *   feat_drop_bits          bit set for skipped features, all binary features only
  *   literal_offsets         first literal of each patch feature
- *   x_bits                  output, (N_PATCHES, N_FEAT_CHUNKS) bit packed current sample, all binary features only
+ *   x_bits                  output, (N_PATCHES, N_BIN_FEAT_CHUNKS) bit packed current sample, all binary features only
  *   clause_position_bounds  per clause [y_lo, y_hi, x_lo, x_hi] of allowed patches
  *   clause_feat_bounds      per clause [lo, hi] of each bounded feature
  *   clause_feat_ids         per clause ids of its bounded features
@@ -234,8 +234,8 @@ void eval_fit(const ull* restrict rng_keys, const FBOUND_T* restrict X, const in
         const FBOUND_T* feat_bounds = ALL_BINARY_FEATS ? NULL : &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
         const NFEAT_T* feat_ids = ALL_BINARY_FEATS ? NULL : &clause_feat_ids[feat_ids_offset(clause, 0)];
         const int n_feats = ALL_BINARY_FEATS ? 0 : (int)clause_n_feats[clause];
-        const uint64_t* pos_bits = ALL_BINARY_FEATS ? &clause_pos_bits[clause * N_FEAT_CHUNKS] : NULL;
-        const uint64_t* neg_bits = ALL_BINARY_FEATS ? &clause_neg_bits[clause * N_FEAT_CHUNKS] : NULL;
+        const uint64_t* pos_bits = ALL_BINARY_FEATS ? &clause_pos_bits[clause * N_BIN_FEAT_CHUNKS] : NULL;
+        const uint64_t* neg_bits = ALL_BINARY_FEATS ? &clause_neg_bits[clause * N_BIN_FEAT_CHUNKS] : NULL;
 
         if (N_PATCHES > 1) {
             ull rng_k = rng_hash(seed, clause, 0xDEADBEEFULL);

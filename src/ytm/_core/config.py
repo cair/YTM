@@ -198,7 +198,8 @@ class BaseTMConfig:
         self._n_patches_x = ((self._dim[1] - self._patch_dim[1]) // self._stride[1]) + 1
         self._n_patches = self._n_patches_y * self._n_patches_x
         self._n_raw_patch_feats = self._patch_dim[0] * self._patch_dim[1] * self._dim[2]
-        self._n_feat_chunks = (self._n_raw_patch_feats + 63) // 64
+        self._bin_feat_chunk_sz = 64
+        self._n_bin_feat_chunks = (self._n_raw_patch_feats + self._bin_feat_chunk_sz - 1) // self._bin_feat_chunk_sz
 
     def _resolve_states(self):
         # TA states, need at least an include and an exclude state
@@ -356,6 +357,8 @@ class BaseTMConfig:
 #define NEGATED_LITERALS {int(self.negated_literals)}
 #define POSITION_LITERALS {int(self._position_literals)}
 #define ALL_BINARY_FEATS {int(self._all_binary_feats)}
+#define BIN_FEAT_CHUNK_SZ {self._bin_feat_chunk_sz}
+#define N_BIN_FEAT_CHUNKS {self._n_bin_feat_chunks}
 
 #define INCLUDE_STATE {self._include_state}
 #define MAX_TA_STATE {self.n_states - 1}

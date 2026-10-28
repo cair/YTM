@@ -46,16 +46,6 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
         self.p_therm_bits = self.therm_bits.ctypes.data_as(fbound_p)
         self.p_literal_offsets = self.literal_offsets.ctypes.data_as(nlits_p)
 
-    def _init_packed_clauses(self):
-        super()._init_packed_clauses()
-        cfg = self.config
-        if cfg._all_binary_feats:
-            self.packed_clauses.clause_feat_ids = np.zeros(1, dtype=cfg._nfeat_dtype)
-            self.packed_clauses.clause_feat_bounds = np.zeros(1, dtype=cfg._fbound_dtype)
-            self.packed_clauses.clause_n_feats = np.zeros(1, dtype=cfg._nfeat_dtype)
-            self.packed_clauses.clause_pos_bits = np.zeros((cfg._total_clauses, cfg._n_feat_chunks), dtype=np.uint64)
-            self.packed_clauses.clause_neg_bits = np.zeros((cfg._total_clauses, cfg._n_feat_chunks), dtype=np.uint64)
-
     def _to_host(self, arr: np.ndarray) -> np.ndarray:
         return arr.copy()
 
@@ -162,7 +152,7 @@ class CPUDevice(BaseDevice[BuffersT, ConfigT, np.ndarray]):
         cfg = self.config
         if not cfg._all_binary_feats:
             return None
-        x_bits = np.empty((bs, cfg._n_patches, cfg._n_feat_chunks), dtype=np.uint64)
+        x_bits = np.empty((bs, cfg._n_patches, cfg._n_bin_feat_chunks), dtype=np.uint64)
         self.lib.bit_pack_X(p_Xb, c_int(bs), x_bits.ctypes.data_as(uint64_p))
         return x_bits
 

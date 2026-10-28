@@ -109,6 +109,8 @@ class CUDADevice(BaseDevice[BuffersT, ConfigT, cp.ndarray]):
                     self.packed_clauses.clause_n_feats,
                     self.packed_clauses.has_contra,
                     self.packed_clauses.clause_len,
+                    self.packed_clauses.clause_pos_bits,
+                    self.packed_clauses.clause_neg_bits,
                     self.packed_clauses.is_clause_synced,
                     np.int32(full),
                 ),
@@ -120,6 +122,9 @@ class CUDADevice(BaseDevice[BuffersT, ConfigT, cp.ndarray]):
         cfg = self.config
         pc = self.packed_clauses
 
+        if cfg._all_binary_feats:
+            self.cu.bit_pack_X(cfg._n_patches * cfg._n_bin_feat_chunks * self._warp_size, (buf.X[e], np.int32(1), buf.x_bits))
+
         self.cu.eval_fit(
             cfg._total_clauses * self._warp_size,
             (
@@ -129,11 +134,15 @@ class CUDADevice(BaseDevice[BuffersT, ConfigT, cp.ndarray]):
                 buf.clause_drop_mask,
                 buf.class_active,
                 buf.lit_drop_mask,
+                buf.feat_drop_bits,
                 self.literal_offsets,
+                buf.x_bits,
                 pc.clause_position_bounds,
                 pc.clause_feat_bounds,
                 pc.clause_feat_ids,
                 pc.clause_n_feats,
+                pc.clause_pos_bits,
+                pc.clause_neg_bits,
                 pc.has_contra,
                 pc.clause_len,
                 buf.clause_output,
@@ -197,19 +206,31 @@ class CUDADevice(BaseDevice[BuffersT, ConfigT, cp.ndarray]):
         self._vote_sum(self._clause_outputs(Xb, bs), bs, class_sums)
         return class_sums
 
+    def _bit_pack_X(self, Xb: cp.ndarray, bs: int) -> cp.ndarray:
+        cfg = self.config
+        if not cfg._all_binary_feats:
+            return cp.zeros(1, dtype=np.uint64)
+        x_bits = cp.empty((bs, cfg._n_patches, cfg._n_bin_feat_chunks), dtype=np.uint64)
+        self.cu.bit_pack_X(bs * cfg._n_patches * cfg._n_bin_feat_chunks * self._warp_size, (Xb, np.int32(bs), x_bits))
+        return x_bits
+
     def _clause_outputs(self, Xb: cp.ndarray, bs: int) -> cp.ndarray:
         cfg = self.config
         pc = self.packed_clauses
         clause_outputs = cp.empty((bs, cfg._total_clauses), dtype=np.int8)
+        x_bits = self._bit_pack_X(Xb, bs)
         self.cu.eval_infer(
             bs * cfg._total_clauses * self._warp_size,
             (
                 Xb,
+                x_bits,
                 np.int32(bs),
                 pc.clause_position_bounds,
                 pc.clause_feat_bounds,
                 pc.clause_feat_ids,
                 pc.clause_n_feats,
+                pc.clause_pos_bits,
+                pc.clause_neg_bits,
                 pc.has_contra,
                 pc.clause_len,
                 clause_outputs,
@@ -221,15 +242,19 @@ class CUDADevice(BaseDevice[BuffersT, ConfigT, cp.ndarray]):
         cfg = self.config
         pc = self.packed_clauses
         patch_output = cp.empty((bs, cfg._total_clauses, cfg._n_patches), dtype=np.int8)
+        x_bits = self._bit_pack_X(Xb, bs)
         self.cu.eval_patchwise(
             bs * cfg._total_clauses * cfg._n_patches,
             (
                 Xb,
+                x_bits,
                 np.int32(bs),
                 pc.clause_position_bounds,
                 pc.clause_feat_bounds,
                 pc.clause_feat_ids,
                 pc.clause_n_feats,
+                pc.clause_pos_bits,
+                pc.clause_neg_bits,
                 pc.has_contra,
                 pc.clause_len,
                 patch_output,
@@ -257,6 +282,8 @@ class CUDADevice(BaseDevice[BuffersT, ConfigT, cp.ndarray]):
                     pc.clause_feat_bounds,
                     pc.clause_feat_ids,
                     pc.clause_n_feats,
+                    pc.clause_pos_bits,
+                    pc.clause_neg_bits,
                     pc.clause_position_bounds,
                     pc.has_contra,
                     pw_norm,
@@ -282,6 +309,8 @@ class CUDADevice(BaseDevice[BuffersT, ConfigT, cp.ndarray]):
                 pc.clause_feat_bounds,
                 pc.clause_feat_ids,
                 pc.clause_n_feats,
+                pc.clause_pos_bits,
+                pc.clause_neg_bits,
                 patch_output,
                 pc.has_contra,
                 self.therm_bits,

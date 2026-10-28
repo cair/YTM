@@ -64,9 +64,9 @@ static inline FeatureResult scan_feature_bits(const TA_STATE_T* restrict ta_stat
     int n_bounded = 0;
     bool all_valid = true;
 
-    for (int k = 0; k < N_FEAT_CHUNKS; k++) {
-        const int base = k * FEAT_CHUNK_SIZE;
-        const int n = N_RAW_PATCH_FEATS - base < FEAT_CHUNK_SIZE ? N_RAW_PATCH_FEATS - base : FEAT_CHUNK_SIZE;
+    for (int k = 0; k < N_BIN_FEAT_CHUNKS; k++) {
+        const int base = k * BIN_FEAT_CHUNK_SZ;
+        const int n = N_RAW_PATCH_FEATS - base < BIN_FEAT_CHUNK_SZ ? N_RAW_PATCH_FEATS - base : BIN_FEAT_CHUNK_SZ;
         uint64_t pos = 0, neg = 0;
 
         for (int b = 0; b < n; b++) {
@@ -123,7 +123,7 @@ void pack_clauses(const TA_STATE_T* restrict global_ta_states, const FBOUND_T* r
 
         FeatureResult fr;
         if (ALL_BINARY_FEATS) {
-            fr = scan_feature_bits(ta_state, &clause_pos_bits[clause * N_FEAT_CHUNKS], &clause_neg_bits[clause * N_FEAT_CHUNKS],
+            fr = scan_feature_bits(ta_state, &clause_pos_bits[clause * N_BIN_FEAT_CHUNKS], &clause_neg_bits[clause * N_BIN_FEAT_CHUNKS],
                                    dont_skip);
         } else {
             NFEAT_T* cfids = &clause_feat_ids[feat_ids_offset(clause, 0)];

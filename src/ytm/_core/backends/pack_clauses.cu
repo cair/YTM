@@ -83,11 +83,51 @@ __device__ inline FeatureResult scan_feature_literals(const warp_t& warp, const 
     return {write_offset, n_includes, all_valid};
 }
 
+__device__ inline FeatureResult scan_feature_bits(const warp_t& warp, const TA_STATE_T* __restrict__ ta_state,
+                                                  uint64_t* __restrict__ pos_bits, uint64_t* __restrict__ neg_bits,
+                                                  int dont_skip) {
+    const int lane = (int)warp.thread_rank();
+    uint n_includes = 0;
+    int n_bounded = 0;
+    bool all_valid = true;
+
+    for (int k = 0; k < N_BIN_FEAT_CHUNKS; k++) {
+        const int f0 = k * BIN_FEAT_CHUNK_SZ + lane;
+        const int f1 = f0 + WARP_SIZE;
+        const int off = N_POSITION_FEATS;
+        const uint pos_lo = warp.ballot(f0 < N_RAW_PATCH_FEATS && is_included(ta_state[off + f0]));
+        const uint pos_hi = warp.ballot(f1 < N_RAW_PATCH_FEATS && is_included(ta_state[off + f1]));
+        uint neg_lo = 0u, neg_hi = 0u;
+        if (NEGATED_LITERALS) {
+            neg_lo = warp.ballot(f0 < N_RAW_PATCH_FEATS && is_included(ta_state[off + N_LITERALS / 2 + f0]));
+            neg_hi = warp.ballot(f1 < N_RAW_PATCH_FEATS && is_included(ta_state[off + N_LITERALS / 2 + f1]));
+        }
+        const uint64_t pos = ((uint64_t)pos_hi << 32) | pos_lo;
+        const uint64_t neg = ((uint64_t)neg_hi << 32) | neg_lo;
+
+        if (lane == 0) {
+            pos_bits[k] = pos;
+            neg_bits[k] = neg;
+        }
+        n_includes += (uint)(__popcll(pos) + __popcll(neg));
+        n_bounded += __popcll(pos | neg);
+
+        if (pos & neg) {
+            all_valid = false;
+            if (!dont_skip)
+                break;
+        }
+    }
+
+    return {n_bounded, n_includes, all_valid};
+}
+
 extern "C" __global__ void
 pack_clauses(const TA_STATE_T* __restrict__ global_ta_states, const FBOUND_T* __restrict__ therm_bits,
              const NLITS_T* __restrict__ literal_offsets, PBOUND_T* __restrict__ clause_position_bounds,
              FBOUND_T* __restrict__ clause_feat_bounds, NFEAT_T* __restrict__ clause_feat_ids,
              NFEAT_T* __restrict__ clause_n_feats, int8_t* __restrict__ has_contra, NLITS_T* __restrict__ clause_len,
+             uint64_t* __restrict__ clause_pos_bits, uint64_t* __restrict__ clause_neg_bits,
              int8_t* __restrict__ is_clause_synced, int dont_skip) {
     auto [warp, lane, warp_id, total_warps] = warp_grid();
 
@@ -118,14 +158,22 @@ pack_clauses(const TA_STATE_T* __restrict__ global_ta_states, const FBOUND_T* __
             continue;
         }
 
-        NFEAT_T* cfids = &clause_feat_ids[feat_ids_offset(clause, 0)];
-        FBOUND_T* cfb = &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
-
-        FeatureResult fr = scan_feature_literals(warp, ta_state, therm_bits, literal_offsets, cfids, cfb, dont_skip);
-        uint total_inc = pr.includes + cg::reduce(warp, fr.includes, cg::plus<uint>());
+        FeatureResult fr;
+        uint total_inc;
+        if (ALL_BINARY_FEATS) {
+            fr = scan_feature_bits(warp, ta_state, &clause_pos_bits[clause * N_BIN_FEAT_CHUNKS],
+                                   &clause_neg_bits[clause * N_BIN_FEAT_CHUNKS], dont_skip);
+            total_inc = pr.includes + fr.includes;
+        } else {
+            NFEAT_T* cfids = &clause_feat_ids[feat_ids_offset(clause, 0)];
+            FBOUND_T* cfb = &clause_feat_bounds[feat_bounds_offset(clause, 0, 0)];
+            fr = scan_feature_literals(warp, ta_state, therm_bits, literal_offsets, cfids, cfb, dont_skip);
+            total_inc = pr.includes + cg::reduce(warp, fr.includes, cg::plus<uint>());
+        }
 
         if (lane == 0) {
-            clause_n_feats[clause] = (NFEAT_T)fr.n_bounded_feats;
+            if (!ALL_BINARY_FEATS)
+                clause_n_feats[clause] = (NFEAT_T)fr.n_bounded_feats;
             has_contra[clause] = !(pr.valid && fr.all_valid);
             clause_len[clause] = (NLITS_T)total_inc;
             is_clause_synced[clause] = 1;

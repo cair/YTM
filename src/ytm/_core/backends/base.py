@@ -122,17 +122,18 @@ class BaseDevice(abc.ABC, Generic[BuffersT, ConfigT, ArrayT]):
 
     def _init_packed_clauses(self):
         cfg = self.config
+        binary = cfg._all_binary_feats
         self.packed_clauses = PackedClauses(
             make_ptrs=self.xp is np,
-            clause_feat_ids=self.xp.empty((cfg._total_clauses, cfg._n_raw_patch_feats), dtype=cfg._nfeat_dtype),
-            clause_feat_bounds=self.xp.empty((cfg._total_clauses, cfg._n_raw_patch_feats, 2), dtype=cfg._fbound_dtype),
-            clause_n_feats=self.xp.empty(cfg._total_clauses, dtype=cfg._nfeat_dtype),
+            clause_feat_ids=self.xp.empty(1 if binary else (cfg._total_clauses, cfg._n_raw_patch_feats), dtype=cfg._nfeat_dtype),
+            clause_feat_bounds=self.xp.empty(1 if binary else (cfg._total_clauses, cfg._n_raw_patch_feats, 2), dtype=cfg._fbound_dtype),
+            clause_n_feats=self.xp.empty(1 if binary else cfg._total_clauses, dtype=cfg._nfeat_dtype),
             clause_position_bounds=self.xp.empty((cfg._total_clauses, 4) if cfg._n_patches > 1 else (1, 1), dtype=cfg._pbound_dtype),
             has_contra=self.xp.empty(cfg._total_clauses, dtype=np.int8),
             clause_len=self.xp.empty(cfg._total_clauses, dtype=cfg._nlits_dtype),
             is_clause_synced=self.xp.zeros(cfg._total_clauses, dtype=np.int8),
-            clause_pos_bits=self.xp.zeros(1, dtype=np.uint64),
-            clause_neg_bits=self.xp.zeros(1, dtype=np.uint64),
+            clause_pos_bits=self.xp.zeros((cfg._total_clauses, cfg._n_bin_feat_chunks) if binary else 1, dtype=np.uint64),
+            clause_neg_bits=self.xp.zeros((cfg._total_clauses, cfg._n_bin_feat_chunks) if binary else 1, dtype=np.uint64),
         )
 
     def set_threads(self, n: int):
@@ -246,12 +247,19 @@ class BaseDevice(abc.ABC, Generic[BuffersT, ConfigT, ArrayT]):
     def post_sample(self, e: int) -> float:
         return 0.0
 
+    def _sample_bytes(self, X: np.ndarray) -> int:
+        cfg = self.config
+        n = int(np.prod(X.shape[1:])) * np.dtype(cfg._fbound_dtype).itemsize
+        if cfg._all_binary_feats:
+            n += cfg._n_patches * cfg._n_bin_feat_chunks * 8
+        return n
+
     # =========Inference============
     def infer(self, X: np.ndarray, force_repack: bool = False) -> np.ndarray:
         """Inference. Calculate class sums for X."""
         cfg = self.config
         N = X.shape[0]
-        x_bytes = int(np.prod(X.shape[1:])) * np.dtype(cfg._fbound_dtype).itemsize
+        x_bytes = self._sample_bytes(X)
         out = np.empty((N, cfg.n_classes), dtype=np.float32)
         with self._ctx():
             self.pack_clauses(force_repack)
@@ -269,7 +277,7 @@ class BaseDevice(abc.ABC, Generic[BuffersT, ConfigT, ArrayT]):
         """Calculate clause activations."""
         cfg = self.config
         N = X.shape[0]
-        x_bytes = int(np.prod(X.shape[1:])) * np.dtype(cfg._fbound_dtype).itemsize
+        x_bytes = self._sample_bytes(X)
         out = np.empty((N, cfg._total_clauses), dtype=np.int8)
         with self._ctx():
             self.pack_clauses(force_repack)
@@ -282,7 +290,7 @@ class BaseDevice(abc.ABC, Generic[BuffersT, ConfigT, ArrayT]):
         """Patchwise Clause activations."""
         cfg = self.config
         N = X.shape[0]
-        x_bytes = int(np.prod(X.shape[1:])) * np.dtype(cfg._fbound_dtype).itemsize
+        x_bytes = self._sample_bytes(X)
         out = np.empty((N, cfg._total_clauses, cfg._n_patches), dtype=np.int8)
         with self._ctx():
             self.pack_clauses(force_repack)
@@ -308,7 +316,7 @@ class BaseDevice(abc.ABC, Generic[BuffersT, ConfigT, ArrayT]):
         """Calculate WAC score."""
         cfg = self.config
         N = X.shape[0]
-        x_bytes = int(np.prod(X.shape[1:])) * np.dtype(cfg._fbound_dtype).itemsize
+        x_bytes = self._sample_bytes(X)
         out_bytes = int(np.prod(cfg._dim)) * 4
         output = np.empty((N, *cfg._dim), dtype=np.float32)
         with self._ctx():

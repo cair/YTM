@@ -12,6 +12,7 @@ typedef unsigned int uint;
 typedef unsigned long long ull;
 typedef signed char int8_t;
 typedef unsigned char uint8_t;
+typedef unsigned long long uint64_t;
 
 #ifndef INFINITY
 #define INFINITY __int_as_float(0x7f800000)
