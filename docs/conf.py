@@ -1,7 +1,10 @@
 import dataclasses
+import importlib.metadata
 import types
 
 project = "YTM"
+release = importlib.metadata.version("ytm")
+version = ".".join(release.split(".")[:2])
 
 extensions = [
     "sphinx.ext.autodoc",
@@ -13,7 +16,7 @@ extensions = [
     "sphinx_copybutton",
 ]
 source_suffix = {".rst": "restructuredtext", ".md": "markdown"}
-exclude_patterns = ["_build"]
+exclude_patterns = ["_build", "_pages_root", "README.md"]
 templates_path = ["_templates"]
 
 autosummary_generate = True
@@ -27,6 +30,12 @@ intersphinx_mapping = {
 }
 
 html_theme = "pydata_sphinx_theme"
+html_static_path = ["_static"]
+html_theme_options = {
+    "switcher": {"json_url": "https://cair.github.io/YTM/stable/_static/switcher.json", "version_match": version},
+    "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
+    "check_switcher": False,
+}
 
 
 def _drop_dataclass_signature(app, what, name, obj, options, signature, return_annotation):
