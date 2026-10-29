@@ -1,8 +1,10 @@
 import abc
 from dataclasses import fields
+from typing import Any
 
 import numpy as np
 
+from .. import pbar
 from .backends.base import BaseDevice
 from .config import BaseTMConfig
 from .device_config import DeviceConfig
@@ -69,8 +71,65 @@ class BaseTM(abc.ABC):
         cfg = self._config_cls()(**state["config"])
         self.dev = self._build_device(cfg, DeviceConfig(), state["params"])
 
-    @abc.abstractmethod
-    def _fit(self, X: np.ndarray, Y: np.ndarray, *args, **kwargs): ...
+    def fit_epoch(self, X: np.ndarray, Y: np.ndarray, clause_drop_p: float, shuffle: bool = True, **kwargs) -> Any:
+        """Fit one epoch."""
+        dev = self.dev
+        with dev._ctx():
+            self.start_epoch(X, Y, clause_drop_p, shuffle, **kwargs)
+            self.pre_epoch()
+
+            N = X.shape[0]
+            chunk_N = dev._chunk_size(N, dev.buf.per_sample_bytes())
+
+            for e in pbar.bar(range(N), desc="Fit"):
+                if e == dev.buf.chunk_end:
+                    dev.buf.load_chunk(e, min(e + chunk_N, N))
+
+                self.pre_sample(e)
+                dev.fit_sample(e - dev.buf.chunk_start)
+                self.post_sample(e)
+
+            out = self.post_epoch()
+            self.end_epoch()
+            return out
+
+    def start_epoch(self, X: np.ndarray, Y: np.ndarray, clause_drop_p: float, shuffle: bool = True, **kwargs) -> None:
+        """Load the epoch's inputs into the fit buffers, with the visit order, the clause drop mask and the per sample rng keys."""
+        cfg, dev = self.config, self.dev
+        assert X.dtype == cfg._fbound_dtype, f"X must be {np.dtype(cfg._fbound_dtype)}, got {X.dtype}"
+
+        iota = self._rng.permutation(X.shape[0]) if shuffle else None
+
+        if clause_drop_p <= 0:
+            clause_drop_mask = dev.xp.asarray(np.zeros(cfg._total_clauses, dtype=np.uint8))
+        else:
+            clause_drop_mask = dev.xp.asarray((self._rng.random(cfg._total_clauses) <= clause_drop_p), dtype=np.uint8)
+
+        dev.buf.start_epoch(
+            iota=iota,
+            X=X,
+            Y=Y,
+            clause_drop_mask=clause_drop_mask,
+            rng_keys=self._rng.integers(1, 1 << 62, size=X.shape[0], dtype=np.uint64),
+            **kwargs,
+        )
+
+    def end_epoch(self) -> None:
+        """Release the epoch's inputs from the fit buffers."""
+        self.dev.buf.end_epoch()
+
+    ## ========Hooks========
+    def pre_epoch(self) -> None:
+        pass
+
+    def post_epoch(self) -> Any:
+        return None
+
+    def pre_sample(self, e: int) -> None:
+        pass
+
+    def post_sample(self, e: int) -> None:
+        pass
 
     def score(self, X: np.ndarray, force_repack: bool = False) -> np.ndarray:
         """Calculate class sums or model outputs for the given X.

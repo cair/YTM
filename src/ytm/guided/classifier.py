@@ -57,7 +57,11 @@ class Classifier(BaseTM):
             Mean loss per sample over the epoch.
         """
         assert X.shape[0] == Y.shape[0], "X and Y must have the same number of samples."
-        return self._fit(X, self.config.prepare_Y(Y), shuffle, clause_drop_p, lr, lambda_)
+        cfg = self.config
+        Y = np.asarray(cfg.prepare_Y(Y), dtype=np.float32, order="C")
+        lr = cfg.lr if lr is None else lr
+        lambda_ = cfg.lambda_ if lambda_ is None else lambda_
+        return self.fit_epoch(cfg.prepare_X(X), Y, clause_drop_p, shuffle, lr=lr, lambda_=lambda_)
 
 
 class MultiClassTM(Classifier):

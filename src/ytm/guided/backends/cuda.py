@@ -89,14 +89,6 @@ class CUDADevice(CoreCUDADevice[GuidedFitBuffers, TMConfig]):
             (buf.grad, np.float32(buf.lr), buf.clause_output, buf.clause_drop_mask, self.clause_weights),
         )
 
-    def post_epoch(self, total) -> float:
-        buf = self.buf
-        return float(total) / buf.N
-
-    def post_sample(self, e: int) -> float:
-        buf = self.buf
-        return buf.loss[0].astype(np.float64)
-
     def _infer_batch(self, Xb: cp.ndarray, bs: int) -> cp.ndarray:
         votes = super()._infer_batch(Xb, bs)
         y_hat = cp.empty_like(votes)

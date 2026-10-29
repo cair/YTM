@@ -39,24 +39,6 @@ class BaseTM(CoreBaseTM):
     def config(self) -> TMConfig:
         return cast(TMConfig, self.dev.config)
 
-    def _fit(
-        self,
-        X: np.ndarray,
-        Y: np.ndarray,
-        shuffle: bool = True,
-        clause_drop_p: float = 0.0,
-        label_sampling: bool = False,
-    ) -> None:
-        X = self.config.prepare_X(X)
-
-        iota = self._rng.permutation(X.shape[0]) if shuffle else np.arange(X.shape[0])
-        X = X[iota]
-
-        encoded_Y = np.asarray(self._encode_Y(Y[iota]), dtype=np.float32, order="C")
-        label_probs = np.asarray(self._label_sampler(encoded_Y, label_sampling), dtype=np.float32, order="C")
-
-        self.dev.fit_epoch(X, encoded_Y, clause_drop_p, label_probs=label_probs)
-
     def _encode_Y(self, Y: np.ndarray) -> np.ndarray:
         return np.where(Y == 1, self.config._T_max, self.config._T_min).astype(np.float32)
 

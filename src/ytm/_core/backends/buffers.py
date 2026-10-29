@@ -34,8 +34,9 @@ class FitBuffers(AutoPtrs):
 
     Work arrays (clause outputs, votes, feedback lists) are made once in ``__post_init__``.
     ``start_epoch`` takes the epoch's inputs: per-sample fields (``per_sample_fields``) stay on
-    the host, the rest are moved to the device. ``load_chunk(start, end)`` moves one slice of
-    the per-sample fields to the device, so an epoch can run in chunks that fit in memory.
+    the host, the rest are moved to the device. ``load_chunk(start, end)`` moves visit steps
+    ``[start, end)`` of the per-sample fields to the device, gathered through ``iota``, so an
+    epoch can run in chunks that fit in memory.
     ``end_epoch`` drops the epoch's inputs.
 
     With ``make_ptrs``, every numpy array set as an attribute also gets a ctypes pointer
@@ -59,6 +60,9 @@ class FitBuffers(AutoPtrs):
 
     per_sample_fields : tuple of str
         Fields with one row per sample, needed for loading chunk by chunk.
+
+    iota : array of shape (N,) or None
+        Sample visited at each step, None for the given order.
 
     N : int
         Total number of samples in the epoch.
@@ -120,6 +124,7 @@ class FitBuffers(AutoPtrs):
     per_sample_fields: ClassVar[tuple[str, ...]] = ("X", "Y", "rng_keys")
 
     N: int = field(init=False, default=0)
+    iota: Any = field(init=False, default=None)  # (N,) sample visited at each step, None for the given order
     chunk_start: int = field(init=False, default=0)
     chunk_end: int = field(init=False, default=0)
 
@@ -160,8 +165,8 @@ class FitBuffers(AutoPtrs):
         self.t1a_cnt = xp.empty(n, dtype=cfg._nclasses_dtype)
         self.t2_cnt = xp.empty(n, dtype=cfg._nclasses_dtype)
 
-    def start_epoch(self, **fields: Any) -> None:
-        """Take the epoch's inputs as keyword arguments, ``X`` included.
+    def start_epoch(self, iota: np.ndarray | None = None, **fields: Any) -> None:
+        """Take the epoch's inputs as keyword arguments, ``X`` included, and the visit order ``iota``.
 
         Per-sample fields are kept on the host until ``load_chunk``. The others are set now, numpy
         arrays moved to the device.
@@ -176,6 +181,7 @@ class FitBuffers(AutoPtrs):
                 setattr(self, name, value)
 
         self.epoch_fields = fields
+        self.iota = iota
         self.chunk_start = self.chunk_end = 0
         self.N = fields["X"].shape[0]
 
@@ -185,12 +191,14 @@ class FitBuffers(AutoPtrs):
             setattr(self, name, None)
 
         self.epoch_fields = {}
+        self.iota = None
         self.chunk_start = self.chunk_end = self.N = 0
 
     def load_chunk(self, start: int, end: int) -> None:
-        """Move samples ``[start, end)`` of every per-sample field to the device."""
+        """Move visit steps ``[start, end)`` of every per-sample field to the device."""
+        rows = slice(start, end) if self.iota is None else self.iota[start:end]
         for name in self.per_sample_fields:
-            setattr(self, name, self.xp.asarray(self.epoch_fields[name][start:end], order="C"))
+            setattr(self, name, self.xp.asarray(self.epoch_fields[name][rows], order="C"))
         self.chunk_start, self.chunk_end = start, end
 
     def per_sample_bytes(self) -> int:

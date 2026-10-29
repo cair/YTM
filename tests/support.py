@@ -86,9 +86,9 @@ def make_buffers(tm, X, Y):
 
     with _ctx(tm):
         if guided_model:
-            dev.pre_epoch(Xp, Yf, 0.0, lr=cfg.lr, lambda_=cfg.lambda_)
+            tm.start_epoch(Xp, Yf, 0.0, False, lr=cfg.lr, lambda_=cfg.lambda_)
         else:
-            dev.pre_epoch(Xp, Yf, 0.0, label_probs=np.ones((Xp.shape[0], cfg.n_classes), dtype=np.float32))
+            tm.start_epoch(Xp, Yf, 0.0, False, label_probs=np.ones((Xp.shape[0], cfg.n_classes), dtype=np.float32))
         dev.buf.load_chunk(0, Xp.shape[0])
     return dev.buf
 

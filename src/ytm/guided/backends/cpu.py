@@ -76,14 +76,6 @@ class CPUDevice(CoreCPUDevice[GuidedFitBuffers, TMConfig]):
         buf = self.buf
         self.lib.update_weights(buf.p_grad, c_float(buf.lr), buf.p_clause_output, buf.p_clause_drop_mask, self.p_clause_weights)
 
-    def post_epoch(self, total) -> float:
-        buf = self.buf
-        return float(total) / buf.N
-
-    def post_sample(self, e: int) -> float:
-        buf = self.buf
-        return buf.loss[0].astype(np.float64)
-
     def _infer_batch(self, Xb: np.ndarray, bs: int) -> np.ndarray:
         votes = super()._infer_batch(Xb, bs)
         y_hat = np.empty_like(votes)

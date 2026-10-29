@@ -1,4 +1,4 @@
-from typing import Unpack, cast
+from typing import Any, Unpack, cast
 
 import numpy as np
 
@@ -38,24 +38,14 @@ class BaseTM(CoreBaseTM):
     def config(self) -> TMConfig:
         return cast(TMConfig, self.dev.config)
 
-    def _fit(
-        self,
-        X: np.ndarray,
-        Y: np.ndarray,
-        shuffle: bool = True,
-        clause_drop_p: float = 0.0,
-        lr: float | None = None,
-        lambda_: float | None = None,
-    ):
-        assert Y.ndim == 2, f"Y must be 2D array (samples, outputs), got {Y.ndim}D"
-        X = self.config.prepare_X(X)
+    def pre_epoch(self) -> None:
+        self._loss_sum: Any = 0.0
 
-        iota = self._rng.permutation(X.shape[0]) if shuffle else np.arange(X.shape[0])
-        X = X[iota]
-        Y = np.asarray(Y, dtype=np.float32, order="C")[iota]
+    def post_sample(self, e: int) -> None:
+        self._loss_sum += self.dev.buf.loss[0].astype(np.float64)
 
-        cfg = self.config
-        return self.dev.fit_epoch(X, Y, clause_drop_p, lr=cfg.lr if lr is None else lr, lambda_=cfg.lambda_ if lambda_ is None else lambda_)
+    def post_epoch(self) -> float:
+        return float(self._loss_sum) / self.dev.buf.N
 
     def to_prob(self, class_sums: np.ndarray) -> np.ndarray:
         """No-op, simply returns the activated class sums (``class_sums``) as is."""

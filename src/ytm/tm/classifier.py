@@ -42,7 +42,9 @@ class Classifier(BaseTM):
             Probability of dropping each clause for this epoch (Drop Clause).
         """
         assert X.shape[0] == Y.shape[0], "X and Y must have the same number of samples."
-        return self._fit(X, self.config.prepare_Y(Y), shuffle, clause_drop_p, label_sampling)
+        encoded_Y = np.asarray(self._encode_Y(self.config.prepare_Y(Y)), dtype=np.float32, order="C")
+        label_probs = np.asarray(self._label_sampler(encoded_Y, label_sampling), dtype=np.float32, order="C")
+        self.fit_epoch(self.config.prepare_X(X), encoded_Y, clause_drop_p, shuffle, label_probs=label_probs)
 
 
 class MultiClassTM(Classifier):

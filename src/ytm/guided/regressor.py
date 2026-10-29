@@ -71,7 +71,11 @@ class RegressionTM(BaseTM):
         """
         assert X.shape[0] == Y.shape[0], "X and Y must have the same number of samples"
         assert Y.ndim == 1, "Y must be 1D array (samples,)"
-        return self._fit(X, Y.reshape(-1, 1), shuffle, clause_drop_p, lr, lambda_)
+        cfg = self.config
+        Y = np.asarray(Y.reshape(-1, 1), dtype=np.float32, order="C")
+        lr = cfg.lr if lr is None else lr
+        lambda_ = cfg.lambda_ if lambda_ is None else lambda_
+        return self.fit_epoch(cfg.prepare_X(X), Y, clause_drop_p, shuffle, lr=lr, lambda_=lambda_)
 
     def predict(self, X: np.ndarray, force_repack: bool = False):
         """Predict the target of each sample: the activated output.

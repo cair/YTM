@@ -3,7 +3,7 @@ import contextlib
 import copy
 import types
 from collections.abc import Iterator
-from typing import Any, Generic, TypeVar
+from typing import Generic, TypeVar
 
 import numpy as np
 
@@ -166,31 +166,8 @@ class BaseDevice(abc.ABC, Generic[BuffersT, ConfigT, ArrayT]):
     def _fit_buffers_cls() -> type[BuffersT]:
         """FitBuffers class to use for this model. Needed when subclasses want to set there on Buffer class."""
 
-    def fit_epoch(self, X: np.ndarray, Y: np.ndarray, clause_drop_p: float, **kwargs):
-        """Fit one epoch."""
-        with self._ctx():
-            self.pre_epoch(X, Y, clause_drop_p, **kwargs)
-
-            N = X.shape[0]
-            chunk_N = self._chunk_size(N, self.buf.per_sample_bytes())
-
-            total = 0.0
-            for e in pbar.bar(range(N), desc="Fit"):
-                if e == self.buf.chunk_end:
-                    self.buf.load_chunk(e, min(e + chunk_N, N))
-
-                total += self.fit_sample(e)
-
-            out = self.post_epoch(total)
-            self.buf.end_epoch()
-            return out
-
-    def fit_sample(self, e: int) -> float:
-        """Fit one sample ``e``."""
-        i = e - self.buf.chunk_start
-
-        self.pre_sample(e)
-
+    def fit_sample(self, i: int) -> None:
+        """Fit sample ``i`` of the current chunk."""
         self.pack_clauses()
         self._fit_eval(i)
         self._fit_voting()
@@ -198,8 +175,6 @@ class BaseDevice(abc.ABC, Generic[BuffersT, ConfigT, ArrayT]):
         self._fit_apply_fb(i)
         if self.config.weighted:
             self._fit_update_weights()
-
-        return self.post_sample(e)
 
     @abc.abstractmethod
     def _fit_eval(self, e: int):
@@ -220,32 +195,6 @@ class BaseDevice(abc.ABC, Generic[BuffersT, ConfigT, ArrayT]):
     @abc.abstractmethod
     def _fit_update_weights(self):
         """Update the clause weights from the decided feedback. Only runs when ``weighted``."""
-
-    ## ========Hooks========
-    def pre_epoch(self, X: np.ndarray, Y: np.ndarray, clause_drop_p: float, **kwargs) -> None:
-        assert X.dtype == self.config._fbound_dtype, f"X must be {np.dtype(self.config._fbound_dtype)}, got {X.dtype}"
-
-        if clause_drop_p <= 0:
-            clause_drop_mask = self.xp.asarray(np.zeros(self.config._total_clauses, dtype=np.uint8))
-        else:
-            clause_drop_mask = self.xp.asarray((self._rng.random(self.config._total_clauses) <= clause_drop_p), dtype=np.uint8)
-
-        self.buf.start_epoch(
-            X=X,
-            Y=Y,
-            clause_drop_mask=clause_drop_mask,
-            rng_keys=self._rng.integers(1, 1 << 62, size=X.shape[0], dtype=np.uint64),
-            **kwargs,
-        )
-
-    def post_epoch(self, total: float) -> Any:
-        return None
-
-    def pre_sample(self, e: int) -> None:
-        pass
-
-    def post_sample(self, e: int) -> float:
-        return 0.0
 
     def _sample_bytes(self, X: np.ndarray) -> int:
         cfg = self.config
